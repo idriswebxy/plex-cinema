@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import "./Landing.css";
-import "../MainImage/MainImage.css";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -30,54 +28,14 @@ const Landing = ({ login, authenticated, loading }) => {
     return <Redirect to="/movies" />;
   }
 
-  if (loading || isLoading) {
-    return <Spinner />;
-  }
+  // if (loading || isLoading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <div className="app-main">
-      {/* <MDBContainer>
-        <MDBRow>
-          <MDBCol md="6">
-            <form onSubmit={(e) => onSubmit(e)}>
-              <p className="h4 text-center mb-4">Sign in</p>
-              <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
-                Your email
-              </label>
-              <MDBInput
-                label="Type your email"
-                icon="envelope"
-                group
-                type="email"
-                validate
-                error="wrong"
-                success="right"
-                name="email"
-                onChange={(e) => onChange(e)}
-              />
-              <br />
-              <label htmlFor="defaultFormLoginPasswordEx" className="grey-text">
-                Your password
-              </label>
-              <MDBInput
-                label="Type your password"
-                icon="lock"
-                group
-                type="password"
-                validate
-                name="password"
-                onChange={(e) => onChange(e)}
-              />
-              <div className="text-center mt-4">
-                <MDBBtn color="indigo" type="submit">
-                  Login
-                </MDBBtn>
-              </div>
-            </form>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer> */}
-      <h1>404</h1>
+     
+      <h1>Landing</h1>
     </div>
   );
 };

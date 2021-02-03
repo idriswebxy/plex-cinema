@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-// import config from "../../config.json";
 import { API_KEY } from "../../config";
 import { setTvShows } from "../../actions/movie";
 import { connect } from "react-redux";
-// import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
 import { loadMoreTvShows } from "../../actions/movie";
 import SearchBar from "../Search/Search";
 import Show from "./Show";
 import RelatedMovies from "../Movies/RelatedMovies";
 import Spinner from "../Spinner/Spinner";
-import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import { useAuth0 } from "@auth0/auth0-react";
-import "../Movies/MovieList.css";
+
 
 const TvShows = ({
   setTvShows,

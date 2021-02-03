@@ -9,6 +9,7 @@ import store from "./store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Auth0Provider } from "@auth0/auth0-react";
 import history from "./utils/history";
+import 'semantic-ui-css/semantic.min.css'
 import {
   REACT_APP_AUTH0_DOMAIN,
   REACT_APP_AUTH0_CLIENT_ID,
@@ -31,15 +32,15 @@ const onRedirectCallback = (appState) => {
 ReactDOM.render(
   <Provider store={store.store}>
     <PersistGate persistor={store.persistor}>
-      <Auth0Provider
-        domain={domain}
+      {/* <Auth0Provider */}
+        {/* domain={domain}
         clientId={clientId}
         audience={audience}
         redirectUri={callbackUri}
-        onRedirectCallback={onRedirectCallback}
-      >
+        onRedirectCallback={onRedirectCallback} */}
+      
         <App />
-      </Auth0Provider>
+      {/* </Auth0Provider> */}
     </PersistGate>
   </Provider>,
   document.getElementById("root")

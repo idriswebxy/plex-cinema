@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
-import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
 import { addToCart, loadCart } from "../../actions/cart";
 import {
   fetchItems,
@@ -13,7 +12,6 @@ import {
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { API_URL, API_KEY } from "../../config";
-import "./MovieList.css";
 import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchBar from "../Search/Search";

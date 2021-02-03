@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addToCart, loadCart } from "../../actions/cart";
-
 import { loadMovieDetails, setMovie, getMovie } from "../../actions/movie";
 import SpinnerPage from "../Spinner/Spinner";
 import ReactPlayer from "react-player/youtube";
@@ -13,7 +12,6 @@ import {
   BACKDROP_SIZE,
   POSTER_SIZE,
 } from "../../config";
-import "./MovieDetails.css";
 import moment from "moment";
 
 const MovieDetails = ({

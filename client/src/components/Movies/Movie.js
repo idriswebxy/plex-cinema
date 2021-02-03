@@ -5,7 +5,7 @@ import { getMovie, getMovieIds } from "../../actions/movie";
 import Spinner from "../Spinner/Spinner";
 import { addToCart, loadCart, auth0_addToCart } from "../../actions/cart";
 import moment from "moment";
-import MovieDetails from "./MovieDetails";
+// import MovieDetails from "./MovieDetails";
 import auth from "../../reducers/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 

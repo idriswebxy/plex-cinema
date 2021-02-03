@@ -20,6 +20,7 @@ import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components/Spinner/Spinner";
 import { fetchItems } from "./actions/movie"
+import "./App.css"
 
 
 import { createBrowserHistory } from "history";
@@ -57,9 +58,9 @@ const App = ({ authenticated }) => {
   //   }
   // }, [getAccessTokenSilently]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <div className="app-main"> 
@@ -71,9 +72,9 @@ const App = ({ authenticated }) => {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <PrivateRoute path="/movies" component={MovieList} />
-          <PrivateRoute path="/tv_shows" component={TvShows} />
+          <PrivateRoute path="/tv-shows" component={TvShows} />
           <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
-          <PrivateRoute path="/show_details" component={TvShowDetails} />
+          <PrivateRoute path="/show-details" component={TvShowDetails} />
           <PrivateRoute path="/cart" component={Cart} />
           <PrivateRoute path="/checkout" component={Checkout} /> 
         </Switch>
