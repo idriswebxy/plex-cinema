@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getMovie, getMovieIds } from "../../actions/movie";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../Spinner/LoadSpinner";
 import { addToCart, loadCart, auth0_addToCart } from "../../actions/cart";
 import moment from "moment";
 // import MovieDetails from "./MovieDetails";

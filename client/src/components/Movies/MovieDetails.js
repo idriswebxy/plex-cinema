@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addToCart, loadCart } from "../../actions/cart";
 import { loadMovieDetails, setMovie, getMovie } from "../../actions/movie";
-import SpinnerPage from "../Spinner/Spinner";
+import SpinnerPage from "../Spinner/LoadSpinner";
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
@@ -55,14 +55,14 @@ const MovieDetails = ({
   //   >
   //     <Container>
   //       <MDBRow>
-  //         <MovieThumb
-  //           image={
-  //             movie.poster_path
-  //               ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
-  //               : "./images/no_image.jpg"
-  //           }
-  //           clickable={false}
-  //         />
+          // <MovieThumb
+          //   image={
+          //     movie.poster_path
+          //       ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
+          //       : "./images/no_image.jpg"
+          //   }
+          //   clickable={false}
+          // />
   //         <div>
   //           <div style={{ margin: "20px" }}>
   //             <h4>Rent HD $2.99</h4>

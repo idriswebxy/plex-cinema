@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../Spinner/LoadSpinner";
 import { addToCart, loadCart } from "../../actions/cart";
 import {
   fetchItems,

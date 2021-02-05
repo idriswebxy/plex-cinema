@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../Spinner/LoadSpinner";
 import GoogleButton from "react-google-button";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";

@@ -18,7 +18,7 @@ import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
-import Spinner from "./components/Spinner/Spinner";
+import Spinner from "./components/Spinner/LoadSpinner";
 import { fetchItems } from "./actions/movie"
 import "./App.css"
 
@@ -42,7 +42,7 @@ const App = ({ authenticated }) => {
 
   
   useEffect(() => {
-    store.store.dispatch(loadUser());
+    // store.store.dispatch(loadUser());
   }, []);
 
 
@@ -71,7 +71,7 @@ const App = ({ authenticated }) => {
           <Route exact path="/" component={Landing} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/movies" component={MovieList} />
+          <Route path="/movies" component={MovieList} />
           <PrivateRoute path="/tv-shows" component={TvShows} />
           <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
           <PrivateRoute path="/show-details" component={TvShowDetails} />

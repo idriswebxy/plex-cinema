@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../Spinner/LoadSpinner";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Cart = ({

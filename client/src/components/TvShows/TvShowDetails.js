@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getMovie, loadMovieDetail } from "../../actions/movie";
 import { addToCart, loadCart } from "../../actions/cart";
 import { loadMovieDetails, setMovie } from "../../actions/movie";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../Spinner/LoadSpinner";
 import {
   API_KEY,
   IMAGE_BASE_URL,

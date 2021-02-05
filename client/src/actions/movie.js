@@ -98,6 +98,8 @@ export const fetchItems = (endpoint) => async (dispatch) => {
   let res = await fetch(endpoint);
   let data = await res.json();
 
+  console.log(data)
+
   try {
     // set total_pages
     dispatch({

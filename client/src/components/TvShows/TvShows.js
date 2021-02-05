@@ -7,7 +7,7 @@ import { loadMoreTvShows } from "../../actions/movie";
 import SearchBar from "../Search/Search";
 import Show from "./Show";
 import RelatedMovies from "../Movies/RelatedMovies";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../Spinner/LoadSpinner";
 import { useAuth0 } from "@auth0/auth0-react";
 
 

@@ -9,7 +9,6 @@ import store from "./store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Auth0Provider } from "@auth0/auth0-react";
 import history from "./utils/history";
-import 'semantic-ui-css/semantic.min.css'
 import {
   REACT_APP_AUTH0_DOMAIN,
   REACT_APP_AUTH0_CLIENT_ID,

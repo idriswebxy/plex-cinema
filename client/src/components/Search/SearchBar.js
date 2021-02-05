@@ -1,7 +1,5 @@
+import { Pane } from "evergreen-ui";
 import React, { useState, useEffect } from "react";
-import { Container } from "semantic-ui-react";
-
-
 
 const SearchBar = ({ onSearch, hideResults }) => {
   const [term, setTerm] = useState("");
@@ -16,7 +14,7 @@ const SearchBar = ({ onSearch, hideResults }) => {
   };
 
   return (
-    <Container>
+    <Pane>
       {/* <form className="form-inline mt-4 mb-4">
         <TextField
           id="standard-basic"
@@ -27,7 +25,7 @@ const SearchBar = ({ onSearch, hideResults }) => {
           onChange={(e) => onChange(e)}
         />
       </form> */}
-    </Container>
+    </Pane>
   );
 };
 

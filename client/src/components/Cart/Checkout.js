@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Container } from "semantic-ui-react";
+import { Pane } from "evergreen-ui"
+
 
 const Checkout = () => {
   return (
-    <Container>
+    <Pane>
       <h1
         style={{
           paddingTop: "20%",
@@ -15,7 +16,7 @@ const Checkout = () => {
       >
         Your order is complete!{" "}
       </h1>
-    </Container>
+    </Pane>
   );
 };
 
