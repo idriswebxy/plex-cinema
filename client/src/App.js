@@ -7,7 +7,7 @@ import Navbar from "./components/Layout/Navbar";
 import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import PrivateRoute from "./components/Routing/PrivateRoute";
-import MovieList from "./components/Movies/MovieList";
+import MovieList from "./components/Movies/MovieList/MovieList";
 import Landing from "./components/Layout/Landing";
 import { loadUser } from "./actions/auth";
 import store from "./store";

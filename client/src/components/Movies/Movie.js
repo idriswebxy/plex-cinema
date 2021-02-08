@@ -34,33 +34,34 @@ const Movie = ({
   }
 
 
-  // let movieLink = (
-  //   <MDBContainer>
-  //     <MDBRow>
-  //       <MDBCol>
-  //         <MDBView
-  //           hover
-  //           zoom
-  //           onMouseEnter={() => setMoviePrev(true)}
-  //           onMouseLeave={() => setMoviePrev(false)}
-  //         >
-  //           <Link to={"/movieInfo/" + id} onClick={() => getMovie(id)}>
-  //             <img src={`http://image.tmdb.org/t/p/w500${image}`} />
-  //           </Link>
-  //         </MDBView>
+  let movieLink = (
+    <div>Movie</div>
+    // <MDBContainer>
+    //   <MDBRow>
+    //     <MDBCol>
+    //       <MDBView
+    //         hover
+    //         zoom
+    //         onMouseEnter={() => setMoviePrev(true)}
+    //         onMouseLeave={() => setMoviePrev(false)}
+    //       >
+    //         <Link to={"/movieInfo/" + id} onClick={() => getMovie(id)}>
+    //           <img src={`http://image.tmdb.org/t/p/w500${image}`} />
+    //         </Link>
+    //       </MDBView>
 
-  //         <div style={{ textAlign: "center", paddingBottom: "50px" }}>
-  //           <h5>{title}</h5>
-  //           <h6>{moment(releaseDate).format("LL")}</h6>
+    //       <div style={{ textAlign: "center", paddingBottom: "50px" }}>
+    //         <h5>{title}</h5>
+    //         <h6>{moment(releaseDate).format("LL")}</h6>
 
-  //           <MDBBtn onClick={() => addToCart(movieObj)}>
-  //             <MDBIcon icon="cart-plus" /> Add To Cart
-  //           </MDBBtn>
-  //         </div>
-  //       </MDBCol>
-  //     </MDBRow>
-  //   </MDBContainer>
-  // );
+    //         <MDBBtn onClick={() => addToCart(movieObj)}>
+    //           <MDBIcon icon="cart-plus" /> Add To Cart
+    //         </MDBBtn>
+    //       </div>
+    //     </MDBCol>
+    //   </MDBRow>
+    // </MDBContainer>
+  );
 
   return (
     <div>

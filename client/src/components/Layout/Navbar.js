@@ -11,7 +11,40 @@ import { LOGIN_SUCCESS, USER_LOADED, GOOGLE_AUTH } from "../../actions/types";
 import store from "../../store";
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
-import { Pane, Heading, Link, TabNavigation, Tab, Tablist } from "evergreen-ui";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  SvgIcon,
+} from "@material-ui/core/";
+
+import MenuIcon from "@material-ui/icons/Menu";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  "& > svg": {
+    margin: theme.spacing(2),
+  },
+}));
+
+function HomeIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
 
 const Navbar = ({
   auth: { authenticated, userInfo },
@@ -29,24 +62,31 @@ const Navbar = ({
 
   let accountName = null;
   let serverUrl = REACT_APP_SERVER_URL;
+  const classes = useStyles();
 
   const guestLinks = (
-    <Pane display="flex" padding={16} background="#14B5D0" borderRadius={3}>
-      <Pane flex={1} alignItems="center" display="flex">
-        <Tab is="a" href="/" marginLeft={0}>
-          <Heading size={600}>Plex Cinema</Heading>
-        </Tab>
-        <Tab size={10} is="a" href="/movies" marginLeft={10}>
-          Movies
-        </Tab>
-        <Tab size={10} is="a" href="/tv-shows" marginLeft={10}>
-          TvShows
-        </Tab>
-      </Pane>
-      <Tab size={10} is="a" href="/logout" marginRight={10}>
-        Logout
-      </Tab>
-    </Pane>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <HomeIcon href="/" style={{ fontSize: 40 }} />
+
+            {/* <MenuIcon /> */}
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Plex Cinema
+          </Typography>
+          <Button href="/login" color="inherit">
+            Login
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 
   return <div>{guestLinks}</div>;

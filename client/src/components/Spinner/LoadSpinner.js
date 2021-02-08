@@ -1,16 +1,22 @@
 import React from "react";
-import { Spinner, Pane } from "evergreen-ui";
+import { makeStyles } from "@material-ui/core/styles";
+import { CircularProgress, Container } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+  },
+}));
 
 const LoadSpinner = () => {
+  const classes = useStyles();
+
   return (
-    <Pane
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      height={400}
-    >
-      <Spinner />
-    </Pane>
+    <div className={classes.root}>
+      <CircularProgress />
+    </div>
   );
 };
 

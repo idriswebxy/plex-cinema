@@ -1,4 +1,3 @@
-import { Pane } from "evergreen-ui";
 import React, { useState, useEffect } from "react";
 
 const SearchBar = ({ onSearch, hideResults }) => {
@@ -14,7 +13,8 @@ const SearchBar = ({ onSearch, hideResults }) => {
   };
 
   return (
-    <Pane>
+    <div>
+      SearhBar
       {/* <form className="form-inline mt-4 mb-4">
         <TextField
           id="standard-basic"
@@ -25,7 +25,7 @@ const SearchBar = ({ onSearch, hideResults }) => {
           onChange={(e) => onChange(e)}
         />
       </form> */}
-    </Pane>
+    </div>
   );
 };
 

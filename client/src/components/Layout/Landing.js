@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "../Spinner/LoadSpinner";
-import { Pane, Text } from "evergreen-ui";
 import { API_URL, API_KEY, POSTER_SIZE, IMAGE_BASE_URL } from "../../config";
 import { addToCart, loadCart } from "../../actions/cart";
 import {
@@ -15,6 +14,7 @@ import {
   loadChange,
   loadMoreItems,
 } from "../../actions/movie";
+import MovieList from "../Movies/MovieList/MovieList"
 
 const Landing = ({ login, authenticated, loading, movies, fetchItems }) => {
   const [formData, setFormData] = useState({
@@ -34,9 +34,6 @@ const Landing = ({ login, authenticated, loading, movies, fetchItems }) => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(movies);
-  }, [movies]);
 
   const { isLoading, isAuthenticated } = useAuth0();
 
@@ -58,31 +55,13 @@ const Landing = ({ login, authenticated, loading, movies, fetchItems }) => {
   //   return <Spinner />;
   // }
 
+
+
   const landingPreview = (
-    <Pane justifyContent="center">
-      <Pane
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="center"
-        flexDirection="inherit"
-        padding={20}
-        // height={"100%"}
-        // width={"100%"}
-      >
-        {movies.map((movie) => (
-          <Pane margin={10}>
-            <img
-              height={"100%"}
-              width={"100%"}
-              src={`http://image.tmdb.org/t/p/w185${movie.poster_path}`}
-            />
-          </Pane>
-        ))}
-      </Pane>
-    </Pane>
+   <div>Landing</div>
   );
 
-  return <div>{landingPreview}</div>;
+  return <div>{landingPreview} <MovieList /></div>;
 };
 
 const mapStateToProps = (state) => ({
