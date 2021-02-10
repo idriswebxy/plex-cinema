@@ -1,22 +1,16 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { CircularProgress, Container } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-  },
-}));
+import Spinner from "react-bootstrap/Spinner";
+import Container from "react-bootstrap/Container";
 
 const LoadSpinner = () => {
-  const classes = useStyles();
+  const style = { marginTop: "25%", marginLeft: "49%" };
 
   return (
-    <div className={classes.root}>
-      <CircularProgress />
-    </div>
+    <Container>
+      <div style={style}>
+        <Spinner animation="border" variant="primary" />
+      </div>
+    </Container>
   );
 };
 

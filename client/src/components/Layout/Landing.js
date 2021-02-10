@@ -14,7 +14,7 @@ import {
   loadChange,
   loadMoreItems,
 } from "../../actions/movie";
-import MovieList from "../Movies/MovieList/MovieList"
+import MovieList from "../Movies/MovieList"
 
 const Landing = ({ login, authenticated, loading, movies, fetchItems }) => {
   const [formData, setFormData] = useState({
@@ -58,10 +58,10 @@ const Landing = ({ login, authenticated, loading, movies, fetchItems }) => {
 
 
   const landingPreview = (
-   <div>Landing</div>
+    <MovieList />
   );
 
-  return <div>{landingPreview} <MovieList /></div>;
+  return <div>{landingPreview}</div>;
 };
 
 const mapStateToProps = (state) => ({

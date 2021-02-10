@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Spinner from "../../Spinner/LoadSpinner";
-import { addToCart, loadCart } from "../../../actions/cart";
+import Spinner from "../Spinner/LoadSpinner";
+import { addToCart, loadCart } from "../../actions/cart";
 import {
   fetchItems,
   nextPage,
@@ -8,22 +8,20 @@ import {
   loadMovies,
   loadChange,
   loadMoreItems,
-} from "../../../actions/movie";
-import { API_URL, API_KEY } from "../../../config";
+} from "../../actions/movie";
+import { API_URL, API_KEY } from "../../config";
 import { connect } from "react-redux";
-import Movie from "../Movie";
-import SearchBar from "../../Search/Search";
+import Movie from "./MovieCard";
+import SearchBar from "../Search/Search";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useStyles } from "./movie-list-style";
-import {
-  Grid,
-  FormLabel,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
-  Paper,
-} from "@material-ui/core";
-import movie from "../../../reducers/movie";
+import MovieCard from "./MovieCard";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+const styles = {
+  margin: "40px",
+};
 
 const MovieList = ({
   addToCart,
@@ -55,8 +53,6 @@ const MovieList = ({
     }
   }, []);
 
-  const classes = useStyles();
-
   // if (!authenticated) {
   //   return <Redirect to="/login" />;
   // }
@@ -65,36 +61,18 @@ const MovieList = ({
   //   return <Spinner />;
   // }
 
-  const FormRow = () => (
-    <div className={classes.root}>
-      {movies.map((m, k) => (
-        <Grid justify={"center"} container spacing={5}>
-          <Grid item xs={6} item sm={6} item md={6} item lg={6}>
-            <Paper className={classes.paper}>
-              <img src={`http://image.tmdb.org/t/p/w185${m.poster_path}`} />
-              <h4>{m.title}</h4>
-            </Paper>
-          </Grid>
-        </Grid>
-      ))}
-    </div>
-  );
-
-  const movieList = (
-    <div className={classes.root}>
-      <Grid container spacing={1}>
-        <Grid container item xs={12} spacing={3}>
-          <FormRow />
-        </Grid>
-      </Grid>
-    </div>
-  );
-
   return (
-    <div>
-      <SearchBar />
-      {/* {carousel} */}
-      {movieList}
+    <div style={styles}>
+      <Container>
+        {/* <SearchBar /> */}
+        <Row>
+          {movies.map((movie) => (
+            <Col md={3} xs={6} lg={3}>
+              <MovieCard movie={movie} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </div>
   );
 };

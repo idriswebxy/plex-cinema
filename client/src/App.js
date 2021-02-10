@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import setAuthToken from "./utils/setAuthToken";
 import Cart from "./components/Cart/Cart";
-import Navbar from "./components/Layout/Navbar";
+import NavigationBar from "./components/Layout/NavigationBar";
 import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import PrivateRoute from "./components/Routing/PrivateRoute";
-import MovieList from "./components/Movies/MovieList/MovieList";
+import MovieList from "./components/Movies/MovieList";
 import Landing from "./components/Layout/Landing";
 import { loadUser } from "./actions/auth";
 import store from "./store";
@@ -24,6 +24,7 @@ import "./App.css"
 
 
 import { createBrowserHistory } from "history";
+
 
 const history = createBrowserHistory();
 
@@ -63,9 +64,9 @@ const App = ({ authenticated }) => {
   // }
 
   return (
-    <div className="app-main"> 
+    <div> 
       <Router history={history}>
-        <Navbar />
+        <NavigationBar />
         <Alert />
         <Switch>
           <Route exact path="/" component={Landing} />
