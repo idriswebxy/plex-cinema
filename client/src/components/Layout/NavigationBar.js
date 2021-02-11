@@ -18,6 +18,10 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
+const style = {
+  color: "orange",
+};
+
 const NavigationBar = ({
   auth: { authenticated, userInfo },
   logOut,
@@ -37,14 +41,23 @@ const NavigationBar = ({
 
   const guestLinks = (
     <Navbar bg="dark" variant="dark" expand="lg">
-      <Navbar.Brand href="/">Plex Cinema</Navbar.Brand>
+      <Navbar.Brand href="/">
+        <i className="bi bi-film" style={style}></i>&nbsp;Plex Cinema
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/movies">Movies</Nav.Link>
+          {/* <Nav.Link href="/movies">Movies</Nav.Link> */}
         </Nav>
         <Nav>
-          <Nav.Link href="/login">Login</Nav.Link>
+          <Nav.Link href="/cart">
+            Cart&nbsp;<i className="bi bi-cart3"></i>
+          </Nav.Link>
+        </Nav>
+        <Nav>
+          <Nav.Link href="/login">
+            Login&nbsp;<i class="bi bi-box-arrow-in-left"></i>
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

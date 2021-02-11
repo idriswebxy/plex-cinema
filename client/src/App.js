@@ -19,19 +19,16 @@ import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components/Spinner/LoadSpinner";
-import { fetchItems } from "./actions/movie"
-import "./App.css"
-
+import { fetchItems } from "./actions/movie";
+import "./App.css";
 
 import { createBrowserHistory } from "history";
-
 
 const history = createBrowserHistory();
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
-
 
 const App = ({ authenticated }) => {
   const {
@@ -41,11 +38,9 @@ const App = ({ authenticated }) => {
     getAccessTokenSilently,
   } = useAuth0();
 
-  
   useEffect(() => {
     // store.store.dispatch(loadUser());
   }, []);
-
 
   // useEffect(() => {
   //   try {
@@ -53,7 +48,7 @@ const App = ({ authenticated }) => {
   //       const token = await getAccessTokenSilently();
   //       console.log(token);
   //     })();
-      
+
   //   } catch (error) {
   //     console.error(error);
   //   }
@@ -64,20 +59,20 @@ const App = ({ authenticated }) => {
   // }
 
   return (
-    <div> 
+    <div>
       <Router history={history}>
         <NavigationBar />
         <Alert />
         <Switch>
-          <Route exact path="/" component={Landing} />
+          {/* <Route exact path="/" component={Landing} /> */}
+          <Route exact path="/" component={MovieList} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="/movies" component={MovieList} />
           <PrivateRoute path="/tv-shows" component={TvShows} />
           <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
           <PrivateRoute path="/show-details" component={TvShowDetails} />
           <PrivateRoute path="/cart" component={Cart} />
-          <PrivateRoute path="/checkout" component={Checkout} /> 
+          <PrivateRoute path="/checkout" component={Checkout} />
         </Switch>
       </Router>
     </div>

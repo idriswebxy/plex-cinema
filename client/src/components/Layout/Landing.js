@@ -14,7 +14,8 @@ import {
   loadChange,
   loadMoreItems,
 } from "../../actions/movie";
-import MovieList from "../Movies/MovieList"
+import MovieList from "../Movies/MovieList";
+
 
 const Landing = ({ login, authenticated, loading, movies, fetchItems }) => {
   const [formData, setFormData] = useState({
@@ -34,7 +35,6 @@ const Landing = ({ login, authenticated, loading, movies, fetchItems }) => {
     }
   }, []);
 
-
   const { isLoading, isAuthenticated } = useAuth0();
 
   const { email, password } = formData;
@@ -51,17 +51,15 @@ const Landing = ({ login, authenticated, loading, movies, fetchItems }) => {
   //   return <Redirect to="/movies" />;
   // }
 
-  // if (loading || isLoading) {
-  //   return <Spinner />;
-  // }
+  if (loading || isLoading) {
+    return <Spinner />;
+  }
 
-
-
-  const landingPreview = (
-    <MovieList />
+  return (
+    <div>
+      <MovieList />
+    </div>
   );
-
-  return <div>{landingPreview}</div>;
 };
 
 const mapStateToProps = (state) => ({
@@ -71,3 +69,4 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { login, fetchItems })(Landing);
+  

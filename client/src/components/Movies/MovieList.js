@@ -62,7 +62,7 @@ const MovieList = ({
   // }
 
   return (
-    <div style={styles}>
+    <div style={styles}> 
       <Container>
         {/* <SearchBar /> */}
         <Row>

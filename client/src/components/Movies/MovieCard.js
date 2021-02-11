@@ -8,6 +8,8 @@ import moment from "moment";
 // import MovieDetails from "./MovieDetails";
 import auth from "../../reducers/auth";
 import { useAuth0 } from "@auth0/auth0-react";
+import Figure from "react-bootstrap/Figure";
+import Card from 'react-bootstrap/Card'
 
 
 const MovieCard = ({ movie }) => {
@@ -23,14 +25,15 @@ const MovieCard = ({ movie }) => {
 
   let movieCard = (
     <div>
-      <img src={`http://image.tmdb.org/t/p/w185${movie.poster_path}`} />
-
-      <h6>{movie.title}</h6>
-      {/* <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text> */}
-      {/* <Button variant="primary">Go somewhere</Button> */}
+      <Figure>
+        <Figure.Image
+          width={200}
+          height={180}
+          alt="200x180"
+          src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
+        />
+        <h5>{movie.title}</h5>
+      </Figure>
     </div>
   );
 

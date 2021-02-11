@@ -1,3 +1,8 @@
 * {
     margin: 0
 }
+
+body {
+    color: white;
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.938) , rgb(83, 83, 83)); /* Standard syntax */
+}

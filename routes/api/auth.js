@@ -12,8 +12,6 @@ const { checkJwt } = require("../../middleware/check-jwt");
 
 const Auth0_User = require("../../models/Auth0.User");
 
-
-
 // Login
 router.post(
   "/",
@@ -69,8 +67,6 @@ router.post(
   }
 );
 
-
-
 // create auth0 user
 router.post("/auth0", checkJwt, async (req, res) => {
   try {
@@ -88,10 +84,7 @@ router.post("/auth0", checkJwt, async (req, res) => {
       email,
     });
 
-    console.log("Found in DB ==> " + user);
-
     if (user) {
-      console.log('User already exists!')
       res.status(400).json({
         errors: [
           {
@@ -99,9 +92,7 @@ router.post("/auth0", checkJwt, async (req, res) => {
           },
         ],
       });
-    } 
-    else {
-
+    } else {
       auth0_user = new Auth0_User({
         name,
         email,
