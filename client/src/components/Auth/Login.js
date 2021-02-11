@@ -22,21 +22,19 @@ const Login = ({ login, authenticated, loading }) => {
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.type]: e.target.value });
-  }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     login(email, password);
   };
 
-  if (authenticated || isAuthenticated) {
+  if (authenticated) {
     return <Redirect to="/" />;
   }
-
-  // if (loading || isLoading) {
-  //   return <Spinner />;
-  // }
+  if (loading) {
+    return <Spinner />;
+  }
 
   const loginForm = (
     <Container>

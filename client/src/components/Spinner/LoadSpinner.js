@@ -3,7 +3,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 
 const LoadSpinner = () => {
-  const style = { align: "center", marginTop: '30%' };
+  const style = { marginLeft: "45%", marginTop: "30%" };
 
   return (
     <Container>

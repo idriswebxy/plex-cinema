@@ -17,6 +17,7 @@ import Form from "react-bootstrap/Form";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
+import Badge from "react-bootstrap/Badge";
 
 const style = {
   color: "orange",
@@ -63,7 +64,45 @@ const NavigationBar = ({
     </Navbar>
   );
 
-  return <div>{guestLinks}</div>;
+  const authLinks = (
+    <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar.Brand href="/">
+        <i className="bi bi-film" style={style}></i>&nbsp;Plex Cinema
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Item>
+            Welcome <i class="bi bi-person-circle" />&nbsp;
+            {authenticated ? userInfo.name : null}!
+          </Nav.Item>
+        </Nav>
+        <Nav>
+          <Nav.Link href="/cart">
+            Cart&nbsp;<i className="bi bi-cart3"></i>
+            <Badge pill variant="info">
+              {cart.length}
+            </Badge>
+          </Nav.Link>
+        </Nav>
+        {authenticated ? (
+          <Nav>
+            <Nav.Link href="/login" onClick={() => logOut()}>
+              Logout&nbsp;<i className="bi bi-box-arrow-in-left"></i>
+            </Nav.Link>
+          </Nav>
+        ) : (
+          <Nav>
+            <Nav.Link href="/login">
+              Login&nbsp;<i className="bi bi-box-arrow-in-left"></i>
+            </Nav.Link>
+          </Nav>
+        )}
+      </Navbar.Collapse>
+    </Navbar>
+  );
+
+  return <div>{authenticated || isAuthenticated ? authLinks : guestLinks}</div>;
 
   // const guestLinks = <div></div>;
 

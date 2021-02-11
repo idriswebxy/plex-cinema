@@ -14,23 +14,16 @@ const Auth0_User = require("../../models/Auth0.User");
 
 
 
-
-router.get('/auth0', async (req, res) => {
-
+router.get("/auth0", async (req, res) => {
   try {
-
-    console.log("GET auth0==> " + req.user)
+    console.log("GET auth0==> " + req.user);
     const user = await Auth0_User.findById(req.user.id).select("-email");
     res.json(user);
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
-
-})
-
-
+});
 
 // get user
 router.get("/", auth, async (req, res) => {
@@ -42,7 +35,6 @@ router.get("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
 
 // register user
 router.post(
@@ -57,9 +49,7 @@ router.post(
     }),
   ],
   async (req, res) => {
-
     const errors = validationResult(req);
-
 
     if (!errors.isEmpty()) {
       return res.status(400).json({
