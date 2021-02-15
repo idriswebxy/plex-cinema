@@ -1,5 +1,4 @@
-import React, { Component, useEffect, useState, useContext } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Component, useEffect, useState, useContext } from "react"; import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import setAuthToken from "./utils/setAuthToken";
 import Cart from "./components/Cart/Cart";

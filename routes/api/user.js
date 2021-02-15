@@ -16,7 +16,6 @@ const Auth0_User = require("../../models/Auth0.User");
 
 router.get("/auth0", async (req, res) => {
   try {
-    console.log("GET auth0==> " + req.user);
     const user = await Auth0_User.findById(req.user.id).select("-email");
     res.json(user);
   } catch (err) {

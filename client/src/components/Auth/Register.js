@@ -25,6 +25,8 @@ const Register = ({ setAlert, register, authenticated }) => {
 
   const { name, email, password, password2 } = formData;
 
+ 
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {

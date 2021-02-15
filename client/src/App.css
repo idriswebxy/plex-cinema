@@ -4,5 +4,5 @@
 
 body {
     color: white;
-	background: linear-gradient(to right, rgba(0, 0, 0, 0.938) , rgb(83, 83, 83)); /* Standard syntax */
+	background: linear-gradient(to right, rgb(0, 0, 0) , rgb(61, 61, 61)); /* Standard syntax */
 }

@@ -57,7 +57,7 @@ const NavigationBar = ({
         </Nav>
         <Nav>
           <Nav.Link href="/login">
-            Login&nbsp;<i class="bi bi-box-arrow-in-left"></i>
+            Login&nbsp;<i className="bi bi-box-arrow-in-left"></i>
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
@@ -73,7 +73,8 @@ const NavigationBar = ({
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Item>
-            Welcome <i class="bi bi-person-circle" />&nbsp;
+            Welcome <i className="bi bi-person-circle" />
+            &nbsp;
             {authenticated ? userInfo.name : null}!
           </Nav.Item>
         </Nav>
