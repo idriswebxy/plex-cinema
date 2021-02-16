@@ -69,9 +69,9 @@ const App = ({ authenticated }) => {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <PrivateRoute path="/tv_shows" component={TvShows} />
-          <PrivateRoute path="/movie_info/:id" component={MovieDetails} />
+          <Route path="/movie_info/:id" component={MovieDetails} />
           <PrivateRoute path="/show_details" component={TvShowDetails} />
-          <PrivateRoute path="/cart" component={Cart} />
+          <Route path="/cart" component={Cart} />
           <PrivateRoute path="/checkout" component={Checkout} />
         </Switch>
       </Router>

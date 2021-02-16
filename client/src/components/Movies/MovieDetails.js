@@ -37,7 +37,6 @@ const MovieDetails = ({
       .then((res) => res.json())
       .then((data) => setVideoKey(data.results[0].key));
     loadCart();
-    console.log(movie.title)
   }, []);
 
   // useEffect(() => {
@@ -49,28 +48,27 @@ const MovieDetails = ({
   // }
 
   return (
-    <Container>
-      <div
-      // style={{
-      //   backgroundImage: `linear-gradient(to right,
-      // rgba(19, 38, 47, 0.7) 0%,
-      // rgba(9, 28, 37, 0.7) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+    <div
+      style={{
+        backgroundImage: `linear-gradient(to right,
+        rgba(19, 38, 47, 0.7) 0%,
+        rgba(9, 28, 37, 0.7) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
 
-      //   backgroundRepeat: "no-repeat",
-      //   backgroundSize: "cover",
-      // }}
-      >
-        {movie.title == null ? null : movie.title}
-      </div>
-    </Container>
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        height: "100vh",
+      }}
+    >
+      {movie.title}
+    </div>
   );
 };
 
-// MovieDetails.propTypes = {
-//   match: PropTypes.object.isRequired,
-//   location: PropTypes.object.isRequired,
-//   history: PropTypes.object.isRequired,
-// };
+MovieDetails.propTypes = {
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   movie: state.movie.searchedMovie,
