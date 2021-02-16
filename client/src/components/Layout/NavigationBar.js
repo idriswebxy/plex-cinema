@@ -19,8 +19,11 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 
-const style = {
+const styles = {
   color: "orange",
+  msg: {
+    color: "white",
+  },
 };
 
 const NavigationBar = ({
@@ -43,7 +46,7 @@ const NavigationBar = ({
   const guestLinks = (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Navbar.Brand href="/">
-        <i className="bi bi-film" style={style}></i>&nbsp;Plex Cinema
+        <i className="bi bi-film" style={styles}></i>&nbsp;Plex Cinema
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -67,11 +70,11 @@ const NavigationBar = ({
   const authLinks = (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Navbar.Brand href="/">
-        <i className="bi bi-film" style={style}></i>&nbsp;Plex Cinema
+        <i className="bi bi-film" style={styles}></i>&nbsp;Plex Cinema
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav style={styles.msg} className="mr-auto">
           <Nav.Item>
             Welcome <i className="bi bi-person-circle" />
             &nbsp;

@@ -25,22 +25,19 @@ const MovieDetails = ({
   isLoading_app,
   voteAverage,
   withRouter,
-  history
+  history,
 }) => {
   const [videoKey, setVideoKey] = useState(null);
   const [movieID, setMovieID] = useState(null);
 
-
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${
-        movie.id ? movie.id || movieID : movieID
-      }/videos?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${API_KEY}&language=en-US`
     )
       .then((res) => res.json())
       .then((data) => setVideoKey(data.results[0].key));
-
     loadCart();
+    console.log(movie.title)
   }, []);
 
   // useEffect(() => {
@@ -51,17 +48,22 @@ const MovieDetails = ({
   //   return <SpinnerPage />;
   // }
 
-  const movieDetails = (
+  return (
     <Container>
-      <div>{movie.title}</div>
+      <div
+      // style={{
+      //   backgroundImage: `linear-gradient(to right,
+      // rgba(19, 38, 47, 0.7) 0%,
+      // rgba(9, 28, 37, 0.7) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+
+      //   backgroundRepeat: "no-repeat",
+      //   backgroundSize: "cover",
+      // }}
+      >
+        {movie.title == null ? null : movie.title}
+      </div>
     </Container>
   );
-  
-  if (history !== "/") {
-    return <div>{movieDetails}</div>;
-  }
-
-
 };
 
 // MovieDetails.propTypes = {

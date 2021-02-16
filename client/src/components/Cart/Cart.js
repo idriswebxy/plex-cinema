@@ -6,7 +6,7 @@ import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import Spinner from "../Spinner/LoadSpinner";
 import { useAuth0 } from "@auth0/auth0-react";
 import Container from "react-bootstrap/Container";
-import ListGroup from "react-bootstrap/ListGroup";
+import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
 const Cart = ({
@@ -37,24 +37,23 @@ const Cart = ({
 
   return (
     <Container>
-      <ListGroup>
+      <Table>
+        <tr>
+          <thead>Movie</thead>
+        </tr>
         {cart.map((movie, key) => (
-          <ListGroup.Item>
-            <div key={key}>
-              <img
-                src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
-              />
-              <div>{movie.title}</div>
-              <Button
-                variant="danger"
-                onClick={() => deleteItem(movie.id, key, price)}
-              >
-                Remove
-              </Button>
-            </div>
-          </ListGroup.Item>
+          <div key={key}>
+            <img src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`} />
+            <div>{movie.title}</div>
+            <Button
+              variant="danger"
+              onClick={() => deleteItem(movie.id, key, price)}
+            >
+              Remove
+            </Button>
+          </div>
         ))}
-      </ListGroup>
+      </Table>
     </Container>
   );
 };
