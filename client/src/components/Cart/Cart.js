@@ -5,6 +5,9 @@ import { Redirect } from "react-router-dom";
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import Spinner from "../Spinner/LoadSpinner";
 import { useAuth0 } from "@auth0/auth0-react";
+import Container from "react-bootstrap/Container";
+import ListGroup from "react-bootstrap/ListGroup";
+import Button from "react-bootstrap/Button";
 
 const Cart = ({
   cart,
@@ -24,46 +27,36 @@ const Cart = ({
     getPriceTotal(userId);
   }, [total]);
 
-  if (!authenticated) {
-    return <Redirect to="/login" />;
-  }
-
-  if (loading || isLoading) {
+  if (loading) {
     return <Spinner />;
   }
 
-  let cartItems = <div>404</div>;
-
-  let checkOut = (
-    <div>404</div>
-    // <div style={{ marginLeft: "10px", color: "white" }}>
-    //   <h2>Total: ${total.toFixed(2)}</h2>
-    //   <NavLink to="/checkout">c</NavLink>
-    // </div>
-  );
-
-  let cartItemsTest = (
-    <div>404</div>
-    // <Table striped bordered hover>
-    //   <thead></thead>
-    // </Table>
-  );
+  // if (!authenticated) {
+  //   return <Redirect to="/login" />;
+  // }
 
   return (
-    // <Container>
-    //   <div style={{ marginTop: "100px" }}>
-    //     {/* <h3>Cart: {cart.length} item(s)</h3>
-    //     <div>{cartItems}</div>
-    //     <div>{checkOut}</div> */}
-    //     {cartItemsTest}
-    //   </div>
-    // </Container>
-    <div>404</div>
+    <Container>
+      <ListGroup>
+        {cart.map((movie, key) => (
+          <ListGroup.Item>
+            <div key={key}>
+              <img
+                src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
+              />
+              <div>{movie.title}</div>
+              <Button
+                variant="danger"
+                onClick={() => deleteItem(movie.id, key, price)}
+              >
+                Remove
+              </Button>
+            </div>
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
+    </Container>
   );
-};
-
-Cart.propTypes = {
-  loadCart: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

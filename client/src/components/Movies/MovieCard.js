@@ -9,10 +9,17 @@ import moment from "moment";
 import auth from "../../reducers/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Figure from "react-bootstrap/Figure";
-import Card from 'react-bootstrap/Card'
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
 
+const styles = {
+  textAlign: "center",
+  marginTop: "10px",
+};
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, getMovie }) => {
+
   const { isAuthenticated } = useAuth0();
 
   const [moviePrev, setMoviePrev] = useState(false);
@@ -24,16 +31,19 @@ const MovieCard = ({ movie }) => {
   };
 
   let movieCard = (
-    <div>
-      <Figure>
-        <Figure.Image
-          width={200}
-          height={180}
-          alt="200x180"
+    <div style={styles}>
+      <Link to={`/movie_info/${movie.id}`} onClick={() => getMovie(movie.id)}>
+        <Image
+          rounded
+          fluid
           src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
         />
-        <h5>{movie.title}</h5>
-      </Figure>
+      </Link>
+      <div style={styles}>
+        <p>
+          {movie.title}&nbsp;({moment(movie.release_date).format("YYYY")})
+        </p>
+      </div>
     </div>
   );
 

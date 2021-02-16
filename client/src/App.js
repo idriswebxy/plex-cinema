@@ -1,4 +1,5 @@
-import React, { Component, useEffect, useState, useContext } from "react"; import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Component, useEffect, useState, useContext } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import setAuthToken from "./utils/setAuthToken";
 import Cart from "./components/Cart/Cart";
@@ -67,9 +68,9 @@ const App = ({ authenticated }) => {
           <Route exact path="/" component={MovieList} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/tv-shows" component={TvShows} />
-          <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
-          <PrivateRoute path="/show-details" component={TvShowDetails} />
+          <PrivateRoute path="/tv_shows" component={TvShows} />
+          <PrivateRoute path="/movie_info/:id" component={MovieDetails} />
+          <PrivateRoute path="/show_details" component={TvShowDetails} />
           <PrivateRoute path="/cart" component={Cart} />
           <PrivateRoute path="/checkout" component={Checkout} />
         </Switch>

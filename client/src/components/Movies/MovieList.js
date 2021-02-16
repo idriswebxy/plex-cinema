@@ -10,6 +10,7 @@ import {
   loadMoreItems,
 } from "../../actions/movie";
 import { API_URL, API_KEY } from "../../config";
+import { Redirect, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import Movie from "./MovieCard";
 import SearchBar from "../Search/Search";
@@ -33,6 +34,7 @@ const MovieList = ({
   totalPages,
   loadMoreItems,
   authenticated,
+  history
 }) => {
   const {
     user,
@@ -48,26 +50,27 @@ const MovieList = ({
       endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart();
+      console.log(history)
     } else {
       loadCart();
     }
   }, []);
 
-  // if (!authenticated) {
-  //   return <Redirect to="/login" />;
-  // }
+  if (loading) {
+    return <Spinner />;
+  }
 
-  // if (isLoading || loading) {
-  //   return <Spinner />;
-  // }
+  if (!authenticated) {
+    return <Redirect to="/login" />;
+  }
 
   return (
-    <div style={styles}> 
+    <div style={styles}>
       <Container>
         {/* <SearchBar /> */}
         <Row>
-          {movies.map((movie) => (
-            <Col md={3} xs={6} lg={3}>
+          {movies.map((movie, key) => (
+            <Col key={key} xs={6} sm={3} md={3} lg={3}>
               <MovieCard movie={movie} />
             </Col>
           ))}
