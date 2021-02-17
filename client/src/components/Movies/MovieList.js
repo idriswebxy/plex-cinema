@@ -46,11 +46,10 @@ const MovieList = ({
   let endpoint = "";
 
   useEffect(() => {
-    if (movies.length <= 20) {
+    if (movies.length < 20) {
       endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart();
-      console.log(history)
     } else {
       loadCart();
     }

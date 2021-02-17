@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addToCart, loadCart } from "../../actions/cart";
 import { loadMovieDetails, setMovie, getMovie } from "../../actions/movie";
-import SpinnerPage from "../Spinner/LoadSpinner";
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
+import SpinnerPage from "../Spinner/LoadSpinner";
 import { withRouter } from "react-router";
 import {
   API_KEY,
@@ -14,6 +14,15 @@ import {
 } from "../../config";
 import moment from "moment";
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+const styles = {
+  border: "2px solid white",
+  pad: {
+    padding: "30px",
+  },
+};
 
 const MovieDetails = ({
   movie,
@@ -59,7 +68,17 @@ const MovieDetails = ({
         height: "100vh",
       }}
     >
-      {movie.title}
+      <Container>
+        <Row style={styles} lg={12} xs={12} sm={12} md={12}>
+
+
+            <img src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`} />
+
+            {movie.title}
+            {movie.overview}
+
+        </Row>
+      </Container>
     </div>
   );
 };
