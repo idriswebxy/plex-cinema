@@ -19,7 +19,6 @@ const styles = {
 };
 
 const MovieCard = ({ movie, getMovie }) => {
-
   const { isAuthenticated } = useAuth0();
 
   const [moviePrev, setMoviePrev] = useState(false);

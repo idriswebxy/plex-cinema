@@ -32,6 +32,8 @@ const Login = ({ login, authenticated, loading }) => {
   if (authenticated) {
     return <Redirect to="/" />;
   }
+
+  
   if (loading) {
     return <Spinner />;
   }

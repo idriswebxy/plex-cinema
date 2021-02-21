@@ -59,9 +59,9 @@ const MovieList = ({
     return <Spinner />;
   }
 
-  if (!authenticated) {
-    return <Redirect to="/login" />;
-  }
+  // if (!authenticated) {
+  //   return <Redirect to="/login" />;
+  // }
 
   return (
     <div style={styles}>

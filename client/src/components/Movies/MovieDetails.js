@@ -16,12 +16,14 @@ import moment from "moment";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
 
 const styles = {
   border: "2px solid white",
   pad: {
     padding: "30px",
   },
+  // backgroundColor: "green",
 };
 
 const MovieDetails = ({
@@ -48,14 +50,6 @@ const MovieDetails = ({
     loadCart();
   }, []);
 
-  // useEffect(() => {
-  //   setMovieID(movie.id)
-  // }, [movie])
-
-  // // if (isLoading) {
-  //   return <SpinnerPage />;
-  // }
-
   return (
     <div
       style={{
@@ -66,17 +60,21 @@ const MovieDetails = ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         height: "100vh",
+        padding: "20px",
       }}
     >
       <Container>
-        <Row style={styles} lg={12} xs={12} sm={12} md={12}>
-
-
-            <img src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`} />
-
-            {movie.title}
-            {movie.overview}
-
+        <Row lg={12} md={12} sm={12} xs={12}>
+          <Image
+            rounded
+            src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
+          />
+          <Col xs={12} style={styles}>
+            <Col>
+              <h3>{movie.title}</h3>
+              <p>{movie.overview}</p>
+            </Col>
+          </Col>
         </Row>
       </Container>
     </div>
