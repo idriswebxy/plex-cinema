@@ -17,13 +17,22 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import StarRatings from "react-star-ratings";
 
 const styles = {
-  border: "2px solid white",
+  container: { border: "8px solid black" },
   pad: {
-    padding: "30px",
+    paddingTop: "10px",
   },
-  // backgroundColor: "green",
+  row: {
+    border: "3px dotted yellow",
+  },
+  mar: {
+    margin: "20px",
+  },
+  colStyle: {
+    border: "3px dotted red",
+  },
 };
 
 const MovieDetails = ({
@@ -39,15 +48,28 @@ const MovieDetails = ({
   history,
 }) => {
   const [videoKey, setVideoKey] = useState(null);
-  const [movieID, setMovieID] = useState(null);
+  const [cast, setCast] = useState(null);
+  const [vidSpinner, setVidSpinner] = useState(true);
 
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${API_KEY}&language=en-US`
     )
       .then((res) => res.json())
-      .then((data) => setVideoKey(data.results[0].key));
+      .then((data) => {
+        setVidSpinner(false);
+        setVideoKey(data.results[0].key);
+      });
     loadCart();
+  }, []);
+  
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`
+      )
+      .then((res) => res.json)
+      .then((data) => setCast(data.cast));
+      console.log(cast);
   }, []);
 
   return (
@@ -59,22 +81,46 @@ const MovieDetails = ({
 
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        height: "100vh",
-        padding: "20px",
+        maxHeight: "100%",
       }}
     >
-      <Container>
-        <Row lg={12} md={12} sm={12} xs={12}>
+      <Container style={styles.container}>
+        <Row style={styles.row} lg={12} md={12} sm={12} xs={12}>
           <Image
             rounded
             src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
           />
-          <Col xs={12} style={styles}>
-            <Col>
+
+          <Col style={styles.colStyle}>
+            <Col style={styles.colStyle}>
               <h3>{movie.title}</h3>
-              <p>{movie.overview}</p>
+              <StarRatings
+                starRatedColor="yellow"
+                numberOfStars={5}
+                rating={movie.vote_average / 2}
+                starDimension={"25"}
+                name="rating"
+              />
+              &nbsp;({movie.vote_count})<p>{movie.overview}</p>
+              {/* {cast.map((actor) => (
+                <Image
+                  roudedCircle
+                  src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
+                />
+              ))} */}
             </Col>
           </Col>
+        </Row>
+        <Row style={styles.pad}>
+          {vidSpinner ? (
+            <SpinnerPage />
+          ) : (
+            <ReactPlayer
+              playing=""
+              controls="true"
+              url={`https://www.youtube.com/watch?v=${videoKey}`}
+            />
+          )}
         </Row>
       </Container>
     </div>
