@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addToCart, loadCart } from "../../actions/cart";
-import { loadMovieDetails, setMovie, getMovie } from "../../actions/movie";
+import { loadMovieDetails, setMovie, getMovie, fetchCast } from "../../actions/movie";
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Spinner/LoadSpinner";
@@ -18,6 +18,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import StarRatings from "react-star-ratings";
+import Button from "react-bootstrap/Button";
+
+
 
 const styles = {
   container: { border: "8px solid black" },
@@ -35,6 +38,8 @@ const styles = {
   },
 };
 
+
+
 const MovieDetails = ({
   movie,
   addToCart,
@@ -48,8 +53,14 @@ const MovieDetails = ({
   history,
 }) => {
   const [videoKey, setVideoKey] = useState(null);
-  const [cast, setCast] = useState(null);
+  const [cast, setCast] = useState([]);
   const [vidSpinner, setVidSpinner] = useState(true);
+  
+  const castFetch = async () => {
+    let res = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`)
+    let data = await res.json();
+    setCast([...cast, data.cast])
+  }
 
   useEffect(() => {
     fetch(
@@ -60,17 +71,16 @@ const MovieDetails = ({
         setVidSpinner(false);
         setVideoKey(data.results[0].key);
       });
+    // fetchCast(movie.id)
     loadCart();
+    castFetch()
+    window.scrollTo(0,0)
+    console.log(cast)
   }, []);
-  
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`
-      )
-      .then((res) => res.json)
-      .then((data) => setCast(data.cast));
-      console.log(cast);
-  }, []);
+
+
+
+
 
   return (
     <div
@@ -84,16 +94,18 @@ const MovieDetails = ({
         maxHeight: "100%",
       }}
     >
-      <Container style={styles.container}>
-        <Row style={styles.row} lg={12} md={12} sm={12} xs={12}>
+
+      <Container style={styles.pad}>
+        <Row lg={12} md={12} sm={12} xs={12}>
           <Image
             rounded
             src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
           />
 
-          <Col style={styles.colStyle}>
-            <Col style={styles.colStyle}>
+          <Col>
+            <Col>
               <h3>{movie.title}</h3>
+              <div>({moment(movie.release_date).format("YYYY")})</div>
               <StarRatings
                 starRatedColor="yellow"
                 numberOfStars={5}
@@ -102,22 +114,22 @@ const MovieDetails = ({
                 name="rating"
               />
               &nbsp;({movie.vote_count})<p>{movie.overview}</p>
-              {/* {cast.map((actor) => (
+              {cast.map((actor) => (
                 <Image
                   roudedCircle
                   src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
                 />
-              ))} */}
+              ))}
             </Col>
           </Col>
         </Row>
-        <Row style={styles.pad}>
+        <Row>
           {vidSpinner ? (
             <SpinnerPage />
           ) : (
             <ReactPlayer
-              playing=""
-              controls="true"
+              playing={false}
+              controls={true}
               url={`https://www.youtube.com/watch?v=${videoKey}`}
             />
           )}
@@ -145,5 +157,6 @@ export default withRouter(
     loadMovieDetails,
     getMovie,
     loadCart,
+    fetchCast
   })(MovieDetails)
 );

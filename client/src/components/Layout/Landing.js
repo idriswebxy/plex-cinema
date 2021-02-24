@@ -51,9 +51,9 @@ const Landing = ({ login, authenticated, loading, movies, fetchItems }) => {
   //   return <Redirect to="/movies" />;
   // }
 
-  if (loading || isLoading) {
-    return <Spinner />;
-  }
+  // if (loading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <div>

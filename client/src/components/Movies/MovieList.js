@@ -19,6 +19,9 @@ import MovieCard from "./MovieCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import LoadSpinner from "../Spinner/LoadSpinner";
+import Loader from "./Loader";
+import Button from "react-bootstrap/Button";
 
 const styles = {
   margin: "40px",
@@ -34,7 +37,7 @@ const MovieList = ({
   totalPages,
   loadMoreItems,
   authenticated,
-  history
+  history,
 }) => {
   const {
     user,
@@ -56,8 +59,21 @@ const MovieList = ({
   }, []);
 
   if (loading) {
-    return <Spinner />;
+    return <LoadSpinner />;
   }
+
+  // window.onscroll = function (ev) {
+  //   if (this.scrollY > ) {
+  //   //  loadMoreItems(endpoint, page)
+  //   console.log('yoooo')
+  //   }
+  // };
+
+  // window.onscroll = function(e) {
+  //   // print "false" if direction is down and "true" if up
+  //   console.log('****');
+  //   this.oldScroll = this.scrollY;
+  // }
 
   // if (!authenticated) {
   //   return <Redirect to="/login" />;
@@ -74,6 +90,17 @@ const MovieList = ({
             </Col>
           ))}
         </Row>
+        {/* {loading ? <LoadSpinner /> : null} */}
+        {page < totalPages ? (
+          <Button
+            onClick={() => loadMoreItems(endpoint, page)}
+            variant="primary"
+            size="lg"
+            block
+          >
+            Load More
+          </Button>
+        ) : null}
       </Container>
     </div>
   );

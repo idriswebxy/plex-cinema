@@ -17,6 +17,7 @@ import {
   LOAD_MORE,
   LOAD_MOVIES,
   LOAD_CHANGE,
+  SET_CAST
 } from "../actions/types";
 import axios from "axios";
 import store from "../store";
@@ -77,6 +78,21 @@ export const loadChange = (loadStatus) => async (dispatch) => {
     payload: loadStatus,
   });
 };
+
+
+export const fetchCast = (id) => async (dispatch) => {
+
+    
+    let res = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`)
+
+    let data = await res.json();
+
+    dispatch({
+      type: SET_CAST,
+      payload: data
+    })
+
+}
 
 export const loadMoreItems = (endpoint, page) => async (dispatch) => {
   endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${

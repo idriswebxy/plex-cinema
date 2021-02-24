@@ -22,12 +22,14 @@ import {
   LOAD_MORE,
   LOAD_MOVIES,
   LOAD_CHANGE,
+  SET_CAST
 } from "../actions/types";
 
 const initialState = {
   isLoading: true,
   movies: [],
   tvShows: [],
+  cast: null,
   searchedMovie: null,
   searchedShow: null,
   relatedMovie: null,
@@ -126,6 +128,11 @@ export default function (state = initialState, action) {
       };
     case SET_MOVIE_ERR:
       return null;
+    case SET_CAST:
+      return {
+        ...state,
+        cast: payload
+      }  
     case LOAD_MOVIE_DETAILS:
       return {
         ...state,
