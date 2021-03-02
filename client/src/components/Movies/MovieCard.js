@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { getMovie, getMovieIds } from "../../actions/movie";
 import Spinner from "../Spinner/LoadSpinner";
 import { addToCart, loadCart, auth0_addToCart } from "../../actions/cart";
@@ -12,6 +12,7 @@ import Figure from "react-bootstrap/Figure";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
+import { SET_CAST } from "../../actions/types";
 
 const styles = {
   textAlign: "center",
@@ -25,10 +26,14 @@ const MovieCard = ({ movie, getMovie }) => {
 
   const [modal, setModal] = useState(false);
 
+  const dispatch = useDispatch();
+
+  
+  
   const toggle = () => {
     setModal(!modal);
+    
   };
-
   let movieCard = (
     <div style={styles}>
       <Link to={`/movie_info/${movie.id}`} onClick={() => getMovie(movie.id)}>

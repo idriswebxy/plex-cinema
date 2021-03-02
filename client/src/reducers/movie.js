@@ -22,14 +22,14 @@ import {
   LOAD_MORE,
   LOAD_MOVIES,
   LOAD_CHANGE,
-  SET_CAST
+  SET_CAST,
 } from "../actions/types";
 
 const initialState = {
   isLoading: true,
   movies: [],
   tvShows: [],
-  cast: null,
+  cast: [],
   searchedMovie: null,
   searchedShow: null,
   relatedMovie: null,
@@ -43,6 +43,7 @@ const initialState = {
   totalShowPages: 0,
   movieIds: [],
   error: null,
+  videoKey: null,
 };
 
 export default function (state = initialState, action) {
@@ -59,10 +60,21 @@ export default function (state = initialState, action) {
         ...state,
         searchedMovie: state.movies.find((movie) => movie.id == payload),
       };
+    case SET_CAST: //TODO: fix cast state 
+      return {
+        ...state,
+
+        cast: cast
+      };
     case SET_MOVIE_ID:
       return {
         ...state,
         movieId: payload,
+      };
+    case SET_VIDEO_KEY:
+      return {
+        ...state,
+        videoKey: payload,
       };
     case GET_SHOW:
       return {
@@ -109,7 +121,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         tvShows: [...state.tvShows, ...payload.results],
-        totalShowPages: payload.total_pages, 
+        totalShowPages: payload.total_pages,
         tvShowPage: payload.page,
         isLoading: false,
       };
@@ -128,11 +140,6 @@ export default function (state = initialState, action) {
       };
     case SET_MOVIE_ERR:
       return null;
-    case SET_CAST:
-      return {
-        ...state,
-        cast: payload
-      }  
     case LOAD_MOVIE_DETAILS:
       return {
         ...state,

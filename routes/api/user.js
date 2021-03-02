@@ -12,8 +12,6 @@ const { checkJwt } = require("../../middleware/check-jwt");
 const User = require("../../models/User");
 const Auth0_User = require("../../models/Auth0.User");
 
-
-
 router.get("/auth0", async (req, res) => {
   try {
     const user = await Auth0_User.findById(req.user.id).select("-email");

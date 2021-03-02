@@ -17,7 +17,8 @@ import {
   LOAD_MORE,
   LOAD_MOVIES,
   LOAD_CHANGE,
-  SET_CAST
+  SET_CAST,
+  SET_VID_KEY,
 } from "../actions/types";
 import axios from "axios";
 import store from "../store";
@@ -46,7 +47,6 @@ export const getRelatedMovie = (id) => async (dispatch) => {
 };
 
 export const loadMovies = (endpoint) => async (dispatch) => {
-
   dispatch({
     type: LOAD_MOVIES,
   });
@@ -60,6 +60,8 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 };
 
 export const getMovie = (id) => async (dispatch) => {
+  fetchVideo(id);
+  fetchCast(id);
   try {
     dispatch({
       type: GET_MOVIE,
@@ -79,20 +81,41 @@ export const loadChange = (loadStatus) => async (dispatch) => {
   });
 };
 
-
 export const fetchCast = (id) => async (dispatch) => {
+  try {
+    let res = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
+    );
 
-    
-    let res = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`)
+    let data = await res.json();
+
+    console.log(data);
+
+    dispatch({
+      type: SET_CAST,
+      payload: data,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchVideo = (id) => async (dispatch) => {
+  try {
+    let res = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+    );
 
     let data = await res.json();
 
     dispatch({
-      type: SET_CAST,
-      payload: data
-    })
-
-}
+      type: SET_VID_KEY,
+      payload: data.results[0].key,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const loadMoreItems = (endpoint, page) => async (dispatch) => {
   endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${

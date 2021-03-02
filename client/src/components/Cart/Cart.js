@@ -41,7 +41,7 @@ const Cart = ({
         <tr>
           <thead>Movie</thead>
         </tr>
-        {cart.map((movie, key) => (
+        {cart.map((movie, key) => ( 
           <div key={key}>
             <img src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`} />
             <div>{movie.title}</div>

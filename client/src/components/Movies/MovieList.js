@@ -77,7 +77,7 @@ const MovieList = ({
 
   // if (!authenticated) {
   //   return <Redirect to="/login" />;
-  // }
+  // 
 
   return (
     <div style={styles}>

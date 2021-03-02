@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addToCart, loadCart } from "../../actions/cart";
-import { loadMovieDetails, setMovie, getMovie, fetchCast } from "../../actions/movie";
+import {
+  loadMovieDetails,
+  setMovie,
+  getMovie,
+  fetchCast,
+  fetchVideo,
+} from "../../actions/movie";
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Spinner/LoadSpinner";
@@ -19,14 +25,12 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import StarRatings from "react-star-ratings";
 import Button from "react-bootstrap/Button";
-
-
+import ListGroup from "react-bootstrap/ListGroup";
 
 const styles = {
   container: { border: "8px solid black" },
-  pad: {
-    paddingTop: "10px",
-  },
+  paddingTop: "10px",
+  pad: {},
   row: {
     border: "3px dotted yellow",
   },
@@ -37,8 +41,6 @@ const styles = {
     border: "3px dotted red",
   },
 };
-
-
 
 const MovieDetails = ({
   movie,
@@ -51,37 +53,53 @@ const MovieDetails = ({
   voteAverage,
   withRouter,
   history,
+  fetchCast,
+  cast,
+  videoKey,
+  fetchVideo,
 }) => {
-  const [videoKey, setVideoKey] = useState(null);
-  const [cast, setCast] = useState([]);
+  // const [vidKey, setVideoKey] = useState(null);
+  // const [cast, setCast] = useState([]);
   const [vidSpinner, setVidSpinner] = useState(true);
-  
-  const castFetch = async () => {
-    let res = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`)
-    let data = await res.json();
-    setCast([...cast, data.cast])
-  }
+
+  // const castFetch = async () => {
+  //   let res = await fetch(
+  //     `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`
+  //   );
+  //   let data = await res.json();
+  //   setCast([data.cast]);
+  // };
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${API_KEY}&language=en-US`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setVidSpinner(false);
-        setVideoKey(data.results[0].key);
-      });
-    // fetchCast(movie.id)
+    // fetchCast(movie.id);
+    // castFetch();
+    // fetchVideo(movie.id);
+    setVidSpinner(false);
     loadCart();
-    castFetch()
-    window.scrollTo(0,0)
-    console.log(cast)
+    window.scrollTo(0, 0);
   }, []);
 
+  let movieCast = (
+    <Row>
+      {cast
+        .map((actor) => (
+          <Col xs={6} lg={2}>
+            <Image
+              rounded
+              src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
+            />
+            <div>{actor.original_name}</div>
+          </Col>
+        ))
+        .slice(0, 6)}
+    </Row>
+  );
 
+  if (isLoading) {
+    return <SpinnerPage />;
+  }
 
-
-
+ 
   return (
     <div
       style={{
@@ -94,7 +112,6 @@ const MovieDetails = ({
         maxHeight: "100%",
       }}
     >
-
       <Container style={styles.pad}>
         <Row lg={12} md={12} sm={12} xs={12}>
           <Image
@@ -114,12 +131,10 @@ const MovieDetails = ({
                 name="rating"
               />
               &nbsp;({movie.vote_count})<p>{movie.overview}</p>
-              {cast.map((actor) => (
-                <Image
-                  roudedCircle
-                  src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
-                />
-              ))}
+              <div>
+                <Button onClick={() => addToCart(movie)}>Add To Cart</Button>
+              </div>
+              <div>{movieCast}</div>
             </Col>
           </Col>
         </Row>
@@ -149,6 +164,8 @@ const mapStateToProps = (state) => ({
   movie: state.movie.searchedMovie,
   isLoading: state.movie.isLoading,
   isLoading_app: state.auth.isLoading,
+  cast: state.movie.cast,
+  videoKey: state.movie.videoKey,
 });
 
 export default withRouter(
@@ -157,6 +174,7 @@ export default withRouter(
     loadMovieDetails,
     getMovie,
     loadCart,
-    fetchCast
+    fetchCast,
+    fetchVideo,
   })(MovieDetails)
 );
