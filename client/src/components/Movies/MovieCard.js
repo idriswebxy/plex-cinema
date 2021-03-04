@@ -26,7 +26,6 @@ const MovieCard = ({ movie, getMovie }) => {
 
   const [modal, setModal] = useState(false);
 
-  const dispatch = useDispatch();
 
   
   

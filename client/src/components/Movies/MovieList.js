@@ -53,6 +53,7 @@ const MovieList = ({
       endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart();
+      console.log(loading, authenticated, movies)
     } else {
       loadCart();
     }
@@ -61,23 +62,6 @@ const MovieList = ({
   if (loading) {
     return <LoadSpinner />;
   }
-
-  // window.onscroll = function (ev) {
-  //   if (this.scrollY > ) {
-  //   //  loadMoreItems(endpoint, page)
-  //   console.log('yoooo')
-  //   }
-  // };
-
-  // window.onscroll = function(e) {
-  //   // print "false" if direction is down and "true" if up
-  //   console.log('****');
-  //   this.oldScroll = this.scrollY;
-  // }
-
-  // if (!authenticated) {
-  //   return <Redirect to="/login" />;
-  // 
 
   return (
     <div style={styles}>
@@ -122,6 +106,5 @@ export default connect(mapStateToProps, {
   prevPage,
   loadMovies,
   fetchItems,
-  loadChange,
   loadMoreItems,
 })(MovieList);

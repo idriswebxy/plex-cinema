@@ -60,8 +60,8 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 };
 
 export const getMovie = (id) => async (dispatch) => {
-  fetchVideo(id);
-  fetchCast(id);
+  dispatch(fetchVideo(id));
+  dispatch(fetchCast(id));
   try {
     dispatch({
       type: GET_MOVIE,
@@ -83,17 +83,13 @@ export const loadChange = (loadStatus) => async (dispatch) => {
 
 export const fetchCast = (id) => async (dispatch) => {
   try {
-    let res = await fetch(
+    let res = await axios.get(
       `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
     );
 
-    let data = await res.json();
-
-    console.log(data);
-
     dispatch({
       type: SET_CAST,
-      payload: data,
+      payload: res.data.cast.slice(0, 6),
     });
   } catch (error) {
     console.error(error);
@@ -101,16 +97,14 @@ export const fetchCast = (id) => async (dispatch) => {
 };
 
 export const fetchVideo = (id) => async (dispatch) => {
+  let res = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+  );
+
   try {
-    let res = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
-    );
-
-    let data = await res.json();
-
     dispatch({
       type: SET_VID_KEY,
-      payload: data.results[0].key,
+      payload: res.data.results[0].key,
     });
   } catch (error) {
     console.error(error);
@@ -134,14 +128,13 @@ export const loadMoreTvShows = (endpoint, page) => async (dispatch) => {
 };
 
 export const fetchItems = (endpoint) => async (dispatch) => {
-  let res = await fetch(endpoint);
-  let data = await res.json();
+  let res = await axios.get(endpoint);
+  // let data = res.json();
 
   try {
-    // set total_pages
     dispatch({
       type: FETCH_MOVIES,
-      payload: data,
+      payload: res.data,
     });
   } catch (e) {
     dispatch({
@@ -149,16 +142,17 @@ export const fetchItems = (endpoint) => async (dispatch) => {
       payload: e,
     });
   }
+  console.log(res.data);
 };
 
 export const setTvShows = (endpoint) => async (dispatch) => {
-  let res = await fetch(endpoint);
-  let data = await res.json();
+  let res = await axios.get(endpoint);
+  // let data = await res.json();
 
   try {
     dispatch({
       type: SET_TVSHOWS,
-      payload: data,
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
@@ -187,7 +181,7 @@ export const loadMovieDetails = () => async (dispatch) => {
   });
 };
 
-export const setRelatedMovies = () => async (dispatch) => {
+export const setRelatedMovies = () => async (dispatch) => { //TODO: swtich to axios.get()
   try {
     const resId = await axios.get("/api/movie/genre_id");
 

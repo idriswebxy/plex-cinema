@@ -29,13 +29,13 @@ const initialState = {
   isLoading: true,
   movies: [],
   tvShows: [],
-  cast: [],
+  movieCast: null,
   searchedMovie: null,
   searchedShow: null,
   relatedMovie: null,
   relatedMovies: [],
   relatedId: null,
-  videoKey: "",
+  videoKey: null,
   movieId: null,
   moviePage: 1,
   totalPages: 0,
@@ -43,7 +43,6 @@ const initialState = {
   totalShowPages: 0,
   movieIds: [],
   error: null,
-  videoKey: null,
 };
 
 export default function (state = initialState, action) {
@@ -58,13 +57,12 @@ export default function (state = initialState, action) {
     case GET_MOVIE:
       return {
         ...state,
-        searchedMovie: state.movies.find((movie) => movie.id == payload),
+        searchedMovie: state.movies.find((movie) => movie.id === payload),
       };
-    case SET_CAST: //TODO: fix cast state 
+    case SET_CAST: //TODO: fix cast state
       return {
         ...state,
-
-        cast: cast
+        movieCast: payload
       };
     case SET_MOVIE_ID:
       return {
@@ -144,7 +142,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchedMovie: payload,
-        isLoading: false,
+        // isLoading: false,
         currentMovie: payload,
       };
     case NEXT_PAGE:
@@ -161,11 +159,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: true,
-      };
-    case SET_VIDEO_KEY:
-      return {
-        ...state,
-        videoKey: payload,
       };
     case SET_MOVIE_IDS:
       return {

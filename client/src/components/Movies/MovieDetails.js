@@ -10,7 +10,7 @@ import {
 } from "../../actions/movie";
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
-import SpinnerPage from "../Spinner/LoadSpinner";
+import LoadSpinner from "../Spinner/LoadSpinner";
 import { withRouter } from "react-router";
 import {
   API_KEY,
@@ -56,11 +56,11 @@ const MovieDetails = ({
   fetchCast,
   cast,
   videoKey,
-  fetchVideo,
+  // fetchVideo,
 }) => {
   // const [vidKey, setVideoKey] = useState(null);
   // const [cast, setCast] = useState([]);
-  const [vidSpinner, setVidSpinner] = useState(true);
+  const [vidSpinner, setVidSpinner] = useState(false);
 
   // const castFetch = async () => {
   //   let res = await fetch(
@@ -73,33 +73,30 @@ const MovieDetails = ({
   useEffect(() => {
     // fetchCast(movie.id);
     // castFetch();
-    // fetchVideo(movie.id);
     setVidSpinner(false);
     loadCart();
     window.scrollTo(0, 0);
+    // fetchVideo(movie.id);
   }, []);
 
   let movieCast = (
     <Row>
-      {cast
-        .map((actor) => (
-          <Col xs={6} lg={2}>
-            <Image
-              rounded
-              src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
-            />
-            <div>{actor.original_name}</div>
-          </Col>
-        ))
-        .slice(0, 6)}
+      {cast.map((actor) => (
+        <Col xs={6} lg={2}>
+          <Image
+            rounded
+            src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
+          />
+          <div>{actor.original_name}</div>
+        </Col>
+      ))}
     </Row>
   );
 
   if (isLoading) {
-    return <SpinnerPage />;
+    return <LoadSpinner />;
   }
 
- 
   return (
     <div
       style={{
@@ -140,7 +137,7 @@ const MovieDetails = ({
         </Row>
         <Row>
           {vidSpinner ? (
-            <SpinnerPage />
+            <LoadSpinner />
           ) : (
             <ReactPlayer
               playing={false}
@@ -164,7 +161,7 @@ const mapStateToProps = (state) => ({
   movie: state.movie.searchedMovie,
   isLoading: state.movie.isLoading,
   isLoading_app: state.auth.isLoading,
-  cast: state.movie.cast,
+  cast: state.movie.movieCast,
   videoKey: state.movie.videoKey,
 });
 
@@ -175,6 +172,6 @@ export default withRouter(
     getMovie,
     loadCart,
     fetchCast,
-    fetchVideo,
+    // fetchVideo,
   })(MovieDetails)
 );
