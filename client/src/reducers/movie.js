@@ -58,21 +58,22 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchedMovie: state.movies.find((movie) => movie.id === payload),
+        movieId: state.searchedMovie.id,
       };
-    case SET_CAST: //TODO: fix cast state
+    case SET_CAST:
       return {
         ...state,
-        movieCast: payload
-      };
-    case SET_MOVIE_ID:
-      return {
-        ...state,
-        movieId: payload,
+        movieCast: payload,
       };
     case SET_VIDEO_KEY:
       return {
         ...state,
         videoKey: payload,
+      };
+    case SET_MOVIE_ID:
+      return {
+        ...state,
+        movieId: payload,
       };
     case GET_SHOW:
       return {

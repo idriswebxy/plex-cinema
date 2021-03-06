@@ -56,7 +56,8 @@ const MovieDetails = ({
   fetchCast,
   cast,
   videoKey,
-  // fetchVideo,
+  fetchVideo,
+  movieID,
 }) => {
   // const [vidKey, setVideoKey] = useState(null);
   // const [cast, setCast] = useState([]);
@@ -73,10 +74,16 @@ const MovieDetails = ({
   useEffect(() => {
     // fetchCast(movie.id);
     // castFetch();
+    // setVideoKey(videoKey)
     setVidSpinner(false);
     loadCart();
     window.scrollTo(0, 0);
-    // fetchVideo(movie.id);
+    // fetchVideo(movieID);
+    // console.log(movieID)
+  }, []);
+
+  useEffect(() => {
+    fetchVideo(movie.id);
   }, []);
 
   let movieCast = (
@@ -136,7 +143,7 @@ const MovieDetails = ({
           </Col>
         </Row>
         <Row>
-          {vidSpinner ? (
+          {/* {vidSpinner ? (
             <LoadSpinner />
           ) : (
             <ReactPlayer
@@ -144,7 +151,12 @@ const MovieDetails = ({
               controls={true}
               url={`https://www.youtube.com/watch?v=${videoKey}`}
             />
-          )}
+          )} */}
+          <ReactPlayer
+            playing={false}
+            controls={true}
+            url={`https://www.youtube.com/watch?v=${videoKey}`}
+          />
         </Row>
       </Container>
     </div>
@@ -163,6 +175,7 @@ const mapStateToProps = (state) => ({
   isLoading_app: state.auth.isLoading,
   cast: state.movie.movieCast,
   videoKey: state.movie.videoKey,
+  movieID: state.movie.movieId,
 });
 
 export default withRouter(
@@ -172,6 +185,6 @@ export default withRouter(
     getMovie,
     loadCart,
     fetchCast,
-    // fetchVideo,
+    fetchVideo,
   })(MovieDetails)
 );

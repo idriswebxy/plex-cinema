@@ -9,6 +9,14 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
+const styles = {
+  color: 'white',
+  marginSpace: {
+    padding: '30px'
+  }
+}
+
+
 const Cart = ({
   cart,
   loadCart,
@@ -37,12 +45,12 @@ const Cart = ({
 
   return (
     <Container>
-      <Table>
+      <Table style={styles}>
         <tr>
           <thead>Movie</thead>
         </tr>
         {cart.map((movie, key) => ( 
-          <div key={key}>
+          <div style={styles.marginSpace} key={key}>
             <img src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`} />
             <div>{movie.title}</div>
             <Button

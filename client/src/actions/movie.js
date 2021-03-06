@@ -60,8 +60,7 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 };
 
 export const getMovie = (id) => async (dispatch) => {
-  dispatch(fetchVideo(id));
-  dispatch(fetchCast(id));
+  // dispatch(fetchCast(id));
   try {
     dispatch({
       type: GET_MOVIE,
@@ -83,6 +82,7 @@ export const loadChange = (loadStatus) => async (dispatch) => {
 
 export const fetchCast = (id) => async (dispatch) => {
   try {
+    dispatch(fetchVideo(id));
     let res = await axios.get(
       `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
     );
@@ -181,7 +181,8 @@ export const loadMovieDetails = () => async (dispatch) => {
   });
 };
 
-export const setRelatedMovies = () => async (dispatch) => { //TODO: swtich to axios.get()
+export const setRelatedMovies = () => async (dispatch) => {
+  //TODO: swtich to axios.get()
   try {
     const resId = await axios.get("/api/movie/genre_id");
 
