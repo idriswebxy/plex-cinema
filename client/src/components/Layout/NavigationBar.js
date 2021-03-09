@@ -63,6 +63,11 @@ const NavigationBar = ({
             Login&nbsp;<i className="bi bi-box-arrow-in-left"></i>
           </Nav.Link>
         </Nav>
+        <Nav>
+          <Nav.Link href="/register">
+            Register&nbsp;<i className="bi bi-box-arrow-in-left"></i>
+          </Nav.Link>
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );

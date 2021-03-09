@@ -17,8 +17,10 @@ const cart = require("./routes/api/cart");
 
 const auth = require("./routes/api/auth");
 
+const url = ""
+
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

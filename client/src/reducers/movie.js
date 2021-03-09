@@ -35,7 +35,7 @@ const initialState = {
   relatedMovie: null,
   relatedMovies: [],
   relatedId: null,
-  videoKey: null,
+  videoKey: "",
   movieId: null,
   moviePage: 1,
   totalPages: 0,
@@ -64,11 +64,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movieCast: payload,
-      };
-    case SET_VIDEO_KEY:
-      return {
-        ...state,
-        videoKey: payload,
       };
     case SET_MOVIE_ID:
       return {
@@ -115,6 +110,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchedMovie: payload,
+      };
+    case SET_VIDEO_KEY:
+      return {
+        ...state,
+        videoKey: payload,
       };
     case SET_TVSHOWS:
       return {

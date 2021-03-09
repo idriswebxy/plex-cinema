@@ -81,8 +81,8 @@ export const loadChange = (loadStatus) => async (dispatch) => {
 };
 
 export const fetchCast = (id) => async (dispatch) => {
+  dispatch(fetchVideo(id));
   try {
-    dispatch(fetchVideo(id));
     let res = await axios.get(
       `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
     );

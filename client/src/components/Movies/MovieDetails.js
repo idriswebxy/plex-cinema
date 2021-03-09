@@ -86,6 +86,8 @@ const MovieDetails = ({
     fetchVideo(movie.id);
   }, []);
 
+  
+  
   let movieCast = (
     <Row>
       {cast.map((actor) => (
