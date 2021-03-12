@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
 
+
 const Login = ({ login, authenticated, loading }) => {
   const { isAuthenticated, logout, loginWithRedirect, isLoading } = useAuth0();
 
@@ -74,7 +75,7 @@ Login.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authenticated: state.auth.authenticated,
+  autheticated: state.auth.authenticated,
   page: state.movie.page,
   loading: state.auth.loading,
 });

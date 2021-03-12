@@ -1,8 +1,8 @@
 import {
   GET_MOVIE,
   GET_MOVIE_ERR,
-  FETCH_MOVIES,
   SET_MOVIE_ERR,
+  FETCH_MOVIES,
   SET_SEARCHED_MOVIE,
   GET_SEARCHED_MOVIE,
   LOAD_MOVIE_DETAILS,
@@ -81,12 +81,12 @@ export const loadChange = (loadStatus) => async (dispatch) => {
 };
 
 export const fetchCast = (id) => async (dispatch) => {
-  dispatch(fetchVideo(id));
   try {
     let res = await axios.get(
       `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
     );
 
+    dispatch(fetchVideo(id));
     dispatch({
       type: SET_CAST,
       payload: res.data.cast.slice(0, 6),
@@ -95,12 +95,10 @@ export const fetchCast = (id) => async (dispatch) => {
     console.error(error);
   }
 };
-
 export const fetchVideo = (id) => async (dispatch) => {
   let res = await axios.get(
     `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
   );
-
   try {
     dispatch({
       type: SET_VID_KEY,
