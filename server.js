@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const path = require("path");   
+const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 var passport = require("passport");
@@ -17,8 +17,6 @@ const cart = require("./routes/api/cart");
 
 const auth = require("./routes/api/auth");
 
-const url = ""
-
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -28,7 +26,6 @@ mongoose
   })
   .then(console.log("Database connected...✅"))
   .catch((err) => console.error(err));
-
 
 const app = express();
 
@@ -44,8 +41,6 @@ app.use(bodyParser.json());
 app.use("/api/user", user);
 app.use("/api/cart", cart);
 app.use("/api/auth", auth);
-
-
 
 //Serve static assets if in productions
 if (process.env.NODE_ENV === "production") {

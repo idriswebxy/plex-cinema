@@ -5,17 +5,16 @@ import {
   LOGIN_SUCCESS,
   AUTH_ERROR,
   LOGOUT,
-
   LOGIN_FAIL,
   CLEAR_PROFILE,
-  GOOGLE_AUTH
+  GOOGLE_AUTH,
 } from "../actions/types";
 
 const initialState = {
   googleAuth: false,
   googleUser: {},
   token: localStorage.getItem("token"),
-  authenticated: null,
+  authenticated: true,
   isLoading: true,
   userInfo: {},
 };
@@ -37,7 +36,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         ...payload,
-        authenticated: true,
+        authenticated: false,
         isLoading: false,
       };
     case REGISTER_FAIL:

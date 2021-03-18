@@ -53,7 +53,6 @@ const MovieList = ({
       endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart();
-      console.log(loading, authenticated, movies)
     } else {
       loadCart();
     }

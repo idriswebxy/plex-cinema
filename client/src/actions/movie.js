@@ -60,7 +60,6 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 };
 
 export const getMovie = (id) => async (dispatch) => {
-  // dispatch(fetchCast(id));
   try {
     dispatch({
       type: GET_MOVIE,
@@ -95,6 +94,7 @@ export const fetchCast = (id) => async (dispatch) => {
     console.error(error);
   }
 };
+
 export const fetchVideo = (id) => async (dispatch) => {
   let res = await axios.get(
     `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
@@ -127,7 +127,6 @@ export const loadMoreTvShows = (endpoint, page) => async (dispatch) => {
 
 export const fetchItems = (endpoint) => async (dispatch) => {
   let res = await axios.get(endpoint);
-  // let data = res.json();
 
   try {
     dispatch({
@@ -140,7 +139,6 @@ export const fetchItems = (endpoint) => async (dispatch) => {
       payload: e,
     });
   }
-  console.log(res.data);
 };
 
 export const setTvShows = (endpoint) => async (dispatch) => {

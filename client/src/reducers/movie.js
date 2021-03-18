@@ -29,7 +29,7 @@ const initialState = {
   isLoading: true,
   movies: [],
   tvShows: [],
-  movieCast: null,
+  movieCast: [],
   searchedMovie: null,
   searchedShow: null,
   relatedMovie: null,
@@ -58,13 +58,9 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchedMovie: state.movies.find((movie) => movie.id === payload),
-        movieId: state.searchedMovie.id,
       };
     case SET_CAST:
-      return {
-        ...state,
-        movieCast: payload,
-      };
+      return { movieCast: [...state.movieCast, payload] };
     case SET_MOVIE_ID:
       return {
         ...state,

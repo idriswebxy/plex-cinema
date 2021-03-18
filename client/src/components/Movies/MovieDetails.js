@@ -11,7 +11,7 @@ import {
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
 import LoadSpinner from "../Spinner/LoadSpinner";
-import { withRouter } from "react-router";
+// import { withRouter } from "react-router";
 import {
   API_KEY,
   IMAGE_BASE_URL,
@@ -72,39 +72,32 @@ const MovieDetails = ({
   // };
 
   useEffect(() => {
-    // fetchCast(movie.id);
+    fetchCast(movie.id);
     // castFetch();
     // setVideoKey(videoKey)
     setVidSpinner(false);
     loadCart();
     window.scrollTo(0, 0);
     // fetchVideo(movieID);
-    // console.log(movieID)
+    console.log(cast);
   }, []);
 
-  useEffect(() => {
-    fetchVideo(movie.id);
-  }, []);
-
-  
-  
-  let movieCast = (
-    <Row>
-      {cast.map((actor) => (
-        <Col xs={6} lg={2}>
-          <Image
-            rounded
-            src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
-          />
-          <div>{actor.original_name}</div>
-        </Col>
-      ))}
-    </Row>
-  );
-
-  if (isLoading) {
-    return <LoadSpinner />;
-  }
+  // if (isLoading) {
+  //   return <LoadSpinner />;
+  // }
+  // let movieCast = (
+  //   <Row>
+  //     {cast.map((actor) => (
+  //       <Col xs={6} lg={2}>
+  //         <Image
+  //           rounded
+  //           src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
+  //         />
+  //         <div>{actor.original_name}</div>
+  //       </Col>
+  //     ))}
+  //   </Row>
+  // );
 
   return (
     <div
@@ -140,20 +133,21 @@ const MovieDetails = ({
               <div>
                 <Button onClick={() => addToCart(movie)}>Add To Cart</Button>
               </div>
-              <div>{movieCast}</div>
+              <Row>
+                {cast.map((actor) => (
+                  <Col xs={6} lg={2}>
+                    <Image
+                      rounded
+                      src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
+                    />
+                    <div>{actor.original_name}</div>
+                  </Col>
+                ))}
+              </Row>
             </Col>
           </Col>
         </Row>
         <Row>
-          {/* {vidSpinner ? (
-            <LoadSpinner />
-          ) : (
-            <ReactPlayer
-              playing={false}
-              controls={true}
-              url={`https://www.youtube.com/watch?v=${videoKey}`}
-            />
-          )} */}
           <ReactPlayer
             playing={false}
             controls={true}
@@ -164,7 +158,6 @@ const MovieDetails = ({
     </div>
   );
 };
-
 MovieDetails.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
@@ -180,13 +173,11 @@ const mapStateToProps = (state) => ({
   movieID: state.movie.movieId,
 });
 
-export default withRouter(
-  connect(mapStateToProps, {
-    addToCart,
-    loadMovieDetails,
-    getMovie,
-    loadCart,
-    fetchCast,
-    fetchVideo,
-  })(MovieDetails)
-);
+export default connect(mapStateToProps, {
+  addToCart,
+  loadMovieDetails,
+  getMovie,
+  loadCart,
+  fetchCast,
+  fetchVideo,
+})(MovieDetails);

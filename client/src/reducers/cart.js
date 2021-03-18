@@ -35,14 +35,14 @@ export default function (state = initialState, action) {
     case DELETE_ITEM:
       return {
         ...state,
-        cart: state.cart.filter(item => item.index !== payload.index),
+        cart: state.cart.filter((item) => item.index !== payload.index),
         totalPrice: state.totalPrice - payload.price,
       };
     case CART_ERROR:
-    return {
-      ...state,
-      cart: state.cart
-    }
+      return {
+        ...state,
+        cart: state.cart,
+      };
 
     default:
       return state;

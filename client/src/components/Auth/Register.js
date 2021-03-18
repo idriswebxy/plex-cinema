@@ -9,8 +9,9 @@ import { register, setProfile } from "../../actions/auth";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
+import { useForm } from "react-hook-form";
 
-const Register = ({ setAlert, register, authenticated }) => {
+const Register = ({ setAlert, authenticated }) => {
   // const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   const [formData, setFormData] = useState({
@@ -26,6 +27,7 @@ const Register = ({ setAlert, register, authenticated }) => {
 
   const { email, password, password2 } = formData;
 
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
