@@ -25,7 +25,7 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import StarRatings from "react-star-ratings";
 import Button from "react-bootstrap/Button";
-import ListGroup from "react-bootstrap/ListGroup";
+import axios from "axios";
 
 const styles = {
   container: { border: "8px solid black" },
@@ -53,51 +53,36 @@ const MovieDetails = ({
   voteAverage,
   withRouter,
   history,
-  fetchCast,
-  cast,
-  videoKey,
-  fetchVideo,
   movieID,
 }) => {
   // const [vidKey, setVideoKey] = useState(null);
-  // const [cast, setCast] = useState([]);
+  const [cast, setCast] = useState([]);
+  const [videoKey, setVideoKey] = useState(null);
   const [vidSpinner, setVidSpinner] = useState(false);
 
-  // const castFetch = async () => {
-  //   let res = await fetch(
-  //     `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`
-  //   );
-  //   let data = await res.json();
-  //   setCast([data.cast]);
-  // };
+  const fetchCast = async (id) => {
+    let res = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
+    );
+
+    setCast(...cast, res.data.cast.slice(0, 6));
+  };
+
+  const videoLoader = async (id) => {
+    let res = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+    );
+
+    setVideoKey(res.data.results[0].key);
+  };
 
   useEffect(() => {
+    // setVidSpinner(false);
     fetchCast(movie.id);
-    // castFetch();
-    // setVideoKey(videoKey)
-    setVidSpinner(false);
+    videoLoader(movie.id);
     loadCart();
     window.scrollTo(0, 0);
-    // fetchVideo(movieID);
-    console.log(cast);
   }, []);
-
-  // if (isLoading) {
-  //   return <LoadSpinner />;
-  // }
-  // let movieCast = (
-  //   <Row>
-  //     {cast.map((actor) => (
-  //       <Col xs={6} lg={2}>
-  //         <Image
-  //           rounded
-  //           src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
-  //         />
-  //         <div>{actor.original_name}</div>
-  //       </Col>
-  //     ))}
-  //   </Row>
-  // );
 
   return (
     <div
@@ -133,6 +118,7 @@ const MovieDetails = ({
               <div>
                 <Button onClick={() => addToCart(movie)}>Add To Cart</Button>
               </div>
+              &nbsp; &nbsp; &nbsp;
               <Row>
                 {cast.map((actor) => (
                   <Col xs={6} lg={2}>
@@ -140,13 +126,14 @@ const MovieDetails = ({
                       rounded
                       src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
                     />
-                    <div>{actor.original_name}</div>
+                    <div>{actor.original_name}</div>({actor.character})
                   </Col>
                 ))}
               </Row>
             </Col>
           </Col>
         </Row>
+        &nbsp; &nbsp; &nbsp;
         <Row>
           <ReactPlayer
             playing={false}
@@ -168,8 +155,8 @@ const mapStateToProps = (state) => ({
   movie: state.movie.searchedMovie,
   isLoading: state.movie.isLoading,
   isLoading_app: state.auth.isLoading,
-  cast: state.movie.movieCast,
-  videoKey: state.movie.videoKey,
+  // cast: state.movie.movieCast,
+  // videoKey: state.movie.videoKey,
   movieID: state.movie.movieId,
 });
 
@@ -178,6 +165,4 @@ export default connect(mapStateToProps, {
   loadMovieDetails,
   getMovie,
   loadCart,
-  fetchCast,
-  fetchVideo,
 })(MovieDetails);
