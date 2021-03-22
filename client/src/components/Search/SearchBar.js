@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from "react-bootstrap/Form";
 
 const SearchBar = ({ onSearch, hideResults }) => {
   const [term, setTerm] = useState("");
@@ -14,17 +16,14 @@ const SearchBar = ({ onSearch, hideResults }) => {
 
   return (
     <div>
-      SearhBar
-      {/* <form className="form-inline mt-4 mb-4">
-        <TextField
-          id="standard-basic"
-          label="Search movies..."
-          className="form-control form-control-sm ml-3 w-75"
+      <Form.Group>
+        <Form.Control
+          size="md"
           type="text"
-          aria-label="Search"
+          placeholder="Search Movies..."
           onChange={(e) => onChange(e)}
-        />
-      </form> */}
+        ></Form.Control>
+      </Form.Group>
     </div>
   );
 };

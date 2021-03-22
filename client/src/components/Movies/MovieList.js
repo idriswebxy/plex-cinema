@@ -16,6 +16,7 @@ import Movie from "./MovieCard";
 import SearchBar from "../Search/Search";
 import { useAuth0 } from "@auth0/auth0-react";
 import MovieCard from "./MovieCard";
+import CarouselSlide from "./Carousel";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -64,8 +65,9 @@ const MovieList = ({
 
   return (
     <div style={styles}>
+      <CarouselSlide />
       <Container>
-        {/* <SearchBar /> */}
+        <SearchBar />
         <Row>
           {movies.map((movie, key) => (
             <Col key={key} xs={6} sm={3} md={3} lg={3}>
