@@ -16,6 +16,8 @@ import MovieDetails from "./components/Movies/MovieDetails";
 import Checkout from "./components/Cart/Checkout";
 import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
+import PopularMovies from "./components/Movies/PopularMovies";
+import UpcomingMovies from "./components/Movies/UpcomingMovies";
 import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components/Spinner/LoadSpinner";
@@ -70,6 +72,8 @@ const App = ({ authenticated }) => {
           <Route path="/login" component={Login} />
           <PrivateRoute path="/tv_shows" component={TvShows} />
           <Route path="/movie_info/:id" component={MovieDetails} />
+          <Route path="/upcoming" component={UpcomingMovies} />
+          <Route path="/popular" component={PopularMovies} />
           <PrivateRoute path="/show_details" component={TvShowDetails} />
           <Route path="/cart" component={Cart} />
           <PrivateRoute path="/checkout" component={Checkout} />

@@ -6,31 +6,28 @@ import Image from "react-bootstrap/esm/Image";
 import Col from "react-bootstrap/Col";
 
 const styles = {
-  display: "block",
-  maxHeight: "500px",
-  maxWidth: "1280px",
-  width: "auto",
-  height: "auto",
+  height: "400px",
 };
 
 const CarouselSlide = ({ movies }) => {
-  return (
-    <Carousel fluid>
+  let demoPage = (
+    <Carousel>
       {movies.map((movie) => (
         <Carousel.Item>
-          <img
+          <Image
+            rounded
             className="d-block w-100"
-            style={styles}
-            src={`http://image.tmdb.org/t/p/w780${movie.poster_path}`}
-            alt="Second slide"
+            src={`http://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
           />
           <Carousel.Caption>
-            <h3>{movie.title}</h3>
+            <h4>{movie.title}</h4>
           </Carousel.Caption>
         </Carousel.Item>
       ))}
     </Carousel>
   );
+
+  return <div>{demoPage}</div>;
 };
 
 const mapStateToProps = (state) => ({

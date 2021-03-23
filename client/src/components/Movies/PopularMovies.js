@@ -29,7 +29,7 @@ const styles = {
   margin: "40px",
 };
 
-const MovieList = ({
+const PopularMovies = ({
   addToCart,
   loadCart,
   loading,
@@ -52,7 +52,7 @@ const MovieList = ({
 
   useEffect(() => {
     if (movies.length < 20) {
-      endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
+      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart();
     } else {
@@ -110,4 +110,4 @@ export default connect(mapStateToProps, {
   loadMovies,
   fetchItems,
   loadMoreItems,
-})(MovieList);
+})(PopularMovies);
