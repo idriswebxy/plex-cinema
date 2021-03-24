@@ -43,5 +43,8 @@
     "request": "^2.88.2",
     "validator": "^12.2.0",
     "webpack": "^4.42.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
