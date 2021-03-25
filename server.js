@@ -34,8 +34,8 @@ app.use(cors());
 app.use(express.json());
 
 // Body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 // Use Routes
 app.use("/api/user", user);

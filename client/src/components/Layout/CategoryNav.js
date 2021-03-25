@@ -2,14 +2,15 @@ import React from "react";
 import Nav from 'react-bootstrap/Nav'
 
 const styles = {
-    margin: '20px'
+    margin: '30px',
+    color: 'white'
 }
 
 
 const CategoryNav = () => {
   return (
     <div style={styles}>
-      <Nav fill variant="tabs" defaultActiveKey="/">
+      <Nav fill variant="tabs">
         <Nav.Item>
           <Nav.Link href="/">Now Playing</Nav.Link>
         </Nav.Item>
