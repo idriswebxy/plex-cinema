@@ -41,11 +41,11 @@ app.use(express.json());
 app.use("/api/user", user);
 app.use("/api/cart", cart);
 app.use("/api/auth", auth);
+//Set static folder
+app.use(express.static(path.join("client/build")));
 
 //Serve static assets if in productions
 if (process.env.NODE_ENV === "production") {
-  //Set static folder
-  app.use(express.static("client/build"));
 
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
