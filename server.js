@@ -11,11 +11,12 @@ var Auth0Strategy = require("passport-auth0");
 var dotenv = require("dotenv");
 const { clientOrigins } = require("./config/env.dev");
 
-// Routes
-const user = require("./routes/api/user");
-const cart = require("./routes/api/cart");
+const app = express();
 
-const auth = require("./routes/api/auth");
+// Routes
+require("./routes/api/user");
+require("./routes/api/cart");
+require("./routes/api/auth");
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -27,26 +28,25 @@ mongoose
   .then(console.log("Database connected...✅"))
   .catch((err) => console.error(err));
 
-const app = express();
-
-app.use(helmet());
+// app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ extended: false }));
 
 // Body parser middleware
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
 
-// Use Routes
-app.use("/api/user", user);
-app.use("/api/cart", cart);
-app.use("/api/auth", auth);
+//  Use Routes
+app.use("/api/user", require("./routes/api/user"));
+
+app.use("/api/cart", require("./routes/api/cart"));
+app.use("/api/auth", require("./routes/api/auth"));
+
 //Set static folder
 app.use(express.static(path.join("client/build")));
 
 //Serve static assets if in productions
 if (process.env.NODE_ENV === "production") {
-
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
