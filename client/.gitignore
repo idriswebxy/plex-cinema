@@ -1,4 +1,4 @@
 /node_modules
-# /src/.env
-# /src/config.js
-# /src/auth0.config.json
+/src/.env
+/src/config.js
+/src/auth0.config.json
