@@ -19,6 +19,7 @@ import {
   LOAD_CHANGE,
   SET_CAST,
   SET_VID_KEY,
+  FETCH_TOP_RATED
 } from "../actions/types";
 import axios from "axios";
 import store from "../store";
@@ -141,6 +142,27 @@ export const fetchItems = (endpoint) => async (dispatch) => {
     });
   }
 };
+
+
+export const fetchTopRatedMovies = () => async (dispatch) => {
+
+  let res = await axios.get(`${API_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`)
+
+  console.log(res.data)
+
+  try {
+    dispatch({
+      type: FETCH_TOP_RATED,
+      payload: res.data
+    })
+
+  } catch (error) {
+   console.log(error) 
+  }
+
+}
+
+
 
 export const setTvShows = (endpoint) => async (dispatch) => {
   let res = await axios.get(endpoint);

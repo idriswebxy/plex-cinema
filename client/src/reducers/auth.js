@@ -14,7 +14,7 @@ const initialState = {
   googleAuth: false,
   googleUser: {},
   token: localStorage.getItem("token"),
-  authenticated: true,
+  authenticated: false,
   isLoading: true,
   userInfo: {},
 };

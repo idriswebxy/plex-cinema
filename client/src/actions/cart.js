@@ -9,12 +9,7 @@ import {
 import axios from "axios";
 import { setAlert } from "./alert";
 
-
-
-
-export const addToCart = (movie) => async (dispatch) => {
-
-
+export const addToCart = (movie, authenticated) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -27,20 +22,24 @@ export const addToCart = (movie) => async (dispatch) => {
   const body = JSON.stringify(movie);
 
   try {
-    const res = await axios.post(`/api/cart`, body, config);
-
-    dispatch({
-      type: ADD_TO_CART,
-      payload: res.data,
-    });
+    if (authenticated) {
+      const res = await axios.post(`/api/cart`, body, config);
+      dispatch({
+        type: ADD_TO_CART,
+        payload: res.data,
+      });
+    } else {
+      dispatch({
+        type: ADD_TO_CART,
+        payload: movie,
+      });
+    }
   } catch (err) {
     dispatch({
       type: CART_ERROR,
     });
   }
 };
-
-
 
 export const addToCartTvShow = (item) => async (dispatch) => {
   const config = {
@@ -65,17 +64,16 @@ export const addToCartTvShow = (item) => async (dispatch) => {
   }
 };
 
-
-
-export const loadCart = () => async (dispatch) => {
+export const loadCart = (authenticated) => async (dispatch) => {
   try {
-
-    const res = await axios.get("/api/cart");
-    
-    dispatch({
-      type: LOAD_CART,
-      payload: res.data,
-    });
+    if (authenticated) {
+      const res = await axios.get("/api/cart");
+      dispatch({
+        type: LOAD_CART,
+        payload: res.data,
+      });
+    } else {
+    }
   } catch (error) {
     dispatch({
       type: CART_ERROR,
@@ -83,23 +81,23 @@ export const loadCart = () => async (dispatch) => {
   }
 };
 
-
-
-
-export const deleteItem = (id, index, price) => async (dispatch) => {
-
+export const deleteItem = (id, index, price, auth) => async (dispatch) => {
+  console.log(auth, index)
   try {
-
-    await axios.delete(`api/cart/${id}`);
-
-    dispatch({
-      type: DELETE_ITEM,
-      payload: { index, price }
-    });
-
-    dispatch(setAlert("Item Removed", "success"));
-
-
+    if (auth) {
+      await axios.delete(`api/cart/${id}`);
+      dispatch({
+        type: DELETE_ITEM,
+        payload: { index, price },
+      });
+      dispatch(setAlert("Item Removed", "success"));
+    } else {
+      dispatch({
+        type: DELETE_ITEM,
+        payload: { index, price },
+      });
+      dispatch(setAlert("Item Removed", "success"));
+    }
   } catch (err) {
     dispatch({
       type: CART_ERROR,
@@ -108,11 +106,8 @@ export const deleteItem = (id, index, price) => async (dispatch) => {
   }
 };
 
-
-
 export const getPriceTotal = (id) => async (dispatch) => {
-
-  console.log(id)
+  console.log(id);
   try {
     const res = await axios.get(`/api/cart/total/${id}`);
 
@@ -121,17 +116,12 @@ export const getPriceTotal = (id) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 };
 
-
-
 export const auth0_addToCart = (movie) => async (dispatch) => {
-
-
   try {
-
     dispatch({
       type: ADD_TO_CART,
       payload: movie,

@@ -23,6 +23,7 @@ import {
   LOAD_MOVIES,
   LOAD_CHANGE,
   SET_CAST,
+  FETCH_TOP_RATED
 } from "../actions/types";
 
 const initialState = {
@@ -79,6 +80,14 @@ export default function (state = initialState, action) {
           (movie) => movie.id === payload
         ),
       };
+    case FETCH_TOP_RATED:
+      return {
+        ...state,
+        movies: [...state.movies, ...payload.results],
+        totalPages: payload.total_pages,
+        moviePage: payload.page,
+        isLoading: false,
+      }  
     case GET_RELATED_MOVIE_ID:
       return {
         ...state,

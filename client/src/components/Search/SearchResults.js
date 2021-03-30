@@ -17,10 +17,10 @@ const SearchResults = ({ results, getSearchedMovie }) => {
     <Container>
       <Scrollbars style={{ width: 700, height: 350 }}>
         {results && results.length !== 0 ? (
-          results.map((result) => (
+          results.map((result, key) => (
             <ListGroup style={{ width: "30rem" }}>
               <Row>
-                <Col>
+                <Col key={key}>
                   <Link
                     to={"/movieInfo/" + result.id}
                     onClick={() => getSearchedMovie(result.id)}

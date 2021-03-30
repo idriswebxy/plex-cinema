@@ -16,7 +16,7 @@ import MovieDetails from "./components/Movies/MovieDetails";
 import Checkout from "./components/Cart/Checkout";
 import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
-import PopularMovies from "./components/Movies/PopularMovies";
+import TopRatedMovies from "./components/Movies/TopRatedMovies";
 import UpcomingMovies from "./components/Movies/UpcomingMovies";
 import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -73,7 +73,7 @@ const App = ({ authenticated }) => {
           <PrivateRoute path="/tv_shows" component={TvShows} />
           <Route path="/movie_info/:id" component={MovieDetails} />
           <Route path="/upcoming" component={UpcomingMovies} />
-          <Route path="/popular" component={PopularMovies} />
+          <Route path="/top_rated" component={TopRatedMovies} />
           <PrivateRoute path="/show_details" component={TvShowDetails} />
           <Route path="/cart" component={Cart} />
           <PrivateRoute path="/checkout" component={Checkout} />

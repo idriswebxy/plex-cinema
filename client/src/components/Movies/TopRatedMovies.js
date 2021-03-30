@@ -8,6 +8,7 @@ import {
   loadMovies,
   loadChange,
   loadMoreItems,
+  fetchTopRatedMovies,
 } from "../../actions/movie";
 import { API_URL, API_KEY } from "../../config";
 import { Redirect, BrowserRouter as Router } from "react-router-dom";
@@ -29,7 +30,7 @@ const styles = {
   margin: "40px",
 };
 
-const PopularMovies = ({
+const TopRatedMovies = ({
   addToCart,
   loadCart,
   loading,
@@ -51,14 +52,19 @@ const PopularMovies = ({
   let endpoint = "";
 
   useEffect(() => {
-    if (movies.length < 20) {
-      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-      fetchItems(endpoint);
-      loadCart();
-    } else {
-      loadCart();
+    if (movies.length < 21) {
+      // endpoint = `${API_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
+      // fetchItems(endpoint);
+      if (authenticated) {
+        loadCart();
+      }
+      console.log("Top Rated page");
     }
   }, []);
+
+  useEffect(() => {
+    fetchTopRatedMovies();
+  });
 
   if (loading) {
     return <LoadSpinner />;
@@ -105,9 +111,9 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   addToCart,
   loadCart,
+  loadMovies,
   nextPage,
   prevPage,
-  loadMovies,
   fetchItems,
   loadMoreItems,
-})(PopularMovies);
+})(TopRatedMovies);

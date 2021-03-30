@@ -31,13 +31,13 @@ const Cart = ({
   const { isLoading } = useAuth0();
 
   useEffect(() => {
-    loadCart();
+    loadCart(authenticated);
     getPriceTotal(userId);
   }, [total]);
 
-  if (loading) {
-    return <Spinner />;
-  }
+  // if (loading) {
+  //   return <Spinner />;
+  // }
 
   // if (!authenticated) {
   //   return <Redirect to="/login" />;
@@ -55,7 +55,7 @@ const Cart = ({
             <div>{movie.title}</div>
             <Button
               variant="danger"
-              onClick={() => deleteItem(movie.id, key, price)}
+              onClick={() => deleteItem(movie.id, key, price, authenticated)}
             >
               Remove
             </Button>

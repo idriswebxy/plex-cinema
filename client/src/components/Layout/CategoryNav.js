@@ -15,7 +15,7 @@ const CategoryNav = () => {
           <Nav.Link href="/">Now Playing</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="/popular">Popular</Nav.Link>
+          <Nav.Link href="/top_rated">Top Rated</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link href="/upcoming">Upcoming</Nav.Link>

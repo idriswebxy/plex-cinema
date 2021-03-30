@@ -55,7 +55,10 @@ const NavigationBar = ({
         </Nav>
         <Nav>
           <Nav.Link href="/cart">
-            &nbsp;<i className="bi bi-cart3"></i>
+            Cart&nbsp;<i className="bi bi-cart3"></i>
+            <Badge pill variant="info">
+              {cart.length}
+            </Badge>
           </Nav.Link>
         </Nav>
         <Nav>

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchItems } from "../../actions/movie";
+import { fetchItems, getMovie } from "../../actions/movie";
 import Carousel from "react-bootstrap/Carousel";
 import Image from "react-bootstrap/esm/Image";
 import Col from "react-bootstrap/Col";
@@ -12,15 +12,14 @@ const styles = {
 const CarouselSlide = ({ movies }) => {
   let demoPage = (
     <div>
-      <Carousel interval={3000}>
-        {movies.map((movie) => (
-          <Carousel.Item>
+      <Carousel interval={4000}>
+        {movies.map((movie, key) => (
+          <Carousel.Item key={key}>
             <Image
               style={{
                 backgroundImage: `linear-gradient(to right,
         rgba(19, 38, 47, 0.7) 0%,
         rgba(9, 28, 37, 0.7) 100%)`,
-
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 maxHeight: "100%",

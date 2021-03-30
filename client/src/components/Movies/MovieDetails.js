@@ -54,6 +54,7 @@ const MovieDetails = ({
   withRouter,
   history,
   movieID,
+  auth
 }) => {
   // const [vidKey, setVideoKey] = useState(null);
   const [cast, setCast] = useState([]);
@@ -116,7 +117,7 @@ const MovieDetails = ({
               />
               &nbsp;({movie.vote_count})<p>{movie.overview}</p>
               <div>
-                <Button onClick={() => addToCart(movie)}>Add To Cart</Button>
+                <Button onClick={() => addToCart(movie, auth)}>Add To Cart</Button>
               </div>
               &nbsp; &nbsp; &nbsp;
               <Row>
@@ -136,7 +137,7 @@ const MovieDetails = ({
         &nbsp; &nbsp; &nbsp;
         <Row>
           <ReactPlayer
-            playing={false}
+            playing={true}
             controls={true}
             url={`https://www.youtube.com/watch?v=${videoKey}`}
           />
@@ -158,6 +159,7 @@ const mapStateToProps = (state) => ({
   // cast: state.movie.movieCast,
   // videoKey: state.movie.videoKey,
   movieID: state.movie.movieId,
+  auth: state.auth.authenticated
 });
 
 export default connect(mapStateToProps, {
