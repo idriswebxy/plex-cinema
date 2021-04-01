@@ -54,7 +54,8 @@ const MovieDetails = ({
   withRouter,
   history,
   movieID,
-  auth
+  auth,
+  cart
 }) => {
   // const [vidKey, setVideoKey] = useState(null);
   const [cast, setCast] = useState([]);
@@ -81,7 +82,7 @@ const MovieDetails = ({
     // setVidSpinner(false);
     fetchCast(movie.id);
     videoLoader(movie.id);
-    loadCart();
+    loadCart(auth, cart);
     window.scrollTo(0, 0);
   }, []);
 
@@ -159,7 +160,8 @@ const mapStateToProps = (state) => ({
   // cast: state.movie.movieCast,
   // videoKey: state.movie.videoKey,
   movieID: state.movie.movieId,
-  auth: state.auth.authenticated
+  auth: state.auth.authenticated,
+  cart: state.cart
 });
 
 export default connect(mapStateToProps, {

@@ -31,7 +31,7 @@ const Cart = ({
   const { isLoading } = useAuth0();
 
   useEffect(() => {
-    loadCart(authenticated);
+    loadCart(authenticated, cart);
     getPriceTotal(userId);
   }, [total]);
 

@@ -20,19 +20,18 @@ const styles = {
 };
 
 const MovieCard = ({ movie, getMovie }) => {
+
+
   const { isAuthenticated } = useAuth0();
 
   const [moviePrev, setMoviePrev] = useState(false);
 
   const [modal, setModal] = useState(false);
 
-
-  
-  
   const toggle = () => {
     setModal(!modal);
-    
   };
+
   let movieCard = (
     <div style={styles}>
       <Link to={`/movie_info/${movie.id}`} onClick={() => getMovie(movie.id)}>

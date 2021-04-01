@@ -40,6 +40,7 @@ const MovieList = ({
   loadMoreItems,
   authenticated,
   history,
+  cart
 }) => {
   const {
     user,
@@ -48,14 +49,13 @@ const MovieList = ({
     getAccessTokenSilently,
   } = useAuth0();
 
-
   let endpoint = "";
 
   useEffect(() => {
     if (movies.length < 20) {
       endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
-      loadCart(authenticated);
+      loadCart(authenticated, cart);
     }
   }, []);
 
@@ -99,6 +99,7 @@ const mapStateToProps = (state) => ({
   page: state.movie.moviePage,
   searchedMovie: state.movie.searchedMovie,
   totalPages: state.movie.totalPages,
+  cart: state.cart.cart
 });
 
 export default connect(mapStateToProps, {

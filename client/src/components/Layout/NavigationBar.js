@@ -57,7 +57,7 @@ const NavigationBar = ({
           <Nav.Link href="/cart">
             Cart&nbsp;<i className="bi bi-cart3"></i>
             <Badge pill variant="info">
-              {cart.length}
+              {cart === undefined ? [] : cart.length}
             </Badge>
           </Nav.Link>
         </Nav>
@@ -93,7 +93,7 @@ const NavigationBar = ({
           <Nav.Link href="/cart">
             Cart&nbsp;<i className="bi bi-cart3"></i>
             <Badge pill variant="info">
-              {cart.length}
+              {cart === undefined ? [] : cart.length}
             </Badge>
           </Nav.Link>
         </Nav>
