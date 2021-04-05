@@ -61,7 +61,7 @@ const MovieList = ({
       loadCart(authenticated);
       console.log('less than 20')
     } else {
-      loadCart();
+      loadCart(authenticated);
       console.log('MORE than 20')
     }
   }, []);

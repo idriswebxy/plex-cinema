@@ -30,6 +30,7 @@ const NavigationBar = ({
   auth: { authenticated, userInfo },
   logOut,
   cart,
+  guestCart,
   auth0User,
 }) => {
   const {
@@ -39,6 +40,11 @@ const NavigationBar = ({
     isAuthenticated,
     getAccessTokenSilently,
   } = useAuth0();
+
+
+  useEffect(() => {
+    console.log(guestCart.length)
+  }, [])
 
   let accountName = null;
   let serverUrl = REACT_APP_SERVER_URL;
@@ -57,7 +63,7 @@ const NavigationBar = ({
           <Nav.Link href="/cart">
             Cart&nbsp;<i className="bi bi-cart3"></i>
             <Badge pill variant="info">
-              {cart.length}
+              {authenticated === false ? guestCart.length : cart.length}
             </Badge>
           </Nav.Link>
         </Nav>
@@ -93,7 +99,7 @@ const NavigationBar = ({
           <Nav.Link href="/cart">
             Cart&nbsp;<i className="bi bi-cart3"></i>
             <Badge pill variant="info">
-              {cart.length}
+              {authenticated === true ? cart.length : guestCart.length}
             </Badge>
           </Nav.Link>
         </Nav>
@@ -124,6 +130,7 @@ const NavigationBar = ({
 const mapStateToProps = (state) => ({
   auth: state.auth,
   cart: state.cart.cart,
+  guestCart: state.cart.guestCart
 });
 
 export default connect(mapStateToProps, { logOut })(NavigationBar);

@@ -5,7 +5,7 @@ const Cart = require("../../models/Cart");
 const User = require("../../models/User");
 const auth = require("../../middleware/auth");
 const Auth0_User = require("../../models/Auth0.User");
-const GuestCart = require("../../models/GuestCart")
+const GuestCart = require("../../models/Cart")
 
 // returns total price in cart
 router.get("/total/:id", async (req, res) => {
@@ -36,37 +36,6 @@ router.get("/", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
-
-// router.post("/guest_cart", async (req, res) => {
-
-//   try {
-    
-//     let tempCart = 
-
-
-//   } catch (error) {
-    
-//   }
-
-
-// })
-
-
-
-
-// router.post("/guest_cart", async (req, res) => {
-
-//   try {
-    
-
-
-//   } catch (error) {
-    
-//   }
-
-
-// })
 
 
 

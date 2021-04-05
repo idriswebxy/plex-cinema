@@ -4,11 +4,13 @@ import {
   CART_ERROR,
   DELETE_ITEM,
   PRICE_TOTAL,
+  GUEST_CART_ADD,
+  GUEST_CART_LOAD,
 } from "../actions/types";
 
 const initialState = {
-  guestCart: null,
-  cart: null,
+  guestCart: [],
+  cart: [],
   totalPrice: 0.0,
   loading: true,
 };
@@ -21,6 +23,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         cart: [payload, ...state.cart],
+      };
+    case GUEST_CART_ADD:
+      return {
+        ...state,
+        guestCart: [...state.guestCart, payload],
+      };
+    case GUEST_CART_LOAD:
+      return {
+        ...state,
+        guestCart: [...state.guestCart.map((m) => m)],
       };
     case LOAD_CART:
       return {
@@ -44,7 +56,6 @@ export default function (state = initialState, action) {
         ...state,
         cart: state.cart,
       };
-
     default:
       return state;
   }

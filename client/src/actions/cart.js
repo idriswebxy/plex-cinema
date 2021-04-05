@@ -5,55 +5,40 @@ import {
   DELETE_ITEM,
   PRICE_TOTAL,
   CHANGE_LOAD,
+  GUEST_CART_ADD,
+  GUEST_CART_LOAD,
 } from "./types";
 import axios from "axios";
 import { setAlert } from "./alert";
-import ls from 'local-storage'
-
+import ls from "local-storage";
 
 export const addToCart = (movie, auth) => async (dispatch) => {
-
   if (!auth) {
-    
     dispatch({
       type: GUEST_CART_ADD,
-      payload: movie
-    })
-
+      payload: movie,
+    });
   } else {
-    
-  }
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
+    const body = JSON.stringify(movie);
 
-
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  const body = JSON.stringify(movie);
-
-  try {
-    if (auth) {
+    try {
       const res = await axios.post(`/api/cart`, body, config);
 
       dispatch({
         type: ADD_TO_CART,
         payload: res.data,
       });
-    } else {
-      const res = await axios.post("/api/cart/guest_cart", body, config);
-
+    } catch (err) {
       dispatch({
-        type: ADD_TO_CART,
-        payload: res.data,
+        type: CART_ERROR,
       });
     }
-  } catch (err) {
-    dispatch({
-      type: CART_ERROR,
-    });
   }
 };
 
@@ -82,13 +67,18 @@ export const addToCartTvShow = (item) => async (dispatch) => {
 
 export const loadCart = (auth) => async (dispatch) => {
   try {
+    if (!auth) {
+      dispatch({
+        type: GUEST_CART_LOAD,
+      });
+    } else {
+      const res = await axios.get("/api/cart");
 
-    const res = await axios.get("/api/cart");
-
-    dispatch({
-      type: LOAD_CART,
-      payload: res.data,
-    });
+      dispatch({
+        type: LOAD_CART,
+        payload: res.data,
+      });
+    }
   } catch (error) {
     dispatch({
       type: CART_ERROR,

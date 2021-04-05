@@ -10,12 +10,11 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
 const styles = {
-  color: 'white',
+  color: "white",
   marginSpace: {
-    padding: '30px'
-  }
-}
-
+    padding: "30px",
+  },
+};
 
 const Cart = ({
   cart,
@@ -27,12 +26,13 @@ const Cart = ({
   price = 2.99,
   userId,
   authenticated,
-  movie
+  movie,
+  guestCart,
 }) => {
   const { isLoading } = useAuth0();
 
   useEffect(() => {
-    loadCart();
+    loadCart(authenticated);
     // getPriceTotal(userId); //TODO: temp off
   }, []);
 
@@ -50,18 +50,37 @@ const Cart = ({
         <tr>
           <thead>Movie</thead>
         </tr>
-        {cart.map((movie, key) => ( 
-          <div style={styles.marginSpace} key={key}>
-            <img src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`} />
-            <div>{movie.title}</div>
-            <Button
-              variant="danger"
-              onClick={() => deleteItem(movie.id, key, price)}
-            >
-              Remove
-            </Button>
-          </div>
-        ))}
+        {authenticated
+          ? cart.map((movie, key) => (
+              <div style={styles.marginSpace} key={key}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
+                />
+                <div>{movie.title}</div>
+
+                <Button
+                  variant="danger"
+                  onClick={() => deleteItem(movie.id, key, price)}
+                >
+                  Remove
+                </Button>
+              </div>
+            ))
+          : guestCart.map((movie, key) => (
+              <div style={styles.marginSpace} key={key}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
+                />
+                <div>{movie.title}</div>
+
+                <Button
+                  variant="danger"
+                  onClick={() => deleteItem(movie.id, key, price)}
+                >
+                  Remove
+                </Button>
+              </div>
+            ))}
       </Table>
     </Container>
   );
@@ -69,11 +88,12 @@ const Cart = ({
 
 const mapStateToProps = (state) => ({
   cart: state.cart.cart,
+  guestCart: state.cart.guestCart,
   total: state.cart.totalPrice,
   loading: state.cart.loading,
   userId: state.auth.userInfo._id,
   authenticated: state.auth.authenticated,
-  movie: state.movie.searchedMovie
+  movie: state.movie.searchedMovie,
 });
 
 export default connect(mapStateToProps, {

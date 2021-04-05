@@ -82,7 +82,7 @@ const MovieDetails = ({
     // setVidSpinner(false);
     fetchCast(movie.id);
     videoLoader(movie.id);
-    loadCart();
+    loadCart(auth);
     window.scrollTo(0, 0);
   }, []);
 
