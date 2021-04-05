@@ -8,31 +8,48 @@ import {
 } from "./types";
 import axios from "axios";
 import { setAlert } from "./alert";
+import ls from 'local-storage'
 
-export const addToCart = (movie, authenticated) => async (dispatch) => {
+
+export const addToCart = (movie, auth) => async (dispatch) => {
+
+  if (!auth) {
+    
+    dispatch({
+      type: GUEST_CART_ADD,
+      payload: movie
+    })
+
+  } else {
+    
+  }
+
+
+
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  // movie.price = 2.99;
-  // movie.index = index;
-
   const body = JSON.stringify(movie);
 
   try {
-    if (authenticated) {
+    if (auth) {
       const res = await axios.post(`/api/cart`, body, config);
+
+      dispatch({
+        type: ADD_TO_CART,
+        payload: res.data,
+      });
+    } else {
+      const res = await axios.post("/api/cart/guest_cart", body, config);
+
       dispatch({
         type: ADD_TO_CART,
         payload: res.data,
       });
     }
-    dispatch({
-      type: ADD_TO_CART,
-      payload: movie,
-    });
   } catch (err) {
     dispatch({
       type: CART_ERROR,
@@ -63,19 +80,14 @@ export const addToCartTvShow = (item) => async (dispatch) => {
   }
 };
 
-export const loadCart = (authenticated, cart) => async (dispatch) => {
+export const loadCart = (auth) => async (dispatch) => {
   try {
-    if (authenticated) {
-      const res = await axios.get("/api/cart");
-      dispatch({
-        type: LOAD_CART,
-        payload: res.data,
-      });
-    }
-    console.log('cart here')
+
+    const res = await axios.get("/api/cart");
+
     dispatch({
       type: LOAD_CART,
-      payload: cart
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
@@ -84,16 +96,9 @@ export const loadCart = (authenticated, cart) => async (dispatch) => {
   }
 };
 
-export const deleteItem = (id, index, price, auth) => async (dispatch) => {
+export const deleteItem = (id, index, price) => async (dispatch) => {
   try {
-    if (auth) {
-      await axios.delete(`api/cart/${id}`);
-      dispatch({
-        type: DELETE_ITEM,
-        payload: { index, price },
-      });
-      dispatch(setAlert("Item Removed", "success"));
-    }
+    await axios.delete(`api/cart/${id}`);
     dispatch({
       type: DELETE_ITEM,
       payload: { index, price },
@@ -108,7 +113,6 @@ export const deleteItem = (id, index, price, auth) => async (dispatch) => {
 };
 
 export const getPriceTotal = (id) => async (dispatch) => {
-  console.log(id);
   try {
     const res = await axios.get(`/api/cart/total/${id}`);
 

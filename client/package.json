@@ -11,6 +11,7 @@
     "connected-react-router": "^6.9.1",
     "history": "^5.0.0",
     "jwt-decode": "^2.2.0",
+    "local-storage": "^2.0.0",
     "mobx": "^6.1.8",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",

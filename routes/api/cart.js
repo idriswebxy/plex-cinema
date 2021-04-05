@@ -5,9 +5,10 @@ const Cart = require("../../models/Cart");
 const User = require("../../models/User");
 const auth = require("../../middleware/auth");
 const Auth0_User = require("../../models/Auth0.User");
+const GuestCart = require("../../models/GuestCart")
 
 // returns total price in cart
-router.get("/total/:id", auth, async (req, res) => {
+router.get("/total/:id", async (req, res) => {
   try {
     let sum = 0.0;
 
@@ -16,6 +17,7 @@ router.get("/total/:id", auth, async (req, res) => {
     usersCart.map((movie) => {
       sum = movie.price + sum;
     });
+
     res.json(sum);
   } catch (error) {
     console.error(error.message);
@@ -24,7 +26,7 @@ router.get("/total/:id", auth, async (req, res) => {
 });
 
 // Get users cart
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const items = await Cart.find({ user: req.user.id });
 
@@ -35,10 +37,46 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// add to cart
-router.post("/", auth, async (req, res) => {
+
+// router.post("/guest_cart", async (req, res) => {
+
+//   try {
+    
+//     let tempCart = 
+
+
+//   } catch (error) {
+    
+//   }
+
+
+// })
+
+
+
+
+// router.post("/guest_cart", async (req, res) => {
+
+//   try {
+    
+
+
+//   } catch (error) {
+    
+//   }
+
+
+// })
+
+
+
+
+// Add to cart
+router.post("/", async (req, res) => {
   try {
+    
     const user = await User.findById(req.user.id);
+
 
     const newCart = new Cart({
       user: user.id,
@@ -77,7 +115,7 @@ router.post("/", auth, async (req, res) => {
 // });
 
 // Delete movie in cart
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const cart = await Cart.findOneAndDelete({ movieId: req.params.id });
 

@@ -27,13 +27,14 @@ const Cart = ({
   price = 2.99,
   userId,
   authenticated,
+  movie
 }) => {
   const { isLoading } = useAuth0();
 
   useEffect(() => {
-    loadCart(authenticated, cart);
-    getPriceTotal(userId);
-  }, [total]);
+    loadCart();
+    // getPriceTotal(userId); //TODO: temp off
+  }, []);
 
   // if (loading) {
   //   return <Spinner />;
@@ -55,7 +56,7 @@ const Cart = ({
             <div>{movie.title}</div>
             <Button
               variant="danger"
-              onClick={() => deleteItem(movie.id, key, price, authenticated)}
+              onClick={() => deleteItem(movie.id, key, price)}
             >
               Remove
             </Button>
@@ -72,6 +73,7 @@ const mapStateToProps = (state) => ({
   loading: state.cart.loading,
   userId: state.auth.userInfo._id,
   authenticated: state.auth.authenticated,
+  movie: state.movie.searchedMovie
 });
 
 export default connect(mapStateToProps, {

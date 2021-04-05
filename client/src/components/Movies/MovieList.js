@@ -24,6 +24,9 @@ import LoadSpinner from "../Spinner/LoadSpinner";
 import Loader from "./Loader";
 import Button from "react-bootstrap/Button";
 import CategoryNav from "../Layout/CategoryNav";
+import ls from 'local-storage'
+
+
 
 const styles = {
   margin: "40px",
@@ -40,7 +43,7 @@ const MovieList = ({
   loadMoreItems,
   authenticated,
   history,
-  cart
+  cart,
 }) => {
   const {
     user,
@@ -55,7 +58,11 @@ const MovieList = ({
     if (movies.length < 20) {
       endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
-      loadCart(authenticated, cart);
+      loadCart(authenticated);
+      console.log('less than 20')
+    } else {
+      loadCart();
+      console.log('MORE than 20')
     }
   }, []);
 
@@ -72,7 +79,7 @@ const MovieList = ({
         <Row>
           {movies.map((movie, key) => (
             <Col key={key} xs={6} sm={3} md={3} lg={3}>
-              <MovieCard movie={movie} />
+              <MovieCard movie={movie} /> 
             </Col>
           ))}
         </Row>
@@ -99,7 +106,7 @@ const mapStateToProps = (state) => ({
   page: state.movie.moviePage,
   searchedMovie: state.movie.searchedMovie,
   totalPages: state.movie.totalPages,
-  cart: state.cart.cart
+  cart: state.cart.cart,
 });
 
 export default connect(mapStateToProps, {

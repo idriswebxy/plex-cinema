@@ -82,7 +82,7 @@ const MovieDetails = ({
     // setVidSpinner(false);
     fetchCast(movie.id);
     videoLoader(movie.id);
-    loadCart(auth, cart);
+    loadCart();
     window.scrollTo(0, 0);
   }, []);
 
@@ -138,7 +138,7 @@ const MovieDetails = ({
         &nbsp; &nbsp; &nbsp;
         <Row>
           <ReactPlayer
-            playing={true}
+            playing={false}
             controls={true}
             url={`https://www.youtube.com/watch?v=${videoKey}`}
           />
