@@ -6,6 +6,7 @@ import {
   PRICE_TOTAL,
   GUEST_CART_ADD,
   GUEST_CART_LOAD,
+  DELETE_GUEST_MOVIE
 } from "../actions/types";
 
 const initialState = {
@@ -34,6 +35,11 @@ export default function (state = initialState, action) {
         ...state,
         guestCart: [...state.guestCart.map((m) => m)],
       };
+    case DELETE_GUEST_MOVIE:
+      return {
+        ...state,
+        guestCart: state.guestCart.filter(m => m.id !== payload.id)
+      }  
     case LOAD_CART:
       return {
         ...state,

@@ -53,16 +53,16 @@ const MovieList = ({
   } = useAuth0();
 
   let endpoint = "";
+  endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
+
+
 
   useEffect(() => {
     if (movies.length < 20) {
-      endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart(authenticated);
-      console.log('less than 20')
     } else {
       loadCart(authenticated);
-      console.log('MORE than 20')
     }
   }, []);
 

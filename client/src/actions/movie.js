@@ -128,7 +128,8 @@ export const loadMoreTvShows = (endpoint, page) => async (dispatch) => {
 };
 
 export const fetchItems = (endpoint) => async (dispatch) => {
-  let res = await axios.get(endpoint);
+  
+  const res = await axios.get(endpoint);
 
   try {
     dispatch({

@@ -48,7 +48,7 @@ const Cart = ({
     <Container>
       <Table style={styles}>
         <tr>
-          <thead>Movie</thead>
+          <thead>Cart Movies</thead>
         </tr>
         {authenticated
           ? cart.map((movie, key) => (

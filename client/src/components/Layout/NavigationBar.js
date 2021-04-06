@@ -41,11 +41,6 @@ const NavigationBar = ({
     getAccessTokenSilently,
   } = useAuth0();
 
-
-  useEffect(() => {
-    console.log(guestCart.length)
-  }, [])
-
   let accountName = null;
   let serverUrl = REACT_APP_SERVER_URL;
 
