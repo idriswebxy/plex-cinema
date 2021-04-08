@@ -55,7 +55,7 @@ const MovieDetails = ({
   history,
   movieID,
   auth,
-  cart
+  cart,
 }) => {
   // const [vidKey, setVideoKey] = useState(null);
   const [cast, setCast] = useState([]);
@@ -118,7 +118,9 @@ const MovieDetails = ({
               />
               &nbsp;({movie.vote_count})<p>{movie.overview}</p>
               <div>
-                <Button onClick={() => addToCart(movie, auth)}>Add To Cart</Button>
+                <Button onClick={() => addToCart(movie, auth)}>
+                  Add To Cart
+                </Button>
               </div>
               &nbsp; &nbsp; &nbsp;
               <Row>
@@ -161,7 +163,7 @@ const mapStateToProps = (state) => ({
   // videoKey: state.movie.videoKey,
   movieID: state.movie.movieId,
   auth: state.auth.authenticated,
-  cart: state.cart
+  cart: state.cart,
 });
 
 export default connect(mapStateToProps, {

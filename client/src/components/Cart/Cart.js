@@ -8,7 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Img from "react-bootstrap/Image";
+import Image from "react-bootstrap/Image";
 
 
 const styles = {
@@ -70,7 +70,7 @@ const Cart = ({
             ))
           : guestCart.map((movie, key) => (
               <div style={styles.marginSpace} key={key}>
-                <Img
+                <Image
                   rounded
                   src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
                 />
