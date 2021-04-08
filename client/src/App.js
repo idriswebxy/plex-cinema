@@ -70,7 +70,7 @@ const App = ({ authenticated }) => {
           <Route exact path="/" component={MovieList} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/tv_shows" component={TvShows} />
+          <Route path="/tv_shows" component={TvShows} />
           <Route path="/movie_info/:id" component={MovieDetails} />
           <Route path="/upcoming" component={UpcomingMovies} />
           <Route path="/top_rated" component={TopRatedMovies} />

@@ -24,9 +24,7 @@ import LoadSpinner from "../Spinner/LoadSpinner";
 import Loader from "./Loader";
 import Button from "react-bootstrap/Button";
 import CategoryNav from "../Layout/CategoryNav";
-import ls from 'local-storage'
-
-
+import ls from "local-storage";
 
 const styles = {
   margin: "40px",
@@ -55,8 +53,6 @@ const MovieList = ({
   let endpoint = "";
   endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
 
-
-
   useEffect(() => {
     if (movies.length < 20) {
       fetchItems(endpoint);
@@ -79,7 +75,7 @@ const MovieList = ({
         <Row>
           {movies.map((movie, key) => (
             <Col key={key} xs={6} sm={3} md={3} lg={3}>
-              <MovieCard movie={movie} /> 
+              <MovieCard movie={movie} />
             </Col>
           ))}
         </Row>
