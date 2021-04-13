@@ -83,7 +83,8 @@ export default function (state = initialState, action) {
     case FETCH_TOP_RATED:
       return {
         ...state,
-        movies: [...state.movies, ...payload.results],
+        // movies: [],
+        movies: [state.movies],
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,

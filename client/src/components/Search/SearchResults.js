@@ -9,7 +9,6 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-
 const SearchResults = ({ results, getSearchedMovie }) => {
   results = results.slice(0, 10);
 
@@ -21,8 +20,8 @@ const SearchResults = ({ results, getSearchedMovie }) => {
             <ListGroup style={{ width: "30rem" }}>
               <Row>
                 <Col key={key}>
-                  <Link
-                    to={"/movieInfo/" + result.id}
+                  <Link 
+                    to={`/movie_info/${result.id}`}
                     onClick={() => getSearchedMovie(result.id)}
                   >
                     <div

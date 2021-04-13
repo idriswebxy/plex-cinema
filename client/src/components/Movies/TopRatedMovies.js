@@ -41,6 +41,7 @@ const TopRatedMovies = ({
   loadMoreItems,
   authenticated,
   history,
+  fetchTopRatedMovies,
 }) => {
   const {
     user,
@@ -53,18 +54,13 @@ const TopRatedMovies = ({
 
   useEffect(() => {
     if (movies.length < 21) {
-      // endpoint = `${API_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
-      // fetchItems(endpoint);
-      if (authenticated) {
-        loadCart();
-      }
-      console.log("Top Rated page");
+      fetchTopRatedMovies();
+      loadCart();
+    } else {
+      loadCart();
     }
+    console.log(movies.length)
   }, []);
-
-  useEffect(() => {
-    fetchTopRatedMovies();
-  });
 
   if (loading) {
     return <LoadSpinner />;
@@ -116,4 +112,5 @@ export default connect(mapStateToProps, {
   prevPage,
   fetchItems,
   loadMoreItems,
+  fetchTopRatedMovies,
 })(TopRatedMovies);

@@ -87,7 +87,7 @@ const MovieList = ({
             size="lg"
             block
           >
-            Load More
+            Load More 
           </Button>
         ) : null}
       </Container>
