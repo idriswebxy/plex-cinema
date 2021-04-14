@@ -51,10 +51,10 @@ const MovieList = ({
   } = useAuth0();
 
   let endpoint = "";
-  endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
+  endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`; //todo: move to a different folder
 
   useEffect(() => {
-    if (movies.length < 20) {
+    if (movies.length < 21) {
       fetchItems(endpoint);
       loadCart(authenticated);
     } else {
@@ -87,7 +87,7 @@ const MovieList = ({
             size="lg"
             block
           >
-            Load More 
+            Load More
           </Button>
         ) : null}
       </Container>

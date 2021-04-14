@@ -8,6 +8,8 @@ import {
   loadMovies,
   loadChange,
   loadMoreItems,
+  fetchUpcomingMovies,
+  loadMoreUpComingMovies
 } from "../../actions/movie";
 import { API_URL, API_KEY } from "../../config";
 import { Redirect, BrowserRouter as Router } from "react-router-dom";
@@ -40,6 +42,8 @@ const UpcomingMovies = ({
   loadMoreItems,
   authenticated,
   history,
+  fetchUpcomingMovies,
+  loadMoreUpComingMovies
 }) => {
   const {
     user,
@@ -48,12 +52,11 @@ const UpcomingMovies = ({
     getAccessTokenSilently,
   } = useAuth0();
 
-  let endpoint = "";
+  let endpoint = `${API_URL}movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`;
 
   useEffect(() => {
-    if (movies.length < 20) {
-      endpoint = `${API_URL}movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`;
-      fetchItems(endpoint);
+    if (movies.length < 21) {
+      fetchUpcomingMovies(endpoint);
       loadCart();
     } else {
       loadCart();
@@ -80,7 +83,7 @@ const UpcomingMovies = ({
         {/* {loading ? <LoadSpinner /> : null} */}
         {page < totalPages ? (
           <Button
-            onClick={() => loadMoreItems(endpoint, page)}
+            onClick={() => loadMoreUpComingMovies(endpoint, page)}
             variant="primary"
             size="lg"
             block
@@ -110,4 +113,6 @@ export default connect(mapStateToProps, {
   loadMovies,
   fetchItems,
   loadMoreItems,
+  fetchUpcomingMovies,
+  loadMoreUpComingMovies
 })(UpcomingMovies);
