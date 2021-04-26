@@ -23,7 +23,8 @@ import {
   LOAD_MOVIES,
   LOAD_CHANGE,
   SET_CAST,
-  FETCH_TOP_RATED
+  FETCH_TOP_RATED,
+  FETCH_UPCOMING_MOVIES
 } from "../actions/types";
 
 const initialState = {
@@ -83,12 +84,21 @@ export default function (state = initialState, action) {
     case FETCH_TOP_RATED:
       return {
         ...state,
-        // movies: [],
-        movies: [state.movies],
+        movies: state.movies.length = 0,
+        movies: [...payload.results],
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,
-      }  
+      } 
+    case FETCH_UPCOMING_MOVIES:
+      return {
+        ...state,
+        movies: state.movies.length = 0,
+        movies: [...payload.results],
+        totalPages: payload.total_pages,
+        moviePage: payload.page,
+        isLoading: false,
+      }   
     case GET_RELATED_MOVIE_ID:
       return {
         ...state,
@@ -138,6 +148,7 @@ export default function (state = initialState, action) {
     case FETCH_MOVIES:
       return {
         ...state,
+        movies: state.movies.length = 0,
         movies: [...state.movies, ...payload.results],
         totalPages: payload.total_pages,
         moviePage: payload.page,
@@ -176,7 +187,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movies: state.movies.concat(payload),
-      };
+      }; 
     case LOAD_MOVIES:
       return {
         ...state,

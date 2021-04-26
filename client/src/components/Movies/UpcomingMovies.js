@@ -51,7 +51,7 @@ const UpcomingMovies = ({
   let endpoint = "";
 
   useEffect(() => {
-    if (movies.length < 20) {
+    if (movies.length < 21) {
       endpoint = `${API_URL}movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart();

@@ -43,6 +43,7 @@ export const GOOGLE_AUTH = "GOOGLE_AUTH";
 export const SET_CAST = "SET_CAST";
 export const SET_VID_KEY = "SET_VID_KEY";
 export const FETCH_TOP_RATED = "FETCH_TOP_RATED";
+export const FETCH_UPCOMING_MOVIES = "FETCH_UPCOMING_MOVIES";
 // export const AUTH0_USER_LOADED = "AUTH0_USER_LOADED";
 // export const AUTH0_ADD_TO_CART = "AUTH0_ADD_TO_CART";
 // export const AUTH0_LOGIN_SUCCESS = "AUTH0_LOGIN_SUCCESS";

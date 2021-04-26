@@ -19,7 +19,8 @@ import {
   LOAD_CHANGE,
   SET_CAST,
   SET_VID_KEY,
-  FETCH_TOP_RATED
+  FETCH_TOP_RATED,
+  FETCH_UPCOMING_MOVIES
 } from "../actions/types";
 import axios from "axios";
 import store from "../store";
@@ -61,7 +62,6 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 };
 
 export const getMovie = (id) => async (dispatch) => {
-
   try {
     dispatch({
       type: GET_MOVIE,
@@ -119,16 +119,15 @@ export const loadMoreItems = (endpoint, page) => async (dispatch) => {
   dispatch(fetchItems(endpoint));
 };
 
-export const loadMoreTvShows = (endpoint, page) => async (dispatch) => {
-  endpoint = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=${
-    page + 1
-  }`;
+// export const loadMoreTvShows = (endpoint, page) => async (dispatch) => {
+//   endpoint = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=${
+//     page + 1
+//   }`;
 
-  dispatch(setTvShows(endpoint));
-};
+//   dispatch(setTvShows(endpoint));
+// };
 
 export const fetchItems = (endpoint) => async (dispatch) => {
-  
   const res = await axios.get(endpoint);
 
   try {
@@ -144,26 +143,57 @@ export const fetchItems = (endpoint) => async (dispatch) => {
   }
 };
 
-
 export const fetchTopRatedMovies = () => async (dispatch) => {
+  let res = await axios.get(
+    `${API_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`
+  );
 
-  let res = await axios.get(`${API_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`)
-
-  console.log(res.data)
+  console.log(res.data);
 
   try {
     dispatch({
       type: FETCH_TOP_RATED,
-      payload: res.data
-    })
-
+      payload: res.data,
+    });
   } catch (error) {
-   console.log(error) 
+    console.log(error);
   }
+};
 
-}
+export const fetchUpcomingMovies = (endpoint) => async (dispatch) => {
+  let res = await axios.get(endpoint);
+
+  try {
+    dispatch({ type: FETCH_UPCOMING_MOVIES, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 
+export const loadMoreTopRatedMovies = (endpoint, page) => async (dispatch) => {
+  endpoint = `${API_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=${
+    page + 1
+  }`;
+
+  dispatch(fetchTopRatedMovies(endpoint));
+};
+
+export const loadMoreUpComingMovies = (endpoint, page) => async (dispatch) => {
+  endpoint = `${API_URL}movie/upcoming?api_key=${API_KEY}&language=en-US&page=${
+    page + 1
+  }`;
+
+  dispatch(fetchUpcomingMovies(endpoint));
+};
+
+export const loadMoreTvShows = (endpoint, page) => async (dispatch) => {
+  endpoint = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=${
+    page + 1
+  }`;
+
+  dispatch(setTvShows(endpoint));
+};
 
 export const setTvShows = (endpoint) => async (dispatch) => {
   let res = await axios.get(endpoint);
