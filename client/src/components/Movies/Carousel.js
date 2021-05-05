@@ -7,6 +7,9 @@ import Col from "react-bootstrap/Col";
 
 const styles = {
   height: "400px",
+  gradient: {
+    background: 'linear-gradient(to top, #260a42, #2b2c2c)'
+  }
 };
 
 const CarouselSlide = ({ movies }) => {
@@ -16,14 +19,7 @@ const CarouselSlide = ({ movies }) => {
         {movies.map((movie, key) => (
           <Carousel.Item key={key}>
             <Image
-              style={{
-                backgroundImage: `linear-gradient(to right,
-        rgba(19, 38, 47, 0.7) 0%,
-        rgba(9, 28, 37, 0.7) 100%)`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                maxHeight: "100%",
-              }}
+              style={styles.gradient}
               rounded
               className="d-block w-100"
               src={`http://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}

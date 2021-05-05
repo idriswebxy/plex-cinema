@@ -54,7 +54,7 @@ const MovieList = ({
   endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
 
   useEffect(() => {
-    if (movies.length < 20) {
+    if (movies.length < 21) {
       fetchItems(endpoint);
       loadCart(authenticated);
     } else {
@@ -74,7 +74,7 @@ const MovieList = ({
         <CarouselSlide />
         <Row>
           {movies.map((movie, key) => (
-            <Col key={key} xs={6} sm={3} md={3} lg={3}>
+            <Col key={key} xs={6} sm={3} md={3} lg={1}>
               <MovieCard movie={movie} />
             </Col>
           ))}
@@ -87,7 +87,7 @@ const MovieList = ({
             size="lg"
             block
           >
-            Load More 
+            Load More
           </Button>
         ) : null}
       </Container>
