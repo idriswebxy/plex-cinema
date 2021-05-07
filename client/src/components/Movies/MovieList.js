@@ -74,9 +74,9 @@ const MovieList = ({
         <CarouselSlide />
         <Row>
           {movies.map((movie, key) => (
-            <Col key={key} xs={6} sm={3} md={3} lg={1}>
+
               <MovieCard movie={movie} />
-            </Col>
+
           ))}
         </Row>
         {/* {loading ? <LoadSpinner /> : null} */}

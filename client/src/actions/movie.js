@@ -111,8 +111,8 @@ export const loadChange = (loadStatus) => async (dispatch) => {
 //   }
 // };
 
-export const loadMoreItems = (endpoint, page) => async (dispatch) => {
-  endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${
+export const loadMoreItems = (endpoint, page, listType) => async (dispatch) => {
+  endpoint = `${API_URL}movie/${listType}?api_key=${API_KEY}&language=en-US&page=${
     page + 1
   }`;
 

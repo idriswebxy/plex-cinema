@@ -6,7 +6,7 @@ const SearchBar = ({ onSearch, hideResults }) => {
   const [term, setTerm] = useState("");
 
   useEffect(() => {
-    // hideResults(term);
+    hideResults(term);
   }, [term]);
 
   const onChange = (e) => {

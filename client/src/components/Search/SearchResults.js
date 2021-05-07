@@ -1,35 +1,66 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getMovie, getSearchedMovie } from "../../actions/movie";
 import moment from "moment";
-import { Scrollbars } from "react-custom-scrollbars";
+import { Scrollbars } from "react-custom-scrollbars-2";
 import Container from "react-bootstrap/esm/Container";
 import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const SearchResults = ({ results, getSearchedMovie }) => {
-  results = results.slice(0, 10);
+  // results = results.slice(0, 10);
+
+  const node = useRef();
+
+  const [resultDisplay, setResultDisplay] = useState(true);
+
+  // displays or hides search results
+  document.addEventListener("mousedown", () => {
+    if (resultDisplay === true) {
+      setResultDisplay(false);
+    } else {
+      setResultDisplay(true);
+    }
+  });
+
+  const handleClick = (e) => {
+    console.log(node, e);
+  };
+
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener("mousedown", handleClick);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, []);
 
   let searchResults = (
     <Container>
       <Scrollbars style={{ width: 700, height: 350 }}>
         {results && results.length !== 0 ? (
           results.map((result, key) => (
-            <ListGroup style={{ width: "30rem" }}>
+            <ListGroup style={{ width: "30rem", color: "black" }}>
               <Row>
-                <Col key={key}>
-                  <Link 
-                    to={`/movie_info/${result.id}`}
+                <Col key={results.id}>
+                  <ListGroup.Item
+                    action
+                    href={`/movie_info/${result.id}`}
+                    variant="light"
+                    ref={node}
+                    className="resultsLink"
                     onClick={() => getSearchedMovie(result.id)}
                   >
                     <div
-                      key={result.id}
-                      style={{
-                        color: "white",
-                        padding: "10px",
-                      }}
+                      style={
+                        {
+                          // color: "white",
+                          // padding: "10px",
+                        }
+                      }
                     >
                       <img
                         style={{ width: "5rem" }}
@@ -46,7 +77,7 @@ const SearchResults = ({ results, getSearchedMovie }) => {
                         })`}
                       </Col>
                     </div>
-                  </Link>
+                  </ListGroup.Item>
                 </Col>
               </Row>
             </ListGroup>
@@ -61,6 +92,7 @@ const SearchResults = ({ results, getSearchedMovie }) => {
   );
 
   return <div>{searchResults}</div>;
+  // return <div>{searchResults}</div>;
 };
 
 const mapStateToProps = (state) => ({

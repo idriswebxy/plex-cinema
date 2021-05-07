@@ -31,7 +31,7 @@ const initialState = {
   isLoading: true,
   movies: [],
   tvShows: [],
-  movieCast: [],
+  movieCast: [], 
   searchedMovie: null,
   searchedShow: null,
   relatedMovie: null,
@@ -191,7 +191,7 @@ export default function (state = initialState, action) {
     case LOAD_MOVIES:
       return {
         ...state,
-        movies: state.movies.map((m) => m),
+        movies: state.movies.map((movie) => movie),
       };
     default:
       return state;
