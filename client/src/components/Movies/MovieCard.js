@@ -13,15 +13,14 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import { SET_CAST } from "../../actions/types";
+// import "./MovieList.css";
 
 const styles = {
-  textAlign: "center",
-  marginTop: "10px",
+  // textAlign: "center",
+  // marginTop: "10px",
 };
 
-const MovieCard = ({ movie, getMovie }) => {
-
-
+const MovieCard = ({ movie, getMovie, itemClass }) => {
   const { isAuthenticated } = useAuth0();
 
   const [moviePrev, setMoviePrev] = useState(false);
@@ -37,7 +36,7 @@ const MovieCard = ({ movie, getMovie }) => {
       <Link to={`/movie_info/${movie.id}`} onClick={() => getMovie(movie.id)}>
         <Image
           rounded
-          fluid
+          // fluid
           src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
         />
       </Link>

@@ -12,32 +12,6 @@ import Col from "react-bootstrap/Col";
 const SearchResults = ({ results, getSearchedMovie }) => {
   // results = results.slice(0, 10);
 
-  const node = useRef();
-
-  const [resultDisplay, setResultDisplay] = useState(true);
-
-  // displays or hides search results
-  document.addEventListener("mousedown", () => {
-    if (resultDisplay === true) {
-      setResultDisplay(false);
-    } else {
-      setResultDisplay(true);
-    }
-  });
-
-  const handleClick = (e) => {
-    console.log(node, e);
-  };
-
-  useEffect(() => {
-    // add when mounted
-    document.addEventListener("mousedown", handleClick);
-    // return function to be called when unmounted
-    return () => {
-      document.removeEventListener("mousedown", handleClick);
-    };
-  }, []);
-
   let searchResults = (
     <Container>
       <Scrollbars style={{ width: 700, height: 350 }}>
@@ -50,18 +24,9 @@ const SearchResults = ({ results, getSearchedMovie }) => {
                     action
                     href={`/movie_info/${result.id}`}
                     variant="light"
-                    ref={node}
-                    className="resultsLink"
                     onClick={() => getSearchedMovie(result.id)}
                   >
-                    <div
-                      style={
-                        {
-                          // color: "white",
-                          // padding: "10px",
-                        }
-                      }
-                    >
+                    <div>
                       <img
                         style={{ width: "5rem" }}
                         src={`https://image.tmdb.org/t/p/w154${[

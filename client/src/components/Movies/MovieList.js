@@ -25,9 +25,32 @@ import Loader from "./Loader";
 import Button from "react-bootstrap/Button";
 import CategoryNav from "../Layout/CategoryNav";
 import ls from "local-storage";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import "./MovieList.scss";
 
 const styles = {
   margin: "40px",
+};
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 5,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
 };
 
 const MovieList = ({
@@ -43,12 +66,8 @@ const MovieList = ({
   history,
   cart,
 }) => {
-  const {
-    user,
-    isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
+    useAuth0();
 
   let endpoint = "";
   endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
@@ -67,31 +86,39 @@ const MovieList = ({
   }
 
   return (
-    <div style={styles}>
-      <Container>
-        <SearchBar />
-        <CategoryNav />
-        <CarouselSlide />
-        <Row>
-          {movies.map((movie, key) => (
+    // <div style={styles}>
+    //   <Container>
+    //     <SearchBar />
+    //     <CategoryNav />
+    //     {/* <CarouselSlide /> */}
+    //     <Row>
+    //       {movies.map((movie, key) => (
 
-              <MovieCard movie={movie} />
+    //           <MovieCard movie={movie} />
 
-          ))}
-        </Row>
-        {/* {loading ? <LoadSpinner /> : null} */}
-        {page < totalPages ? (
-          <Button
-            onClick={() => loadMoreItems(endpoint, page)}
-            variant="primary"
-            size="lg"
-            block
-          >
-            Load More
-          </Button>
-        ) : null}
-      </Container>
-    </div>
+    //       ))}
+    //     </Row>
+    //     {/* {loading ? <LoadSpinner /> : null} */}
+    //     {page < totalPages ? (
+    //       <Button
+    //         onClick={() => loadMoreItems(endpoint, page)}
+    //         variant="primary"
+    //         size="lg"
+    //         block
+    //       >
+    //         Load More
+    //       </Button>
+    //     ) : null}
+    //   </Container>
+    // </div>
+
+    <Carousel responsive={responsive}>
+      {movies.map((movie, key) => (
+        <div>
+          <MovieCard movie={movie} />
+        </div>
+      ))}
+    </Carousel>
   );
 };
 

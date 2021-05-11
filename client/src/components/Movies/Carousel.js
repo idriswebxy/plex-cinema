@@ -6,10 +6,10 @@ import Image from "react-bootstrap/esm/Image";
 import Col from "react-bootstrap/Col";
 
 const styles = {
-  height: "400px",
+  height: "200px",
   gradient: {
-    background: 'linear-gradient(to top, #260a42, #2b2c2c)'
-  }
+    background: "linear-gradient(to top, #260a42, #2b2c2c)",
+  },
 };
 
 const CarouselSlide = ({ movies }) => {
