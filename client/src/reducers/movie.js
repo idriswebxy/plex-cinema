@@ -24,14 +24,16 @@ import {
   LOAD_CHANGE,
   SET_CAST,
   FETCH_TOP_RATED,
-  FETCH_UPCOMING_MOVIES
+  FETCH_UPCOMING_MOVIES,
 } from "../actions/types";
 
 const initialState = {
   isLoading: true,
-  movies: [],
+  moviesNowPlaying: [],
+  moviesTopRated: [],
+  moviesUpcoming: [],
   tvShows: [],
-  movieCast: [], 
+  movieCast: [],
   searchedMovie: null,
   searchedShow: null,
   relatedMovie: null,
@@ -59,7 +61,9 @@ export default function (state = initialState, action) {
     case GET_MOVIE:
       return {
         ...state,
-        searchedMovie: state.movies.find((movie) => movie.id === payload),
+        searchedMovie: state.moviesNowPlaying.find(
+          (movie) => movie.id === payload
+        ),
       };
     case SET_CAST:
       return { movieCast: [...state.movieCast, payload] };
@@ -84,21 +88,21 @@ export default function (state = initialState, action) {
     case FETCH_TOP_RATED:
       return {
         ...state,
-        movies: state.movies.length = 0,
-        movies: [...payload.results],
+        moviesNowPlaying: (state.moviesNowPlaying.length = 0),
+        moviesNowPlaying: [...payload.results],
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,
-      } 
+      };
     case FETCH_UPCOMING_MOVIES:
       return {
         ...state,
-        movies: state.movies.length = 0,
-        movies: [...payload.results],
+        moviesNowPlaying: (state.moviesNowPlaying.length = 0),
+        moviesNowPlaying: [...payload.results],
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,
-      }   
+      };
     case GET_RELATED_MOVIE_ID:
       return {
         ...state,
@@ -148,8 +152,8 @@ export default function (state = initialState, action) {
     case FETCH_MOVIES:
       return {
         ...state,
-        movies: state.movies.length = 0,
-        movies: [...state.movies, ...payload.results],
+        moviesNowPlaying: (state.moviesNowPlaying.length = 0),
+        moviesNowPlaying: [...state.moviesNowPlaying, ...payload.results],
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,
@@ -186,12 +190,12 @@ export default function (state = initialState, action) {
     case LOAD_MORE:
       return {
         ...state,
-        movies: state.movies.concat(payload),
-      }; 
+        moviesNowPlaying: state.moviesNowPlaying.concat(payload),
+      };
     case LOAD_MOVIES:
       return {
         ...state,
-        movies: state.movies.map((movie) => movie),
+        moviesNowPlaying: state.movies.map((movie) => movie),
       };
     default:
       return state;

@@ -13,7 +13,7 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import { SET_CAST } from "../../actions/types";
-// import "./MovieList.css";
+
 
 const styles = {
   // textAlign: "center",

@@ -27,10 +27,11 @@ import CategoryNav from "../Layout/CategoryNav";
 import ls from "local-storage";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import "./MovieList.scss";
+import TopRatedMovies from "./TopRatedMovies";
+import e from "cors";
 
 const styles = {
-  margin: "40px",
+  margin: "10px",
 };
 
 const responsive = {
@@ -73,17 +74,13 @@ const MovieList = ({
   endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
 
   useEffect(() => {
-    if (movies.length < 21) {
-      fetchItems(endpoint);
-      loadCart(authenticated);
-    } else {
-      loadCart(authenticated);
-    }
+    fetchItems(endpoint);
+    
   }, []);
 
-  if (loading) {
-    return <LoadSpinner />;
-  }
+  // if (loading) {
+  //   return <LoadSpinner />;
+  // }
 
   return (
     // <div style={styles}>
@@ -112,20 +109,30 @@ const MovieList = ({
     //   </Container>
     // </div>
 
-    <Carousel responsive={responsive}>
-      {movies.map((movie, key) => (
-        <div>
-          <MovieCard movie={movie} />
-        </div>
-      ))}
-    </Carousel>
+    <div>
+      <h4 style={styles}>Top New Movies</h4>
+      <Carousel
+        infinite={true}
+        focusOnSelect={true}
+        slidesToSlide={5}
+        responsive={responsive}
+        swipeable={true}
+        showDots={true}
+      >
+        {movies.map((movie, key) => (
+          <div style={styles}>
+            <MovieCard movie={movie} />
+          </div>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.movie.isLoading,
+  // loading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
-  movies: state.movie.movies,
+  movies: state.movie.moviesNowPlaying,
   page: state.movie.moviePage,
   searchedMovie: state.movie.searchedMovie,
   totalPages: state.movie.totalPages,

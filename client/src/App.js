@@ -21,6 +21,7 @@ import UpcomingMovies from "./components/Movies/UpcomingMovies";
 import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components/Spinner/LoadSpinner";
+import MovieListContainer from "./components/Movies/MovieListContainer";
 import { fetchItems } from "./actions/movie";
 import "./App.css";
 
@@ -67,7 +68,7 @@ const App = ({ authenticated }) => {
         <Alert />
         <Switch>
           {/* <Route exact path="/" component={Landing} /> */}
-          <Route exact path="/" component={MovieList} />
+          <Route exact path="/" component={MovieListContainer} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/tv_shows" component={TvShows} />

@@ -25,9 +25,31 @@ import LoadSpinner from "../Spinner/LoadSpinner";
 import Loader from "./Loader";
 import Button from "react-bootstrap/Button";
 import CategoryNav from "../Layout/CategoryNav";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const styles = {
   margin: "40px",
+};
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 5,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
 };
 
 const TopRatedMovies = ({
@@ -43,62 +65,72 @@ const TopRatedMovies = ({
   history,
   fetchTopRatedMovies,
 }) => {
-  const {
-    user,
-    isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
+    useAuth0();
 
   let endpoint = "";
 
   useEffect(() => {
-    if (movies.length < 21) {
-      fetchTopRatedMovies();
-      loadCart();
-    } else {
-      loadCart();
-    }
-    console.log(movies.length)
+    fetchTopRatedMovies();
+
   }, []);
 
-  if (loading) {
-    return <LoadSpinner />;
-  }
+  // if (loading) {
+  //   return <LoadSpinner />;
+  // }
 
   return (
-    <div style={styles}>
-      <Container>
-        <SearchBar />
-        <CategoryNav />
-        <CarouselSlide />
-        <Row>
-          {movies.map((movie, key) => (
-            <Col key={key} xs={6} sm={3} md={3} lg={3}>
-              <MovieCard movie={movie} />
-            </Col>
-          ))}
-        </Row>
-        {/* {loading ? <LoadSpinner /> : null} */}
-        {page < totalPages ? (
-          <Button
-            onClick={() => loadMoreItems(endpoint, page)}
-            variant="primary"
-            size="lg"
-            block
-          >
-            Load More
-          </Button>
-        ) : null}
-      </Container>
-    </div>
+    //   <div style={styles}>
+    //     <Container>
+    //       <SearchBar />
+    //       <CategoryNav />
+    //       <CarouselSlide />
+    //       <Row>
+    //         {movies.map((movie, key) => (
+    //           <Col key={key} xs={6} sm={3} md={3} lg={3}>
+    //             <MovieCard movie={movie} />
+    //           </Col>
+    //         ))}
+    //       </Row>
+    //       {/* {loading ? <LoadSpinner /> : null} */}
+    //       {page < totalPages ? (
+    //         <Button
+    //           onClick={() => loadMoreItems(endpoint, page)}
+    //           variant="primary"
+    //           size="lg"
+    //           block
+    //         >
+    //           Load More
+    //         </Button>
+    //       ) : null}
+    //     </Container>
+    //   </div>
+    // );
+
+    <Container>
+      <h4 style={styles}>Top New Movies</h4>
+      <Carousel
+        infinite={true}
+        focusOnSelect={true}
+        slidesToSlide={5}
+        responsive={responsive}
+        swipeable={true}
+        showDots={true}
+      >
+        {movies.map((movie, key) => (
+          <div style={styles}>
+            <MovieCard movie={movie} />
+          </div>
+        ))}
+      </Carousel>
+    </Container>
   );
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.movie.isLoading,
+  // loading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
-  movies: state.movie.movies,
+  movies: state.movie.moviesNowPlaying,
   page: state.movie.moviePage,
   searchedMovie: state.movie.searchedMovie,
   totalPages: state.movie.totalPages,

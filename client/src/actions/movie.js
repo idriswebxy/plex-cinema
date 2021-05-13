@@ -128,6 +128,7 @@ export const loadMoreItems = (endpoint, page, listType) => async (dispatch) => {
 // };
 
 export const fetchItems = (endpoint) => async (dispatch) => {
+  
   const res = await axios.get(endpoint);
 
   try {
@@ -148,11 +149,9 @@ export const fetchTopRatedMovies = () => async (dispatch) => {
     `${API_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`
   );
 
-  console.log(res.data);
-
   try {
     dispatch({
-      type: FETCH_TOP_RATED,
+      type: FETCH_TOP_RATED,  
       payload: res.data,
     });
   } catch (error) {
