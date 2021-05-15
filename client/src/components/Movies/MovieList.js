@@ -9,7 +9,7 @@ import {
   loadChange,
   loadMoreItems,
 } from "../../actions/movie";
-import { API_URL, API_KEY } from "../../config";
+import { NOW_PLAYING_MOVIES_URL } from "../../config/config";
 import { Redirect, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import Movie from "./MovieCard";
@@ -50,7 +50,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
+    items: 3,
   },
 };
 
@@ -70,17 +70,14 @@ const MovieList = ({
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
     useAuth0();
 
-  let endpoint = "";
-  endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
 
-  useEffect(() => {
-    fetchItems(endpoint);
-    
+  useEffect(() => { 
+    fetchItems(NOW_PLAYING_MOVIES_URL);
   }, []);
 
-  // if (loading) {
-  //   return <LoadSpinner />;
-  // }
+  if (loading) {
+    return <LoadSpinner />;
+  }
 
   return (
     // <div style={styles}>
@@ -110,7 +107,7 @@ const MovieList = ({
     // </div>
 
     <div>
-      <h4 style={styles}>Top New Movies</h4>
+      <h4 style={styles}>New Movies</h4>
       <Carousel
         infinite={true}
         focusOnSelect={true}

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "../Spinner/LoadSpinner";
-import { API_URL, API_KEY, POSTER_SIZE, IMAGE_BASE_URL } from "../../config";
+import { API_URL, API_KEY, POSTER_SIZE, IMAGE_BASE_URL } from "../../config/config";
 import { addToCart, loadCart } from "../../actions/cart";
 import {
   fetchItems,

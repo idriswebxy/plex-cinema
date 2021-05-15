@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API_KEY } from "../../config";
+import { API_KEY } from "../../config/config";
 import { setTvShows } from "../../actions/movie";
 import { connect } from "react-redux";
 import { addToCart, loadCart, getCart } from "../../actions/cart";

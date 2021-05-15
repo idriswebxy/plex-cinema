@@ -13,7 +13,7 @@ import {
   REACT_APP_AUTH0_CLIENT_ID,
   REACT_APP_AUTH0_AUDIENCE,
   REACT_APP_AUTH0_CALLBACK_URI,
-} from "./config";
+} from "./config/config";
 
 const domain = REACT_APP_AUTH0_DOMAIN;
 const clientId = REACT_APP_AUTH0_CLIENT_ID;

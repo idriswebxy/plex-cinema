@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import InputGroup from "react-bootstrap/InputGroup";
+import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 
 const SearchBar = ({ onSearch, hideResults }) => {
   const [term, setTerm] = useState("");
 
   useEffect(() => {
-    hideResults(term);
+    // hideResults(term);
   }, [term]);
 
   const onChange = (e) => {
@@ -15,7 +15,7 @@ const SearchBar = ({ onSearch, hideResults }) => {
   };
 
   return (
-    <div>
+    <Container>
       <Form.Group>
         <Form.Control
           size="md"
@@ -24,7 +24,7 @@ const SearchBar = ({ onSearch, hideResults }) => {
           onChange={(e) => onChange(e)}
         ></Form.Control>
       </Form.Group>
-    </div>
+    </Container>
   );
 };
 

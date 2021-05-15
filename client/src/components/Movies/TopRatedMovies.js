@@ -10,7 +10,7 @@ import {
   loadMoreItems,
   fetchTopRatedMovies,
 } from "../../actions/movie";
-import { API_URL, API_KEY } from "../../config";
+import { TOP_RATED_MOVIES_URL } from "../../config/config";
 import { Redirect, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import Movie from "./MovieCard";
@@ -29,7 +29,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const styles = {
-  margin: "40px",
+  margin: "10px",
 };
 
 const responsive = {
@@ -48,7 +48,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
+    items: 3,
   },
 };
 
@@ -68,16 +68,13 @@ const TopRatedMovies = ({
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
     useAuth0();
 
-  let endpoint = "";
-
   useEffect(() => {
-    fetchTopRatedMovies();
-
+    fetchTopRatedMovies(TOP_RATED_MOVIES_URL);
   }, []);
 
-  // if (loading) {
-  //   return <LoadSpinner />;
-  // }
+  if (loading) {
+    return <LoadSpinner />;
+  }
 
   return (
     //   <div style={styles}>
@@ -107,8 +104,8 @@ const TopRatedMovies = ({
     //   </div>
     // );
 
-    <Container>
-      <h4 style={styles}>Top New Movies</h4>
+    <div>
+      <h4 style={styles}>Top Rated Movies</h4>
       <Carousel
         infinite={true}
         focusOnSelect={true}
@@ -123,14 +120,14 @@ const TopRatedMovies = ({
           </div>
         ))}
       </Carousel>
-    </Container>
+    </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   // loading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
-  movies: state.movie.moviesNowPlaying,
+  movies: state.movie.moviesTopRated,
   page: state.movie.moviePage,
   searchedMovie: state.movie.searchedMovie,
   totalPages: state.movie.totalPages,

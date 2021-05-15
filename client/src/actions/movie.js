@@ -20,11 +20,11 @@ import {
   SET_CAST,
   SET_VID_KEY,
   FETCH_TOP_RATED,
-  FETCH_UPCOMING_MOVIES
+  FETCH_UPCOMING_MOVIES,
 } from "../actions/types";
 import axios from "axios";
 import store from "../store";
-import { API_URL, API_KEY } from "../config.js";
+import { API_URL, API_KEY } from "../config/config.js";
 
 // let movieStore = store.store.getState().movie;
 
@@ -128,7 +128,6 @@ export const loadMoreItems = (endpoint, page, listType) => async (dispatch) => {
 // };
 
 export const fetchItems = (endpoint) => async (dispatch) => {
-  
   const res = await axios.get(endpoint);
 
   try {
@@ -144,14 +143,12 @@ export const fetchItems = (endpoint) => async (dispatch) => {
   }
 };
 
-export const fetchTopRatedMovies = () => async (dispatch) => {
-  let res = await axios.get(
-    `${API_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`
-  );
+export const fetchTopRatedMovies = (endpoint) => async (dispatch) => {
+  let res = await axios.get(endpoint);
 
   try {
     dispatch({
-      type: FETCH_TOP_RATED,  
+      type: FETCH_TOP_RATED,
       payload: res.data,
     });
   } catch (error) {
@@ -168,7 +165,6 @@ export const fetchUpcomingMovies = (endpoint) => async (dispatch) => {
     console.error(err);
   }
 };
-
 
 export const loadMoreTopRatedMovies = (endpoint, page) => async (dispatch) => {
   endpoint = `${API_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=${

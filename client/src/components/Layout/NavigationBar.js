@@ -6,7 +6,7 @@ import { loadCart } from "../../actions/cart";
 import Spinner from "../Spinner/LoadSpinner";
 import { useAuth0 } from "@auth0/auth0-react";
 import SearchPage from "../Search/Search";
-import { REACT_APP_SERVER_URL } from "../../config";
+import { REACT_APP_SERVER_URL } from "../../config/config";
 import { LOGIN_SUCCESS, USER_LOADED, GOOGLE_AUTH } from "../../actions/types";
 import store from "../../store";
 import axios from "axios";

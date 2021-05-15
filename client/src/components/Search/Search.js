@@ -5,7 +5,7 @@ import SearchResults from "./SearchResults";
 import SearchBar from "./SearchBar";
 import { setSearchedMovies } from "../../actions/movie";
 
-import { API_KEY } from "../../config.js";
+import { API_KEY } from "../../config/config.js";
 
 const Search = ({ setSearchedMovies }) => {
   const [results, setResults] = useState([]);

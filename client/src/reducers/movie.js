@@ -88,8 +88,8 @@ export default function (state = initialState, action) {
     case FETCH_TOP_RATED:
       return {
         ...state,
-        moviesNowPlaying: (state.moviesNowPlaying.length = 0),
-        moviesNowPlaying: [...payload.results],
+        moviesTopRated: (state.moviesTopRated.length = 0),
+        moviesTopRated: [...payload.results],
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,
@@ -97,8 +97,8 @@ export default function (state = initialState, action) {
     case FETCH_UPCOMING_MOVIES:
       return {
         ...state,
-        moviesNowPlaying: (state.moviesNowPlaying.length = 0),
-        moviesNowPlaying: [...payload.results],
+        moviesUpcoming: (state.moviesUpcoming.length = 0),
+        moviesUpcoming: [...payload.results],
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,

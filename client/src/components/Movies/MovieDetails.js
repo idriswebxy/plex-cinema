@@ -17,7 +17,7 @@ import {
   IMAGE_BASE_URL,
   BACKDROP_SIZE,
   POSTER_SIZE,
-} from "../../config";
+} from "../../config/config";
 import moment from "moment";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

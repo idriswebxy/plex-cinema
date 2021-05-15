@@ -7,26 +7,35 @@ import TopRatedMovies from "./TopRatedMovies";
 import { loadCart } from "../../actions/cart";
 import LoadSpinner from "../Spinner/LoadSpinner";
 import { connect } from "react-redux";
+import {
+  fetchItems,
+  fetchTopRatedMovies,
+  fetchUpcomingMovies,
+} from "../../actions/movie";
+import UpcomingMovies from "./UpcomingMovies";
+import SearchBar from "../Search/SearchBar";
 
 const MovieListContainer = ({ loading, authenticated, loadCart }) => {
   useEffect(() => {
     loadCart(authenticated);
   }, []);
 
-//   if (loading) {
-//     return <LoadSpinner />;
-//   }
+  if (loading) {
+    return <LoadSpinner />;
+  }
 
   return (
     <div>
+      <SearchBar />
       <MovieList />
       <TopRatedMovies />
+      <UpcomingMovies />
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-//   loading: state.movie.isLoading,
+  //   loading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
 });
 
