@@ -61,9 +61,10 @@ export default function (state = initialState, action) {
     case GET_MOVIE:
       return {
         ...state,
-        searchedMovie: state.moviesNowPlaying.find(
-          (movie) => movie.id === payload
-        ),
+        searchedMovie:
+          state.moviesNowPlaying.find((movie) => movie.id === payload) ||
+          state.moviesTopRated.find((movie) => movie.id === payload) ||
+          state.moviesUpcoming.find((movie) => movie.id === payload),
       };
     case SET_CAST:
       return { movieCast: [...state.movieCast, payload] };

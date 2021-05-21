@@ -99,7 +99,6 @@ router.post(
   }
 );
 
-
 router.get("/auth0", async (req, res) => {
   try {
     const user = await Auth0_User.findById(req.user.id).select("-email");

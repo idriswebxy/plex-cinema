@@ -10,7 +10,7 @@ import { API_KEY } from "../../config/config.js";
 const Search = ({ setSearchedMovies }) => {
   const [results, setResults] = useState([]);
   const [movieResults, showMovieResults] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); 
 
   const hideResults = (term) => {
     if (term.length === 0) {

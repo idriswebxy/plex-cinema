@@ -3,10 +3,12 @@ import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 
 const SearchBar = ({ onSearch, hideResults }) => {
+  
   const [term, setTerm] = useState("");
 
   useEffect(() => {
     // hideResults(term);
+    console.log(onSearch)
   }, [term]);
 
   const onChange = (e) => {
