@@ -26,6 +26,8 @@ import Image from "react-bootstrap/Image";
 import StarRatings from "react-star-ratings";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 
 const styles = {
   container: { border: "8px solid black" },
@@ -41,6 +43,21 @@ const styles = {
     border: "3px dotted red",
   },
 };
+
+const UpdatingPopover = React.forwardRef(
+  ({ popper, children, show: _, ...props }, ref) => {
+    useEffect(() => {
+      console.log("updating!");
+      popper.scheduleUpdate();
+    }, [children, popper]);
+
+    return (
+      <Popover ref={ref} content {...props}>
+        {children}
+      </Popover>
+    );
+  }
+);
 
 const MovieDetails = ({
   movie,
@@ -122,9 +139,21 @@ const MovieDetails = ({
               />
               &nbsp;({movie.vote_count})<p>{movie.overview}</p>
               <div>
-                <Button onClick={() => addToCart(movie, auth)}>
+                {/* <Button onClick={() => addToCart(movie, auth)}>
                   Add To Cart
-                </Button>
+                </Button> */}
+                <OverlayTrigger
+                  trigger="click"
+                  overlay={
+                    <UpdatingPopover id="popover-contained">
+                      Item Added!
+                    </UpdatingPopover>
+                  }
+                >
+                  <Button onClick={() => addToCart(movie, auth)}>
+                    Add To Cart
+                  </Button>
+                </OverlayTrigger>
               </div>
               &nbsp; &nbsp; &nbsp;
               <Row>

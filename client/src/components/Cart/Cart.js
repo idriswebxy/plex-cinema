@@ -9,7 +9,8 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 
 const styles = {
   color: "white",
@@ -17,6 +18,21 @@ const styles = {
     padding: "30px",
   },
 };
+
+const UpdatingPopover = React.forwardRef(
+  ({ popper, children, show: _, ...props }, ref) => {
+    useEffect(() => {
+      console.log("updating!");
+      popper.scheduleUpdate();
+    }, [children, popper]);
+
+    return (
+      <Popover ref={ref} content {...props}>
+        {children}
+      </Popover>
+    );
+  }
+);
 
 const Cart = ({
   cart,
@@ -60,12 +76,25 @@ const Cart = ({
                 />
                 <div>{movie.title}</div>
 
-                <Button
+                {/* <Button
                   variant="danger"
                   onClick={() => deleteItem(movie.id, key, price)}
                 >
                   Remove
-                </Button>
+                </Button> */}
+
+                <OverlayTrigger
+                  trigger="click"
+                  overlay={
+                    <UpdatingPopover id="popover-contained">
+                      Item Added!
+                    </UpdatingPopover>
+                  }
+                >
+                  <Button onClick={() => deleteItem(movie.id, key, price)}>
+                    Remove
+                  </Button>
+                </OverlayTrigger>
               </div>
             ))
           : guestCart.map((movie, key) => (
@@ -76,12 +105,30 @@ const Cart = ({
                 />
                 <div>{movie.title}</div>
 
-                <Button
+                {/* <Button
                   variant="danger"
                   onClick={() => deleteItem(movie.id, key, price)}
                 >
                   Remove
-                </Button>
+                </Button> */}
+                <OverlayTrigger
+                  trigger="click"
+                  overlay={
+                    <UpdatingPopover id="popover-contained">
+                      Item Added!
+                    </UpdatingPopover>
+                  }
+                >
+                  <Button style={{
+              backgroundColor: 'rgba(255, 100, 100, 0.85)',
+              padding: '2px 10px',
+              color: 'white',
+              borderRadius: 3,
+              ...props.style,
+            }} onClick={() => deleteItem(movie.id, key, price)}>
+                    Remove
+                  </Button>
+                </OverlayTrigger>
               </div>
             ))}
       </Table>

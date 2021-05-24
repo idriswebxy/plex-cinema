@@ -7,10 +7,16 @@ import { setSearchedMovies } from "../../actions/movie";
 
 import { API_KEY } from "../../config/config.js";
 
+
+const styles = {
+  margin: '20px'
+}
+
+
 const Search = ({ setSearchedMovies }) => {
   const [results, setResults] = useState([]);
   const [movieResults, showMovieResults] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   const hideResults = (term) => {
     if (term.length === 0) {
@@ -36,7 +42,7 @@ const Search = ({ setSearchedMovies }) => {
   };
 
   return (
-    <div>
+    <div style={styles}>
       <SearchBar hideResults={hideResults} onSearch={searchMovies} />
       {movieResults ? <SearchResults results={results} /> : null}
     </div>

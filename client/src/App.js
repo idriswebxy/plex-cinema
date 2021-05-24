@@ -11,7 +11,7 @@ import MovieList from "./components/Movies/MovieList";
 import Landing from "./components/Layout/Landing";
 import { loadUser } from "./actions/auth";
 import store from "./store";
-import Alert from "./components/Layout/Alert";
+import Alert from "./components/Layout/Alerts";
 import MovieDetails from "./components/Movies/MovieDetails";
 import Checkout from "./components/Cart/Checkout";
 import TvShows from "./components/TvShows/TvShows";
@@ -34,12 +34,8 @@ if (localStorage.token) {
 }
 
 const App = ({ authenticated }) => {
-  const {
-    user,
-    isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
+    useAuth0();
 
   useEffect(() => {
     // store.store.dispatch(loadUser());
@@ -58,14 +54,14 @@ const App = ({ authenticated }) => {
   // }, [getAccessTokenSilently]);
 
   // if (isLoading) {
-  //   return <Spinner />;
+  //   return <Spinner />;  
   // }
 
   return (
     <div>
       <Router history={history}>
         <NavigationBar />
-        <Alert />
+        {/* <Alert /> */}
         <Switch>
           {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/" component={MovieListContainer} />

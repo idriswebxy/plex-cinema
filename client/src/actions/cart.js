@@ -7,7 +7,7 @@ import {
   CHANGE_LOAD,
   GUEST_CART_ADD,
   GUEST_CART_LOAD,
-  DELETE_GUEST_MOVIE
+  DELETE_GUEST_MOVIE,
 } from "./types";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -19,6 +19,7 @@ export const addToCart = (movie, auth) => async (dispatch) => {
       type: GUEST_CART_ADD,
       payload: movie,
     });
+    dispatch(setAlert("Item Added!", "success", 3000))
   } else {
     const config = {
       headers: {
@@ -94,7 +95,7 @@ export const deleteItem = (id, index, price, auth) => async (dispatch) => {
         type: "DELETE_GUEST_MOVIE",
         payload: { id, index },
       });
-      dispatch(setAlert("Item Removed", "success"));
+      dispatch(setAlert("Item Removed!", "danger", 3000));
     } else {
       await axios.delete(`api/cart/${id}`);
       dispatch({

@@ -13,7 +13,7 @@ import {
   fetchUpcomingMovies,
 } from "../../actions/movie";
 import UpcomingMovies from "./UpcomingMovies";
-import SearchBar from "../Search/SearchBar";
+import Search from "../Search/Search";
 
 const MovieListContainer = ({ loading, authenticated, loadCart }) => {
   useEffect(() => {
@@ -26,7 +26,7 @@ const MovieListContainer = ({ loading, authenticated, loadCart }) => {
 
   return (
     <div>
-      <SearchBar />
+      <Search />
       <MovieList />
       <TopRatedMovies />
       <UpcomingMovies />
