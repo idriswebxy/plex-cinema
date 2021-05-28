@@ -87,7 +87,7 @@ const NavigationBar = ({
           <Nav.Item>
             Welcome <i className="bi bi-person-circle" />
             &nbsp;
-            {authenticated ? userInfo.name : null}!
+            {authenticated ? userInfo.email : null}!
           </Nav.Item>
         </Nav>
         <Nav>

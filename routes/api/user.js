@@ -44,7 +44,7 @@ router.post(
       });
     }
 
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     try {
       let user = await User.findOne({
@@ -62,7 +62,6 @@ router.post(
       }
 
       user = new User({
-        name,
         email,
         password,
       });

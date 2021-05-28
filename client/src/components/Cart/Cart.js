@@ -51,6 +51,7 @@ const Cart = ({
 
   useEffect(() => {
     loadCart(authenticated);
+    console.log(authenticated)
     // getPriceTotal(userId); //TODO: temp off
   }, []);
 
@@ -115,17 +116,20 @@ const Cart = ({
                   trigger="click"
                   overlay={
                     <UpdatingPopover id="popover-contained">
-                      Item Added!
+                      Item Removed!
                     </UpdatingPopover>
                   }
                 >
-                  <Button style={{
-              backgroundColor: 'rgba(255, 100, 100, 0.85)',
-              padding: '2px 10px',
-              color: 'white',
-              borderRadius: 3,
-              ...props.style,
-            }} onClick={() => deleteItem(movie.id, key, price)}>
+                  <Button
+                    style={{
+                      backgroundColor: "rgba(255, 100, 100, 0.85)",
+                      padding: "2px 10px",
+                      color: "white",
+                      borderRadius: 3,
+                      // ...props.style,
+                    }}
+                    onClick={() => deleteItem(movie.id, key, price)}
+                  >
                     Remove
                   </Button>
                 </OverlayTrigger>

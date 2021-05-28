@@ -19,7 +19,7 @@ export const addToCart = (movie, auth) => async (dispatch) => {
       type: GUEST_CART_ADD,
       payload: movie,
     });
-    dispatch(setAlert("Item Added!", "success", 3000))
+    // dispatch(setAlert("Item Added!", "success", 3000))
   } else {
     const config = {
       headers: {

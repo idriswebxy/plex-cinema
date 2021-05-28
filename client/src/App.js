@@ -61,7 +61,7 @@ const App = ({ authenticated }) => {
     <div>
       <Router history={history}>
         <NavigationBar />
-        {/* <Alert /> */}
+        <Alert />
         <Switch>
           {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/" component={MovieListContainer} />
