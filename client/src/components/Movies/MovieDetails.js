@@ -95,7 +95,7 @@ const MovieDetails = ({
 
       setVideoKey(res.data.results[0].key);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -192,11 +192,11 @@ const mapStateToProps = (state) => ({
   movie: state.movie.searchedMovie,
   isLoading: state.movie.isLoading,
   isLoading_app: state.auth.isLoading,
-  // cast: state.movie.movieCast,
-  // videoKey: state.movie.videoKey,
+  cast: state.movie.movieCast,
+  videoKey: state.movie.videoKey,
   movieID: state.movie.movieId,
   auth: state.auth.authenticated,
-  cart: state.cart,
+  cart: state.cart.cart
 });
 
 export default connect(mapStateToProps, {

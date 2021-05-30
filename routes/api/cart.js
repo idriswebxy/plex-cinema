@@ -5,7 +5,7 @@ const Cart = require("../../models/Cart");
 const User = require("../../models/User");
 const auth = require("../../middleware/auth");
 const Auth0_User = require("../../models/Auth0.User");
-const GuestCart = require("../../models/Cart")
+const GuestCart = require("../../models/Cart");
 
 // returns total price in cart
 router.get("/total/:id", async (req, res) => {
@@ -26,7 +26,8 @@ router.get("/total/:id", async (req, res) => {
 });
 
 // Get users cart
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
+
   try {
     const items = await Cart.find({ user: req.user.id });
 
@@ -37,15 +38,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-
-
-
 // Add to cart
 router.post("/", async (req, res) => {
   try {
-    
     const user = await User.findById(req.user.id);
-
 
     const newCart = new Cart({
       user: user.id,

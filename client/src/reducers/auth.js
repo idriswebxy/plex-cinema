@@ -36,7 +36,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         ...payload,
-        authenticated: false,
+        authenticated: true,
         isLoading: false,
       };
     case REGISTER_FAIL:

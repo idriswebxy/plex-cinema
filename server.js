@@ -36,6 +36,7 @@ app.use(express.json({ extended: false }));
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
 
+
 //  Use Routes
 app.use("/api/user", require("./routes/api/user"));
 

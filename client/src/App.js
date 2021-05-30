@@ -38,7 +38,7 @@ const App = ({ authenticated }) => {
     useAuth0();
 
   useEffect(() => {
-    // store.store.dispatch(loadUser());
+    store.store.dispatch(loadUser());
   }, []);
 
   // useEffect(() => {

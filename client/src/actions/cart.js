@@ -75,7 +75,6 @@ export const loadCart = (auth) => async (dispatch) => {
       });
     } else {
       const res = await axios.get("/api/cart");
-
       dispatch({
         type: LOAD_CART,
         payload: res.data,
