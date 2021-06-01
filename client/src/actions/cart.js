@@ -14,33 +14,32 @@ import { setAlert } from "./alert";
 import ls from "local-storage";
 
 export const addToCart = (movie, auth) => async (dispatch) => {
-  if (!auth) {
-    dispatch({
-      type: GUEST_CART_ADD,
-      payload: movie,
-    });
-    // dispatch(setAlert("Item Added!", "success", 3000))
-  } else {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+  const body = JSON.stringify(movie);
 
-    const body = JSON.stringify(movie);
-
-    try {
+  try {
+    if (!auth) {
+      dispatch({
+        type: GUEST_CART_ADD,
+        payload: movie,
+      });
+      // dispatch(setAlert("Item Added!", "success", 3000))
+    } else {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
       const res = await axios.post(`/api/cart`, body, config);
 
       dispatch({
         type: ADD_TO_CART,
         payload: res.data,
       });
-    } catch (err) {
-      dispatch({
-        type: CART_ERROR,
-      });
     }
+  } catch (err) {
+    dispatch({
+      type: CART_ERROR,
+    });
   }
 };
 
@@ -94,7 +93,7 @@ export const deleteItem = (id, index, price, auth) => async (dispatch) => {
         type: "DELETE_GUEST_MOVIE",
         payload: { id, index },
       });
-      dispatch(setAlert("Item Removed!", "danger", 3000));
+      dispatch(setAlert("Item Removed!", "danger", 2000));
     } else {
       await axios.delete(`api/cart/${id}`);
       dispatch({

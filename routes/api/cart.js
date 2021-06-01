@@ -39,7 +39,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 // Add to cart
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
 

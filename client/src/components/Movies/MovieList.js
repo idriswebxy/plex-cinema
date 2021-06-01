@@ -70,8 +70,7 @@ const MovieList = ({
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
     useAuth0();
 
-
-  useEffect(() => { 
+  useEffect(() => {
     fetchItems(NOW_PLAYING_MOVIES_URL);
   }, []);
 
@@ -80,32 +79,6 @@ const MovieList = ({
   }
 
   return (
-    // <div style={styles}>
-    //   <Container>
-    //     <SearchBar />
-    //     <CategoryNav />
-    //     {/* <CarouselSlide /> */}
-    //     <Row>
-    //       {movies.map((movie, key) => (
-
-    //           <MovieCard movie={movie} />
-
-    //       ))}
-    //     </Row>
-    //     {/* {loading ? <LoadSpinner /> : null} */}
-    //     {page < totalPages ? (
-    //       <Button
-    //         onClick={() => loadMoreItems(endpoint, page)}
-    //         variant="primary"
-    //         size="lg"
-    //         block
-    //       >
-    //         Load More
-    //       </Button>
-    //     ) : null}
-    //   </Container>
-    // </div>
-
     <div>
       <h4 style={styles}>New Movies</h4>
       <Carousel
@@ -117,7 +90,7 @@ const MovieList = ({
         showDots={true}
       >
         {movies.map((movie, key) => (
-          <div style={styles}>
+          <div key={key} style={styles}>
             <MovieCard movie={movie} />
           </div>
         ))}

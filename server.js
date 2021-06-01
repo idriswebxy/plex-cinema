@@ -30,12 +30,11 @@ mongoose
 
 // app.use(helmet());
 app.use(cors());
-app.use(express.json({ extended: false }));
+// app.use(express.json({ extended: false }));
 
 // Body parser middleware
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
-
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 //  Use Routes
 app.use("/api/user", require("./routes/api/user"));

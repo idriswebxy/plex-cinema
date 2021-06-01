@@ -1,5 +1,10 @@
 import React, { Component, useEffect, useState, useContext } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import setAuthToken from "./utils/setAuthToken";
 import Cart from "./components/Cart/Cart";
@@ -41,22 +46,6 @@ const App = ({ authenticated }) => {
     store.store.dispatch(loadUser());
   }, []);
 
-  // useEffect(() => {
-  //   try {
-  //     (async () => {
-  //       const token = await getAccessTokenSilently();
-  //       console.log(token);
-  //     })();
-
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }, [getAccessTokenSilently]);
-
-  // if (isLoading) {
-  //   return <Spinner />;  
-  // }
-
   return (
     <div>
       <Router history={history}>
@@ -66,7 +55,10 @@ const App = ({ authenticated }) => {
           {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/" component={MovieListContainer} />
           <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
+          <Route
+            path="/login"
+            component={authenticated ? MovieListContainer : Login}
+          />
           <Route path="/tv_shows" component={TvShows} />
           <Route path="/movie_info/:id" component={MovieDetails} />
           <Route path="/upcoming" component={UpcomingMovies} />

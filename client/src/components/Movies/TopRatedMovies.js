@@ -77,33 +77,6 @@ const TopRatedMovies = ({
   }
 
   return (
-    //   <div style={styles}>
-    //     <Container>
-    //       <SearchBar />
-    //       <CategoryNav />
-    //       <CarouselSlide />
-    //       <Row>
-    //         {movies.map((movie, key) => (
-    //           <Col key={key} xs={6} sm={3} md={3} lg={3}>
-    //             <MovieCard movie={movie} />
-    //           </Col>
-    //         ))}
-    //       </Row>
-    //       {/* {loading ? <LoadSpinner /> : null} */}
-    //       {page < totalPages ? (
-    //         <Button
-    //           onClick={() => loadMoreItems(endpoint, page)}
-    //           variant="primary"
-    //           size="lg"
-    //           block
-    //         >
-    //           Load More
-    //         </Button>
-    //       ) : null}
-    //     </Container>
-    //   </div>
-    // );
-
     <div>
       <h4 style={styles}>Top Rated Movies</h4>
       <Carousel
@@ -115,7 +88,7 @@ const TopRatedMovies = ({
         showDots={true}
       >
         {movies.map((movie, key) => (
-          <div style={styles}>
+          <div key={key} style={styles}>
             <MovieCard movie={movie} />
           </div>
         ))}

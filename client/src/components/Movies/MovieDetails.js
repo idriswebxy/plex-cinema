@@ -74,26 +74,29 @@ const MovieDetails = ({
   auth,
   cart,
 }) => {
-  // const [vidKey, setVideoKey] = useState(null);
   const [cast, setCast] = useState([]);
   const [videoKey, setVideoKey] = useState(null);
   const [vidSpinner, setVidSpinner] = useState(false);
 
   const fetchCast = async (id) => {
-    let res = await axios.get(
+    await fetch(
       `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
-    );
-
-    setCast(...cast, res.data.cast.slice(0, 6));
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setCast(...cast, data.cast.slice(0, 6));
+      });
   };
 
   const videoLoader = async (id) => {
     try {
-      let res = await axios.get(
+      await fetch(
         `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
-      );
-
-      setVideoKey(res.data.results[0].key);
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setVideoKey(data.results[0].key);
+        });
     } catch (error) {
       console.error(error);
     }
@@ -117,6 +120,7 @@ const MovieDetails = ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         maxHeight: "100%",
+        color: "white",
       }}
     >
       <Container style={styles.pad}>
@@ -129,7 +133,9 @@ const MovieDetails = ({
           <Col>
             <Col>
               <h3>{movie.title}</h3>
-              <div>({moment(movie.release_date).format("YYYY")})</div>
+              <div>
+                Release Date: {moment(movie.release_date).format("YYYY")}
+              </div>
               <StarRatings
                 starRatedColor="yellow"
                 numberOfStars={5}
@@ -137,7 +143,7 @@ const MovieDetails = ({
                 starDimension={"25"}
                 name="rating"
               />
-              &nbsp;({movie.vote_count})<p>{movie.overview}</p>
+              ({movie.vote_count})<p>{movie.overview}</p>
               <div>
                 {/* <Button onClick={() => addToCart(movie, auth)}>
                   Add To Cart
@@ -157,8 +163,8 @@ const MovieDetails = ({
               </div>
               &nbsp; &nbsp; &nbsp;
               <Row>
-                {cast.map((actor) => (
-                  <Col xs={6} lg={2}>
+                {cast.map((actor, key) => (
+                  <Col key={key} xs={6} lg={2}>
                     <Image
                       rounded
                       src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
@@ -196,7 +202,7 @@ const mapStateToProps = (state) => ({
   videoKey: state.movie.videoKey,
   movieID: state.movie.movieId,
   auth: state.auth.authenticated,
-  cart: state.cart.cart
+  cart: state.cart.cart,
 });
 
 export default connect(mapStateToProps, {

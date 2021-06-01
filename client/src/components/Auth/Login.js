@@ -58,15 +58,11 @@ const Login = ({ login, authenticated, loading }) => {
     login(email, password);
   };
 
-  if (authenticated) {
-    return <Redirect to="/" />;
-  }
-
   if (loading) {
     return <Spinner />;
   }
 
-  const loginForm = (
+  return (
     <Container
       onSubmit={(e) => onSubmit(e)}
       style={{ color: "white" }}
@@ -131,8 +127,6 @@ const Login = ({ login, authenticated, loading }) => {
       </div>
     </Container>
   );
-
-  return <div>{loginForm}</div>;
 };
 
 Login.propTypes = {

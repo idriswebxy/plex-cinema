@@ -45,7 +45,7 @@ const initialState = {
   totalPages: 0,
   tvShowPage: 1,
   totalShowPages: 0,
-  movieIds: [], 
+  movieIds: [],
   error: null,
 };
 
