@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
     case ADD_TO_CART:
       return {
         ...state,
-        cart: [payload, ...state.cart],
+        cart: [...state.cart, payload],
       };
     case GUEST_CART_ADD:
       return {

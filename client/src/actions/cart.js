@@ -29,8 +29,8 @@ export const addToCart = (movie, auth) => async (dispatch) => {
           "Content-Type": "application/json",
         },
       };
+      console.log(body)
       const res = await axios.post(`/api/cart`, body, config);
-
       dispatch({
         type: ADD_TO_CART,
         payload: res.data,

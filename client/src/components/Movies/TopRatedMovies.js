@@ -30,6 +30,7 @@ import "react-multi-carousel/lib/styles.css";
 
 const styles = {
   margin: "10px",
+  color: "white"
 };
 
 const responsive = {

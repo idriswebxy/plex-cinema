@@ -19,12 +19,4 @@ const CartSchema = new Schema({
 });
 
 
-
-const GuestCartSchema = new Schema({
-  guestCart: {
-    type: Array,
-  }
-})
-
 module.exports = Cart = mongoose.model("cart", CartSchema);
-module.exports = GuestCart = mongoose.model("guestCart", GuestCartSchema);

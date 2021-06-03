@@ -8,7 +8,7 @@ const Auth0_User = require("../../models/Auth0.User");
 const GuestCart = require("../../models/Cart");
 
 // returns total price in cart
-router.get("/total/:id", async (req, res) => {
+router.get("/total/:id", auth, async (req, res) => {
   try {
     let sum = 0.0;
 
@@ -80,7 +80,7 @@ router.post("/", auth, async (req, res) => {
 // });
 
 // Delete movie in cart
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
     const cart = await Cart.findOneAndDelete({ movieId: req.params.id });
 

@@ -32,6 +32,7 @@ import e from "cors";
 
 const styles = {
   margin: "10px",
+  color: "white"
 };
 
 const responsive = {

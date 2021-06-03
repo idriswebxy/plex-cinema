@@ -44,24 +44,18 @@ const Cart = ({
   price = 2.99,
   userId,
   authenticated,
-  movie,
   guestCart,
 }) => {
   const { isLoading } = useAuth0();
 
   useEffect(() => {
     loadCart(authenticated);
-    console.log(authenticated)
     // getPriceTotal(userId); //TODO: temp off
   }, []);
 
-  // if (loading) {
-  //   return <Spinner />;
-  // }
-
-  // if (!authenticated) {
-  //   return <Redirect to="/login" />;
-  // }
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <Container>
@@ -92,7 +86,12 @@ const Cart = ({
                     </UpdatingPopover>
                   }
                 >
-                  <Button onClick={() => deleteItem(movie.id, key, price)}>
+                  <Button
+                    variant="danger"
+                    onClick={() =>
+                      deleteItem(movie.id, key, price, authenticated)
+                    }
+                  >
                     Remove
                   </Button>
                 </OverlayTrigger>
@@ -121,13 +120,7 @@ const Cart = ({
                   }
                 >
                   <Button
-                    style={{
-                      backgroundColor: "rgba(255, 100, 100, 0.85)",
-                      padding: "2px 10px",
-                      color: "white",
-                      borderRadius: 3,
-                      // ...props.style,
-                    }}
+                    variant="danger"
                     onClick={() => deleteItem(movie.id, key, price)}
                   >
                     Remove
