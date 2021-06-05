@@ -15,7 +15,7 @@ import ls from "local-storage";
 
 export const addToCart = (movie, auth) => async (dispatch) => {
   const body = JSON.stringify(movie);
-
+  
   try {
     if (!auth) {
       dispatch({

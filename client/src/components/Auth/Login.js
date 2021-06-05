@@ -22,6 +22,9 @@ import Input from "@material-ui/core/Input";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    color: "white",
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -33,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
+    color: "white",
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
@@ -40,11 +44,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-
-const styles = {
-  color: "white"
-}
 
 const Login = ({ login, authenticated, loading }) => {
   const { isAuthenticated, logout, loginWithRedirect, isLoading } = useAuth0();
@@ -68,90 +67,63 @@ const Login = ({ login, authenticated, loading }) => {
   }
 
   return (
-    // <Container
-    //   onSubmit={(e) => onSubmit(e)}
-    //   style={{ color: "white" }}
-    //   component="main"
-    //   maxWidth="xs"
-    // >
-    //   {/* <CssBaseline /> */}
-    //   <div className={classes.paper}>
-    //     <Avatar className={classes.avatar}>{/* <LockOutlinedIcon /> */}</Avatar>
-    //     <Typography component="h1" variant="h5">
-    //       Sign in
-    //     </Typography>
-    //     <form className={classes.form} noValidate>
-    //       <TextField
-    //         variant="outlined"
-    //         margin="normal"
-    //         required
-    //         fullWidth
-    //         id="email"
-    //         label="Email Address"
-    //         name="email"
-    //         value={email}
-    //         autoComplete="email"
-    //         autoFocus
-    //         onChange={(e) => setEmail(e.target.value)}
-    //       />
-    //       <TextField
-    //         variant="outlined"
-    //         margin="normal"
-    //         required
-    //         fullWidth
-    //         name="password"
-    //         label="Password"
-    //         type="password"
-    //         id="password"
-    //         autoComplete="current-password"
-    //         value={password}
-    //         onChange={(e) => setPassword(e.target.value)}
-    //       />
-    //       <Button
-    //         type="submit"
-    //         fullWidth
-    //         variant="contained"
-    //         color="primary"
-    //         className={classes.submit}
-    //       >
-    //         Sign In
-    //       </Button>
-    //       {/* <Grid container>
-    //         <Grid item xs>
-    //           <Link href="#" variant="body2">
-    //             Forgot password?
-    //           </Link>
-    //         </Grid>
-    //         <Grid item>
-    //           <Link href="#" variant="body2">
-    //             {"Don't have an account? Sign Up"}
-    //           </Link>
-    //         </Grid>
-    //       </Grid> */}
-    //     </form>
-    //   </div>
-    // </Container>
-    <Container>
-      <Form style={styles}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+    <Container onSubmit={(e) => onSubmit(e)} component="main" maxWidth="xs">
+      {/* <CssBaseline /> */}
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>{/* <LockOutlinedIcon /> */}</Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <form className={classes.form} noValidate>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            value={email}
+            autoComplete="email"
+            autoFocus
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign In
+          </Button>
+          {/* <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid> */}
+        </form>
+      </div>
     </Container>
   );
 };

@@ -17,9 +17,9 @@ const SearchResults = ({ results, getSearchedMovie }) => {
       <Scrollbars style={{ width: 700, height: 350 }}>
         {results && results.length !== 0 ? (
           results.map((result, key) => (
-            <ListGroup style={{ width: "30rem", color: "black" }}>
+            <ListGroup key={key} style={{ width: "30rem", color: "black" }}>
               <Row>
-                <Col key={results.id}>
+                <Col>
                   <ListGroup.Item
                     action
                     href={`/movie_info/${result.id}`}

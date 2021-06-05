@@ -13,9 +13,12 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 
 const styles = {
-  color: "white",
+  color: "black",
   marginSpace: {
     padding: "30px",
+  },
+  centerText: {
+    textAlign: "center",
   },
 };
 
@@ -57,80 +60,67 @@ const Cart = ({
     return <Spinner />;
   }
 
-  return (
-    <Container>
-      <Table style={styles}>
-        <tr>
-          <thead>Cart Movies</thead>
-        </tr>
-        {authenticated
-          ? cart.map((movie, key) => (
-              <div style={styles.marginSpace} key={key}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
-                />
-                <div>{movie.title}</div>
+  const authCart = (
+    <div style={styles.marginSpace}>
+      {cart.map((movie, key) => (
+        <div key={key}>
+          <Image
+            rounded
+            src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
+          />
+          <div>{movie.title}</div>
 
-                {/* <Button
-                  variant="danger"
-                  onClick={() => deleteItem(movie.id, key, price)}
-                >
-                  Remove
-                </Button> */}
-
-                <OverlayTrigger
-                  trigger="click"
-                  overlay={
-                    <UpdatingPopover id="popover-contained">
-                      Item Added!
-                    </UpdatingPopover>
-                  }
-                >
-                  <Button
-                    variant="danger"
-                    onClick={() =>
-                      deleteItem(movie.id, key, price, authenticated)
-                    }
-                  >
-                    Remove
-                  </Button>
-                </OverlayTrigger>
-              </div>
-            ))
-          : guestCart.map((movie, key) => (
-              <div style={styles.marginSpace} key={key}>
-                <Image
-                  rounded
-                  src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
-                />
-                <div>{movie.title}</div>
-
-                {/* <Button
-                  variant="danger"
-                  onClick={() => deleteItem(movie.id, key, price)}
-                >
-                  Remove
-                </Button> */}
-                <OverlayTrigger
-                  trigger="click"
-                  overlay={
-                    <UpdatingPopover id="popover-contained">
-                      Item Removed!
-                    </UpdatingPopover>
-                  }
-                >
-                  <Button
-                    variant="danger"
-                    onClick={() => deleteItem(movie.id, key, price)}
-                  >
-                    Remove
-                  </Button>
-                </OverlayTrigger>
-              </div>
-            ))}
-      </Table>
-    </Container>
+          <OverlayTrigger
+            trigger="click"
+            overlay={
+              <UpdatingPopover id="popover-contained">
+                Item Added!
+              </UpdatingPopover>
+            }
+          >
+            <Button
+              variant="danger"
+              onClick={() => deleteItem(movie.id, key, price, authenticated)}
+            >
+              Remove
+            </Button>
+          </OverlayTrigger>
+        </div>
+      ))}
+    </div>
   );
+
+  const guest = (
+    <div style={styles.marginSpace}>
+      {guestCart.map((movie, key) => (
+        <div key={key}>
+          <Image
+            rounded
+            src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
+          />
+          <div>{movie.title}</div>
+
+          <OverlayTrigger
+            trigger="click"
+            overlay={
+              <UpdatingPopover id="popover-contained">
+                Item Removed!
+              </UpdatingPopover>
+            }
+          >
+            <Button
+              variant="danger"
+              onClick={() => deleteItem(movie.id, key, price)}
+            >
+              Remove
+            </Button>
+          </OverlayTrigger>
+        </div>
+      ))}
+    </div>
+  );
+
+  return <div>{authenticated ? authCart : guest}</div>;
 };
 
 const mapStateToProps = (state) => ({
