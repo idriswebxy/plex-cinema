@@ -19,6 +19,7 @@ router.get("/total/:id", auth, async (req, res) => {
     });
 
     res.json(sum);
+    
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error...");

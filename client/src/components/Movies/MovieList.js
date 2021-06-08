@@ -21,7 +21,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import LoadSpinner from "../Spinner/LoadSpinner";
-import Loader from "./Loader";
 import Button from "react-bootstrap/Button";
 import CategoryNav from "../Layout/CategoryNav";
 import ls from "local-storage";

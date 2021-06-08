@@ -33,13 +33,8 @@ const NavigationBar = ({
   guestCart,
   auth0User,
 }) => {
-  const {
-    user,
-    logout,
-    isLoading,
-    isAuthenticated,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { user, logout, isLoading, isAuthenticated, getAccessTokenSilently } =
+    useAuth0();
 
   let accountName = null;
   let serverUrl = REACT_APP_SERVER_URL;
@@ -125,7 +120,7 @@ const NavigationBar = ({
 const mapStateToProps = (state) => ({
   auth: state.auth,
   cart: state.cart.cart,
-  guestCart: state.cart.guestCart
+  guestCart: state.cart.guestCart,
 });
 
 export default connect(mapStateToProps, { logOut })(NavigationBar);

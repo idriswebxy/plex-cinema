@@ -73,6 +73,7 @@ const MovieDetails = ({
   movieID,
   auth,
   cart,
+  price = 2.99,
 }) => {
   const [cast, setCast] = useState([]);
   const [videoKey, setVideoKey] = useState(null);
@@ -123,8 +124,8 @@ const MovieDetails = ({
         color: "white",
       }}
     >
-      <Container style={styles.pad}>
-        <Row lg={12} md={12} sm={12} xs={12}>
+      <Container>
+        <Row>
           <Image
             rounded
             src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
@@ -145,18 +146,15 @@ const MovieDetails = ({
               />
               ({movie.vote_count})<p>{movie.overview}</p>
               <div>
-                {/* <Button onClick={() => addToCart(movie, auth)}>
-                  Add To Cart
-                </Button> */}
                 <OverlayTrigger
                   trigger="click"
                   overlay={
                     <UpdatingPopover id="popover-contained">
                       Item Added!
-                    </UpdatingPopover>
+                    </UpdatingPopover>  
                   }
                 >
-                  <Button onClick={() => addToCart(movie, auth)}>
+                  <Button onClick={() => addToCart(movie, auth, price)}>
                     Add To Cart
                   </Button>
                 </OverlayTrigger>
@@ -188,6 +186,7 @@ const MovieDetails = ({
     </div>
   );
 };
+
 MovieDetails.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,

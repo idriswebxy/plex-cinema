@@ -38,7 +38,6 @@ app.use(express.json());
 
 //  Use Routes
 app.use("/api/user", require("./routes/api/user"));
-
 app.use("/api/cart", require("./routes/api/cart"));
 app.use("/api/auth", require("./routes/api/auth"));
 
