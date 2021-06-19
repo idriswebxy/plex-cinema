@@ -8,7 +8,7 @@ import {
   GUEST_CART_ADD,
   GUEST_CART_LOAD,
   DELETE_GUEST_MOVIE,
-  GUEST_PRICE_TOTAL
+  GUEST_PRICE_TOTAL,
 } from "./types";
 import axios from "axios";
 import { setAlert } from "./alert";

@@ -31,7 +31,7 @@ import Popover from "react-bootstrap/Popover";
 
 const styles = {
   container: { border: "8px solid black" },
-  paddingTop: "10px",
+  paddingTop: "16px",
   pad: {},
   row: {
     border: "3px dotted yellow",
@@ -125,7 +125,7 @@ const MovieDetails = ({
       }}
     >
       <Container>
-        <Row>
+        <Row style={styles}>
           <Image
             rounded
             src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
@@ -151,11 +151,11 @@ const MovieDetails = ({
                   overlay={
                     <UpdatingPopover id="popover-contained">
                       Item Added!
-                    </UpdatingPopover>  
+                    </UpdatingPopover>
                   }
                 >
                   <Button onClick={() => addToCart(movie, auth, price)}>
-                    Add To Cart
+                    Add To Cart <i class="bi bi-cart-plus-fill"></i>
                   </Button>
                 </OverlayTrigger>
               </div>

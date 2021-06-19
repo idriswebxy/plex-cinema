@@ -31,7 +31,7 @@ const Cart = ({
   userId,
   authenticated,
   guestCart,
-  guestTotal
+  guestTotal,
 }) => {
   const { isLoading } = useAuth0();
 
@@ -121,6 +121,11 @@ const Cart = ({
         <tr>
           <td></td>
           <h5>Total: ${guestTotal}</h5>
+          <div style={styles.marginSpace}>
+            <Button href="/checkout" variant="success">
+              Checkout <i class="bi bi-box-arrow-right"></i>
+            </Button>
+          </div>
         </tr>
       </tbody>
     </Table>
