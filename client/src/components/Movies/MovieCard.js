@@ -13,11 +13,11 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import { SET_CAST } from "../../actions/types";
-
+import "./MovieList.css";
 
 const styles = {
-  // textAlign: "center",
-  // marginTop: "10px",
+  textAlign: "center",
+  padding: '5px'
 };
 
 const MovieCard = ({ movie, getMovie, itemClass }) => {
@@ -41,14 +41,18 @@ const MovieCard = ({ movie, getMovie, itemClass }) => {
         />
       </Link>
       <div style={styles}>
-        <p>
-          {movie.title}&nbsp;({moment(movie.release_date).format("YYYY")})
-        </p>
+        <div>
+          {/* {movie.title}&nbsp;({moment(movie.release_date).format("YYYY")}) */}
+        </div>
       </div>
     </div>
   );
 
-  return <div>{movieCard}</div>;
+  return (
+    <div>
+      <a className="grow dib f3-ns no-underline">{movieCard}</a>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({

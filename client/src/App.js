@@ -31,6 +31,7 @@ import { fetchItems } from "./actions/movie";
 import "./App.css";
 
 import { createBrowserHistory } from "history";
+import MovieNav from "./components/Movies/MovieNav";
 
 const history = createBrowserHistory();
 
@@ -44,6 +45,7 @@ const App = ({ authenticated }) => {
 
   useEffect(() => {
     store.store.dispatch(loadUser());
+
   }, []);
 
   return (
@@ -51,6 +53,7 @@ const App = ({ authenticated }) => {
       <Router history={history}>
         <NavigationBar />
         <Alert />
+        <MovieNav />
         <Switch>
           {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/" component={MovieListContainer} />

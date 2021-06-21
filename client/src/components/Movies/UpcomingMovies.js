@@ -28,7 +28,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const styles = {
-  margin: "10px",
+  padding: "10px",
   color: "black",
   textAlign: "center",
 };
@@ -77,23 +77,15 @@ const UpcomingMovies = ({
   }
 
   return (
-    <div>
-      <h4 style={styles}>Upcoming Movies</h4>
-      <Carousel
-        infinite={true}
-        focusOnSelect={true}
-        slidesToSlide={5}
-        responsive={responsive}
-        swipeable={true}
-        showDots={true}
-      >
+    <Container>
+      <Row>
         {movies.map((movie, key) => (
-          <div key={key} style={styles}>
+          <Col key={key} xs={6} sm={3} md={4} lg={3}>
             <MovieCard movie={movie} />
-          </div>
+          </Col>
         ))}
-      </Carousel>
-    </div>
+      </Row>
+    </Container>
   );
 };
 

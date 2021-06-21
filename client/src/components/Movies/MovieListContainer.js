@@ -14,11 +14,26 @@ import {
 } from "../../actions/movie";
 import UpcomingMovies from "./UpcomingMovies";
 import Search from "../Search/Search";
+import MovieNav from "./MovieNav";
 
 const MovieListContainer = ({ loading, authenticated, loadCart }) => {
   useEffect(() => {
     loadCart(authenticated);
+    console.log(window.location.pathname);
   }, []);
+
+  let renderSwitch = (path) => {
+    switch (path) {
+      case "/":
+        return <MovieList />;
+      case "/top_rated":
+        return <TopRatedMovies />;
+      case "/upcoming":
+        return <UpcomingMovies />;
+      default:
+        return;
+    }
+  };
 
   if (loading) {
     return <LoadSpinner />;
@@ -26,10 +41,7 @@ const MovieListContainer = ({ loading, authenticated, loadCart }) => {
 
   return (
     <div>
-      <Search />
-      <MovieList />
-      <TopRatedMovies />
-      <UpcomingMovies />
+      {renderSwitch(window.location.pathname)}
     </div>
   );
 };
