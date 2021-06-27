@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 
-
 const styles = {
-    padding: '10px'
-}
-
+  padding: "10px",
+};
 
 const MovieNav = () => {
+  useEffect(() => {}, []);
+
   return (
     <div style={styles}>
       <Nav className="justify-content-center" activeKey="/home">

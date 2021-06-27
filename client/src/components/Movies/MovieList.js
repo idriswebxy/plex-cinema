@@ -27,8 +27,7 @@ import ls from "local-storage";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import TopRatedMovies from "./TopRatedMovies";
-import e from "cors";
-import "./MovieList.css"
+import MovieNav from "./MovieNav";
 
 const styles = {
   padding: "10px",
@@ -82,6 +81,7 @@ const MovieList = ({
 
   return (
     <Container>
+      <MovieNav />
       <Row>
         {movies.map((movie, key) => (
           <Col key={key} xs={6} sm={3} md={4} lg={3}>

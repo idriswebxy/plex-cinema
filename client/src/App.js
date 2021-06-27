@@ -5,7 +5,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import setAuthToken from "./utils/setAuthToken";
 import Cart from "./components/Cart/Cart";
 import NavigationBar from "./components/Layout/NavigationBar";
@@ -26,7 +26,6 @@ import UpcomingMovies from "./components/Movies/UpcomingMovies";
 import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components/Spinner/LoadSpinner";
-import MovieListContainer from "./components/Movies/MovieListContainer";
 import { fetchItems } from "./actions/movie";
 import "./App.css";
 
@@ -45,7 +44,6 @@ const App = ({ authenticated }) => {
 
   useEffect(() => {
     store.store.dispatch(loadUser());
-
   }, []);
 
   return (
@@ -53,14 +51,12 @@ const App = ({ authenticated }) => {
       <Router history={history}>
         <NavigationBar />
         <Alert />
-        <MovieNav />
         <Switch>
-          {/* <Route exact path="/" component={Landing} /> */}
-          <Route exact path="/" component={MovieListContainer} />
+          <Route exact path="/" component={MovieList} />
           <Route path="/register" component={Register} />
           <Route
             path="/login"
-            component={authenticated ? MovieListContainer : Login}
+            component={!authenticated ? Login : MovieList}
           />
           <Route path="/tv_shows" component={TvShows} />
           <Route path="/movie_info/:id" component={MovieDetails} />
@@ -69,6 +65,14 @@ const App = ({ authenticated }) => {
           <PrivateRoute path="/show_details" component={TvShowDetails} />
           <Route path="/cart" component={Cart} />
           <PrivateRoute path="/checkout" component={Checkout} />
+          <Route
+            path=""
+            component={() => (
+              <h1 style={{ textAlign: "center", fontSize: "70px" }}>
+                (404) Page not found.
+              </h1>
+            )}
+          />
         </Switch>
       </Router>
     </div>
@@ -77,6 +81,7 @@ const App = ({ authenticated }) => {
 
 const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
+  isLoading: state.auth.isLoading
 });
 
 export default connect(mapStateToProps)(App);

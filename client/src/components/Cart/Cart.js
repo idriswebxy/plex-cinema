@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
+import { getMovie } from "../../actions/movie";
 import Spinner from "../Spinner/LoadSpinner";
 import { useAuth0 } from "@auth0/auth0-react";
 import Container from "react-bootstrap/Container";
@@ -32,6 +33,7 @@ const Cart = ({
   authenticated,
   guestCart,
   guestTotal,
+  getMovie,
 }) => {
   const { isLoading } = useAuth0();
 
@@ -56,10 +58,15 @@ const Cart = ({
         <tbody key={key}>
           <tr>
             <td>
-              <Image
-                rounded
-                src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
-              />
+              <Link
+                to={`/movie_info/${movie.id}`}
+                onClick={() => getMovie(movie.id)}
+              >
+                <Image
+                  rounded
+                  src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
+                />
+              </Link>
               <div>{movie.title}</div>
             </td>
             <td>
@@ -80,6 +87,11 @@ const Cart = ({
           <td></td>
           <td>
             <h5>Total: ${total}</h5>
+            <div style={styles.marginSpace}>
+              <Button href="/checkout" variant="success">
+                Checkout <i class="bi bi-box-arrow-right"></i>
+              </Button>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -98,10 +110,15 @@ const Cart = ({
         <tbody key={key}>
           <tr>
             <td>
-              <Image
-                rounded
-                src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
-              />
+              <Link
+                to={`/movie_info/${movie.id}`}
+                onClick={() => getMovie(movie.id)}
+              >
+                <Image
+                  rounded
+                  src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
+                />
+              </Link>
               <div>{movie.title}</div>
             </td>
             <td>
@@ -149,4 +166,5 @@ export default connect(mapStateToProps, {
   deleteItem,
   loadCart,
   getPriceTotal,
+  getMovie,
 })(Cart);
