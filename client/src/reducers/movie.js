@@ -153,7 +153,7 @@ export default function (state = initialState, action) {
     case FETCH_MOVIES:
       return {
         ...state,
-        moviesNowPlaying: (state.moviesNowPlaying.length = 0),
+        // moviesNowPlaying: (state.moviesNowPlaying.length = 0),
         moviesNowPlaying: [...state.moviesNowPlaying, ...payload.results],
         totalPages: payload.total_pages,
         moviePage: payload.page,

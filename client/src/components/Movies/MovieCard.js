@@ -12,7 +12,7 @@ import Figure from "react-bootstrap/Figure";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
-import { SET_CAST } from "../../actions/types";
+
 
 const styles = {
   textAlign: "center",

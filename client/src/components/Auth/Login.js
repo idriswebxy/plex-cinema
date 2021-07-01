@@ -20,6 +20,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Input from "@material-ui/core/Input";
 import { makeStyles } from "@material-ui/core/styles";
+import { setAlert } from "../../actions/alert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ login, authenticated, loading }) => {
+const Login = ({ login, authenticated, loading, setAlert, logCheck }) => {
   const { isAuthenticated, logout, loginWithRedirect, isLoading } = useAuth0();
 
   const [email, setEmail] = useState("");
@@ -57,6 +58,7 @@ const Login = ({ login, authenticated, loading }) => {
   //   setFormData({ ...formData, [e.target.type]: e.target.value });
   // };
 
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     login(email, password);
@@ -137,6 +139,7 @@ const mapStateToProps = (state) => ({
   autheticated: state.auth.authenticated,
   page: state.movie.page,
   loading: state.auth.loading,
+  logCheck: state.auth.logCheck,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, setAlert })(Login);

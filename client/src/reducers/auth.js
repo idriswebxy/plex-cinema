@@ -17,6 +17,7 @@ const initialState = {
   authenticated: false,
   isLoading: true,
   userInfo: {},
+  logCheck: false  // auth check for guest user checking out
 };
 
 export default function (state = initialState, action) {

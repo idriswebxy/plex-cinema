@@ -9,7 +9,7 @@ import {
   loadChange,
   loadMoreItems,
 } from "../../actions/movie";
-import { NOW_PLAYING_MOVIES_URL } from "../../config/config";
+import { NOW_PLAYING_MOVIES_URL, API_KEY, API_URL } from "../../config/config";
 import { Redirect, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import Movie from "./MovieCard";
@@ -70,10 +70,19 @@ const MovieList = ({
 }) => {
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
     useAuth0();
+  let endpoint = "";
 
   useEffect(() => {
     fetchItems(NOW_PLAYING_MOVIES_URL);
   }, []);
+
+  const loadMore = () => {
+    window.onscroll = function (ev) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        loadMoreItems(NOW_PLAYING_MOVIES_URL, page, "now_playing");
+      }
+    };
+  };
 
   if (loading) {
     return <LoadSpinner />;
@@ -89,18 +98,19 @@ const MovieList = ({
           </Col>
         ))}
       </Row>
+      {page <= totalPages ? loadMore() : <LoadSpinner />}
     </Container>
   );
 };
 
 const mapStateToProps = (state) => ({
-  // loading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   movies: state.movie.moviesNowPlaying,
   page: state.movie.moviePage,
   searchedMovie: state.movie.searchedMovie,
   totalPages: state.movie.totalPages,
   cart: state.cart.cart,
+  loading: state.movie.isLoading,
 });
 
 export default connect(mapStateToProps, {

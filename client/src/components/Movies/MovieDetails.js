@@ -176,11 +176,13 @@ const MovieDetails = ({
         </Row>
         &nbsp; &nbsp; &nbsp;
         <Row>
-          <ReactPlayer
-            playing={false}
-            controls={true}
-            url={`https://www.youtube.com/watch?v=${videoKey}`}
-          />
+          {
+            <ReactPlayer
+              playing={false}
+              controls={true}
+              url={`https://www.youtube.com/watch?v=${videoKey}`}
+            />
+          }
         </Row>
       </Container>
     </div>

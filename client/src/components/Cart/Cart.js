@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import { getMovie } from "../../actions/movie";
 import Spinner from "../Spinner/LoadSpinner";
@@ -10,6 +10,7 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
+import Modal from "react-bootstrap/Modal";
 
 const styles = {
   color: "black",
@@ -37,6 +38,11 @@ const Cart = ({
 }) => {
   const { isLoading } = useAuth0();
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   useEffect(() => {
     loadCart(authenticated);
     getPriceTotal(userId, authenticated);
@@ -45,6 +51,21 @@ const Cart = ({
   if (loading) {
     return <Spinner />;
   }
+
+  const loginCheck = (
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton></Modal.Header>
+      <Modal.Body>Login to Checkout.</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" href="/login">
+          Login
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 
   const authCart = (
     <Table hover>
@@ -139,7 +160,7 @@ const Cart = ({
           <td></td>
           <h5>Total: ${guestTotal}</h5>
           <div style={styles.marginSpace}>
-            <Button href="/checkout" variant="success">
+            <Button onClick={() => handleShow()} variant="success">
               Checkout <i class="bi bi-box-arrow-right"></i>
             </Button>
           </div>
@@ -148,7 +169,12 @@ const Cart = ({
     </Table>
   );
 
-  return <Container>{authenticated ? authCart : guest}</Container>;
+  return (
+    <Container>
+      {authenticated ? authCart : guest}
+      {loginCheck}
+    </Container>
+  );
 };
 
 const mapStateToProps = (state) => ({

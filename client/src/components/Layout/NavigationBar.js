@@ -53,7 +53,7 @@ const NavigationBar = ({
           <Nav.Link href="/cart">
             Cart&nbsp;<i className="bi bi-cart3"></i>
             <Badge pill variant="info">
-              {authenticated === false ? guestCart.length : cart.length}
+              {!authenticated ? (guestCart.length || 0) : cart.length}
             </Badge>
           </Nav.Link>
         </Nav>
