@@ -3,3 +3,4 @@
 /src/config.js
 /src/auth0.config.json
 /.env
+/.gitignore
