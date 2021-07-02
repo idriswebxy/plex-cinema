@@ -56,21 +56,21 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.post("/guestCart", async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-    const newCart = new Cart({
-      user: user.id,
-      movieId: req.body.id,
-      movie: req.body,
-      price: 2.99,
-    });
-    await newCart.save();
-    res.json(newCart);
-  } catch (error) {
-    console.error(error);
-  }
-});
+// router.post("/guestCart", async (req, res) => {
+//   try {
+//     const user = await User.findById(req.user.id);
+//     const newCart = new Cart({
+//       user: user.id,
+//       movieId: req.body.id,
+//       movie: req.body,
+//       price: 2.99,
+//     });
+//     await newCart.save();
+//     res.json(newCart);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// });
 
 // Add to cart for TvShows
 // router.post("/tv_show", async (req, res) => {
