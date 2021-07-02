@@ -5,10 +5,6 @@ import { setAlert } from "../../actions/alert";
 import Login from "../../components/Auth/Login";
 
 const Checkout = ({ authenticated }) => {
-  if (!authenticated) {
-    return <Redirect to="/login" />;
-  }
-
   return (
     <div style={{ textAlign: "center" }}>
       <h1>Your Order is Complete!</h1>

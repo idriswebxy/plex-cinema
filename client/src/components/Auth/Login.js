@@ -21,6 +21,7 @@ import Typography from "@material-ui/core/Typography";
 import Input from "@material-ui/core/Input";
 import { makeStyles } from "@material-ui/core/styles";
 import { setAlert } from "../../actions/alert";
+import { cartItems } from "../../actions/cart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +47,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ login, authenticated, loading, setAlert, logCheck }) => {
+const Login = ({
+  login,
+  authenticated,
+  loading,
+  setAlert,
+  logCheck,
+  cartItems,
+  guestCart,
+}) => {
   const { isAuthenticated, logout, loginWithRedirect, isLoading } = useAuth0();
 
   const [email, setEmail] = useState("");
@@ -54,14 +63,18 @@ const Login = ({ login, authenticated, loading, setAlert, logCheck }) => {
 
   const classes = useStyles();
 
+  useEffect(() => {
+    console.log(guestCart)
+  }, [])
+
   // const onChange = (e) => {
   //   setFormData({ ...formData, [e.target.type]: e.target.value });
   // };
 
-  
   const onSubmit = async (e) => {
     e.preventDefault();
     login(email, password);
+    // cartItems(guestCart);
   };
 
   if (loading) {
@@ -136,10 +149,11 @@ Login.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  autheticated: state.auth.authenticated,
+  authenticated: state.auth.authenticated,
   page: state.movie.page,
   loading: state.auth.loading,
   logCheck: state.auth.logCheck,
+  guestCart: state.cart.guestCart,
 });
 
-export default connect(mapStateToProps, { login, setAlert })(Login);
+export default connect(mapStateToProps, { login, setAlert, cartItems })(Login);

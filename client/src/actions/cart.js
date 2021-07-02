@@ -87,6 +87,24 @@ export const loadCart = (auth) => async (dispatch) => {
   }
 };
 
+
+export const cartItems = (cart) => async (dispatch) => {
+  try {
+
+
+    const res = await axios.post("/api/cart/guestCart", cart);
+
+    console.log(res.data)
+    dispatch({
+      type: LOAD_CART,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.error.apply(error);
+  }
+};
+
+
 export const deleteItem = (id, index, price, auth) => async (dispatch) => {
   try {
     if (!auth) {

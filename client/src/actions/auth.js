@@ -12,6 +12,7 @@ import {
   LOGIN_SUCCESS,
   GOOGLE_AUTH,
   REMOVE_ALERT,
+  LOAD_CART
 } from "./types";
 
 // Load user

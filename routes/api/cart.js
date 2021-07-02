@@ -19,7 +19,6 @@ router.get("/total/:id", auth, async (req, res) => {
     });
 
     res.json(sum);
-    
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error...");
@@ -28,7 +27,6 @@ router.get("/total/:id", auth, async (req, res) => {
 
 // Get users cart
 router.get("/", auth, async (req, res) => {
-
   try {
     const items = await Cart.find({ user: req.user.id });
 
@@ -55,6 +53,22 @@ router.post("/", auth, async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error!");
+  }
+});
+
+router.post("/guestCart", async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    const newCart = new Cart({
+      user: user.id,
+      movieId: req.body.id,
+      movie: req.body,
+      price: 2.99,
+    });
+    await newCart.save();
+    res.json(newCart);
+  } catch (error) {
+    console.error(error);
   }
 });
 

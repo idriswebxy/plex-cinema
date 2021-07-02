@@ -54,7 +54,6 @@ const Cart = ({
 
   const loginCheck = (
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>Login to Checkout.</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
