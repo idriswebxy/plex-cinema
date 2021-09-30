@@ -32,4 +32,4 @@ To Start the App:
 
 To Visit App:
 
-`https://whisper-1.herokuapp.com/`  
+`https://plex-cinema.herokuapp.com/`  
