@@ -54,10 +54,7 @@ const App = ({ authenticated }) => {
         <Switch>
           <Route exact path="/" component={MovieList} />
           <Route path="/register" component={Register} />
-          <Route
-            path="/login"
-            component={!authenticated ? Login : MovieList}
-          />
+          <Route path="/login" component={!authenticated ? Login : MovieList} />
           <Route path="/tv_shows" component={TvShows} />
           <Route path="/movie_info/:id" component={MovieDetails} />
           <Route path="/upcoming" component={UpcomingMovies} />
@@ -81,7 +78,7 @@ const App = ({ authenticated }) => {
 
 const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
-  isLoading: state.auth.isLoading
+  isLoading: state.auth.isLoading,
 });
 
 export default connect(mapStateToProps)(App);
