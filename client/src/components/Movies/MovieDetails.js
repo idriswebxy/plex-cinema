@@ -141,7 +141,7 @@ const MovieDetails = ({
                 starRatedColor="yellow"
                 numberOfStars={5}
                 rating={movie.vote_average / 2}
-                starDimension={"25"}
+                starDimension={"25px"}
                 name="rating"
               />
               ({movie.vote_count})<p>{movie.overview}</p>
