@@ -91,6 +91,7 @@ const MovieList = ({
   return (
     <Container>
       <MovieNav />
+      <SearchBar />
       <Row>
         {movies.map((movie, key) => (
           <Col key={key} xs={6} sm={3} md={4} lg={3}>
