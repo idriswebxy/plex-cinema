@@ -32,4 +32,4 @@ To Start the App:
 
 To Visit App:
 
-[https://plex-cinema.herokuapp.com/](`https://plex-cinema.herokuapp.com/`)  
+[https://plex-cinema.herokuapp.com/](https://plex-cinema.herokuapp.com/) 
