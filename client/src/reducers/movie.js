@@ -25,7 +25,7 @@ import {
   SET_CAST,
   FETCH_TOP_RATED,
   FETCH_UPCOMING_MOVIES,
-} from "../actions/types";
+} from "../actions/types"
 
 const initialState = {
   isLoading: true,
@@ -47,17 +47,17 @@ const initialState = {
   totalShowPages: 0,
   movieIds: [],
   error: null,
-};
+}
 
 export default function (state = initialState, action) {
-  const { type, payload } = action;
+  const { type, payload } = action
 
   switch (type) {
     case LOAD_CHANGE:
       return {
         ...state,
         isLoading: true,
-      };
+      }
     case GET_MOVIE:
       return {
         ...state,
@@ -65,27 +65,27 @@ export default function (state = initialState, action) {
           state.moviesNowPlaying.find((movie) => movie.id === payload) ||
           state.moviesTopRated.find((movie) => movie.id === payload) ||
           state.moviesUpcoming.find((movie) => movie.id === payload),
-      };
+      }
     case SET_CAST:
-      return { movieCast: [...state.movieCast, payload] };
+      return { movieCast: [...state.movieCast, payload] }
     case SET_MOVIE_ID:
       return {
         ...state,
         movieId: payload,
-      };
+      }
     case GET_SHOW:
       return {
         ...state,
         searchedShow: state.tvShows.find((show) => show.id === payload),
         isLoading: false,
-      };
+      }
     case GET_SEARCHED_MOVIE:
       return {
         ...state,
         searchedMovie: state.searchedMovie.find(
           (movie) => movie.id === payload
         ),
-      };
+      }
     case FETCH_TOP_RATED:
       return {
         ...state,
@@ -94,7 +94,7 @@ export default function (state = initialState, action) {
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,
-      };
+      }
     case FETCH_UPCOMING_MOVIES:
       return {
         ...state,
@@ -103,40 +103,40 @@ export default function (state = initialState, action) {
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,
-      };
+      }
     case GET_RELATED_MOVIE_ID:
       return {
         ...state,
         searchedMovie: state.relatedMovies.find(
           (movie) => movie.id === payload
         ),
-      };
+      }
     case CLEAR_MOVIE:
       return {
         ...state,
         searchedMovie: null,
-      };
+      }
     case SET_RELATED_MOVIES:
       return {
         ...state,
         relatedMovies: payload,
-      };
+      }
     case SET_TVSHOWS_ERR:
       return {
         error: payload,
-      };
+      }
     case GET_MOVIE_ERR:
-      return;
+      return
     case SET_SEARCHED_MOVIE:
       return {
         ...state,
         searchedMovie: payload,
-      };
+      }
     case SET_VIDEO_KEY:
       return {
         ...state,
         videoKey: payload,
-      };
+      }
     case SET_TVSHOWS:
       return {
         ...state,
@@ -144,61 +144,61 @@ export default function (state = initialState, action) {
         totalShowPages: payload.total_pages,
         tvShowPage: payload.page,
         isLoading: false,
-      };
+      }
     case SET_GENRE_ID:
       return {
         ...state,
         relatedId: payload,
-      };
+      }
     case FETCH_MOVIES:
       return {
         ...state,
         // moviesNowPlaying: (state.moviesNowPlaying.length = 0),
-        moviesNowPlaying: [...state.moviesNowPlaying, ...payload.results],
+        moviesNowPlaying: [...state.moviesNowPlaying, payload.results],
         totalPages: payload.total_pages,
         moviePage: payload.page,
         isLoading: false,
-      };
+      }
     case SET_MOVIE_ERR:
-      return null;
+      return null
     case LOAD_MOVIE_DETAILS:
       return {
         ...state,
         searchedMovie: payload,
         // isLoading: false,
         currentMovie: payload,
-      };
+      }
     case NEXT_PAGE:
       return {
         ...state,
         moviePage: payload,
-      };
+      }
     case PREV_PAGE:
       return {
         ...state,
         moviePage: payload - 1,
-      };
+      }
     case CHANGE_LOAD:
       return {
         ...state,
         isLoading: true,
-      };
+      }
     case SET_MOVIE_IDS:
       return {
         ...state,
         movieIds: state.movieIds.push(payload),
-      };
+      }
     case LOAD_MORE:
       return {
         ...state,
         moviesNowPlaying: state.moviesNowPlaying.concat(payload),
-      };
+      }
     case LOAD_MOVIES:
       return {
         ...state,
         moviesNowPlaying: state.movies.map((movie) => movie),
-      };
+      }
     default:
-      return state;
+      return state
   }
 }

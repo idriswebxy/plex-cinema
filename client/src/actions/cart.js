@@ -9,101 +9,97 @@ import {
   GUEST_CART_LOAD,
   DELETE_GUEST_MOVIE,
   GUEST_PRICE_TOTAL,
-} from "./types";
-import axios from "axios";
-import { setAlert } from "./alert";
-import ls from "local-storage";
+} from "./types"
+import axios from "axios"
+import { setAlert } from "./alert"
+import ls from "local-storage"
 
 export const addToCart = (movie, auth, price) => async (dispatch) => {
-  const body = JSON.stringify(movie);
+  const body = JSON.stringify(movie)
 
   try {
     if (!auth) {
       dispatch({
         type: GUEST_CART_ADD,
         payload: { movie, price },
-      });
+      })
       // dispatch(setAlert("Item Added!", "success", 3000))
     } else {
       const config = {
         headers: {
           "Content-Type": "application/json",
         },
-      };
+      }
 
-      const res = await axios.post(`/api/cart`, body, config);
+      const res = await axios.post(`/api/cart`, body, config)
       dispatch({
         type: ADD_TO_CART,
         payload: res.data,
-      });
+      })
     }
   } catch (err) {
     dispatch({
       type: CART_ERROR,
-    });
+    })
   }
-};
+}
 
 export const addToCartTvShow = (item) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
-  };
+  }
 
-  const body = JSON.stringify(item);
+  const body = JSON.stringify(item)
 
   try {
-    const res = await axios.post("/api/cart/tv_show", body, config);
+    const res = await axios.post("/api/cart/tv_show", body, config)
 
     dispatch({
       type: ADD_TO_CART,
       payload: res.data,
-    });
+    })
   } catch (err) {
     dispatch({
       type: CART_ERROR,
-    });
+    })
   }
-};
+}
 
 export const loadCart = (auth) => async (dispatch) => {
   try {
     if (!auth) {
       dispatch({
         type: GUEST_CART_LOAD,
-      });
+      })
     } else {
-      const res = await axios.get("/api/cart");
+      const res = await axios.get("/api/cart")
       dispatch({
         type: LOAD_CART,
         payload: res.data,
-      });
+      })
     }
   } catch (error) {
     dispatch({
       type: CART_ERROR,
-    });
+    })
   }
-};
-
+}
 
 export const cartItems = (cart) => async (dispatch) => {
   try {
-
-
-    const res = await axios.post("/api/cart/guestCart", cart);
+    const res = await axios.post("/api/cart/guestCart", cart)
 
     console.log(res.data)
     dispatch({
       type: LOAD_CART,
       payload: res.data,
-    });
+    })
   } catch (error) {
-    console.error.apply(error);
+    console.error.apply(error)
   }
-};
-
+}
 
 export const deleteItem = (id, index, price, auth) => async (dispatch) => {
   try {
@@ -111,51 +107,51 @@ export const deleteItem = (id, index, price, auth) => async (dispatch) => {
       dispatch({
         type: "DELETE_GUEST_MOVIE",
         payload: { id, index, price },
-      });
-      dispatch(setAlert("Item Removed!", "danger", 2000));
+      })
+      dispatch(setAlert("Item Removed!", "danger", 2000))
     } else {
-      await axios.delete(`api/cart/${id}`);
+      await axios.delete(`api/cart/${id}`)
       dispatch({
         type: DELETE_ITEM,
         payload: { index, price },
-      });
-      dispatch(setAlert("Item Removed", "success"));
+      })
+      dispatch(setAlert("Item Removed", "success"))
     }
   } catch (err) {
     dispatch({
       type: CART_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
-    });
+    })
   }
-};
+}
 
 export const getPriceTotal = (id, auth) => async (dispatch) => {
   try {
     if (!auth) {
       dispatch({
         type: GUEST_PRICE_TOTAL,
-      });
+      })
     } else {
-      const res = await axios.get(`/api/cart/total/${id}`);
+      const res = await axios.get(`/api/cart/total/${id}`)
       dispatch({
         type: PRICE_TOTAL,
         payload: res.data,
-      });
+      })
     }
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
-};
+}
 
 export const auth0_addToCart = (movie) => async (dispatch) => {
   try {
     dispatch({
       type: ADD_TO_CART,
       payload: movie,
-    });
+    })
   } catch (err) {
     dispatch({
       type: CART_ERROR,
-    });
+    })
   }
-};
+}

@@ -1,6 +1,6 @@
-import axios from "axios";
-import { setAlert } from "./alert";
-import setAuthToken from "../utils/setAuthToken";
+import axios from "axios"
+import { setAlert } from "./alert"
+import setAuthToken from "../utils/setAuthToken"
 import {
   USER_LOADED,
   AUTH_ERROR,
@@ -12,27 +12,27 @@ import {
   LOGIN_SUCCESS,
   GOOGLE_AUTH,
   REMOVE_ALERT,
-  LOAD_CART
-} from "./types";
+  LOAD_CART,
+} from "./types"
 
 // Load user
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
-    setAuthToken(localStorage.token);
+    setAuthToken(localStorage.token)
   }
   try {
-    const res = await axios.get("/api/user");
+    const res = await axios.get("/api/user")
 
     dispatch({
       type: USER_LOADED,
       payload: res.data,
-    });
+    })
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
-    });
+    })
   }
-};
+}
 
 // Register User
 export const register =
@@ -42,31 +42,31 @@ export const register =
       headers: {
         "Content-Type": "application/json",
       },
-    };
+    }
 
-    const body = JSON.stringify({ email, password });
+    const body = JSON.stringify({ email, password })
 
     try {
-      const res = await axios.post("/api/user", body, config);
+      const res = await axios.post("/api/user", body, config)
 
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
-      });
+      })
 
-      dispatch(loadUser());
+      dispatch(loadUser())
     } catch (err) {
-      const errors = err.response.data.errors;
+      const errors = err.response.data.errors
 
       if (errors) {
-        errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+        errors.forEach((error) => dispatch(setAlert(error.msg, "danger")))
       }
 
       dispatch({
         type: REGISTER_FAIL,
-      });
+      })
     }
-  };
+  }
 
 // Login User
 export const login = (email, password) => async (dispatch) => {
@@ -74,34 +74,34 @@ export const login = (email, password) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json",
     },
-  };
+  }
 
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ email, password })
 
   try {
-    const res = await axios.post("/api/auth", body, config);
+    const res = await axios.post("/api/auth", body, config)
 
     // token dispatch
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
-    });
+    })
 
-    dispatch(loadUser());
+    dispatch(loadUser())
   } catch (err) {
-    const errors = err.response.data.errors;
-    console.log(errors);
+    const errors = err.response.data.errors
+    console.log(errors)
     if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger", 3000)));
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger", 3000)))
     }
 
     dispatch({
       type: LOGIN_FAIL,
-    });
+    })
   }
-};
+}
 
 // Logout
 export const logOut = () => (dispatch) => {
-  dispatch({ type: LOGOUT });
-};
+  dispatch({ type: LOGOUT })
+}
