@@ -128,19 +128,21 @@ export const loadMoreItems = (endpoint, page, listType) => async (dispatch) => {
 // };
 
 export const fetchItems = (endpoint) => async (dispatch) => {
-  const res = await axios.get(endpoint)
-
-  try {
-    dispatch({
-      type: FETCH_MOVIES,
-      payload: res.data,
-    })
-  } catch (e) {
-    dispatch({
-      type: SET_MOVIE_ERR,
-      payload: e,
-    })
-  }
+  
+    .then((res) => res.json())
+    .then((data) => dispatch({ type: FETCH_MOVIES, payload: data.results }))
+  // console.log(res.data.results)
+  // try {
+  //   dispatch({
+  //     type: FETCH_MOVIES,
+  //     payload: res.data.results,
+  //   })
+  // } catch (error) {
+  //   dispatch({
+  //     type: SET_MOVIE_ERR,
+  //     payload: error,
+  //   })
+  // }
 }
 
 export const fetchTopRatedMovies = (endpoint) => async (dispatch) => {

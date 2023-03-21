@@ -59,7 +59,7 @@ const MovieList = ({
   addToCart,
   loadCart,
   loading,
-  movies,
+  // movies,
   fetchItems,
   page,
   totalPages,
@@ -72,9 +72,13 @@ const MovieList = ({
     useAuth0()
   let endpoint = ""
 
+  const [movies, setMovies] = useState([])
+
   useEffect(() => {
-    fetchItems(NOW_PLAYING_MOVIES_URL)
-  }, [movies])
+    fetch(NOW_PLAYING_MOVIES_URL)
+      .then((res) => res.json())
+      .then((data) => setMovies([...movies, data.results]))
+  }, [])
 
   const loadMore = () => {
     window.onscroll = function (ev) {
@@ -84,20 +88,24 @@ const MovieList = ({
     }
   }
 
-  if (loading) {
-    return <LoadSpinner />
-  }
+  // if (loading) {
+  //   return <LoadSpinner />
+  // }
 
   return (
     <Container>
       <MovieNav />
       <SearchBar />
       <Row>
-        {movies.map((movie, key) => (
-          <Col key={key} xs={6} sm={3} md={4} lg={3}>
-            <MovieCard movie={movie} />
-          </Col>
-        ))}
+        {loading ? (
+          <LoadSpinner />
+        ) : (
+          movies.map((movie, key) => (
+            <Col key={key} xs={6} sm={3} md={4} lg={3}>
+              <MovieCard movie={movie} />
+            </Col>
+          ))
+        )}
       </Row>
       {page <= totalPages ? loadMore() : <LoadSpinner />}
     </Container>
@@ -105,13 +113,13 @@ const MovieList = ({
 }
 
 const mapStateToProps = (state) => ({
-  authenticated: state.auth.authenticated,
-  movies: state.movie.moviesNowPlaying,
-  page: state.movie.moviePage,
-  searchedMovie: state.movie.searchedMovie,
-  totalPages: state.movie.totalPages,
-  cart: state.cart.cart,
-  loading: state.movie.isLoading,
+  // authenticated: state.auth.authenticated,
+  // movies: state.movie.moviesNowPlaying,
+  // page: state.movie.moviePage,
+  // searchedMovie: state.movie.searchedMovie,
+  // totalPages: state.movie.totalPages,
+  // cart: state.cart.cart,
+  // loading: state.movie.isLoading,
 })
 
 export default connect(mapStateToProps, {
